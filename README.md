@@ -239,6 +239,9 @@ Projects remain bound to the version they adopted until they intentionally
 upgrade. Changes to normative content should be summarized in a changelog so
 projects can assess the impact of upgrading.
 
+See the [changelog](CHANGELOG.md) for the current v1.0 candidate scope and
+release conditions.
+
 ## Release Documentation
 
 Each WSP release includes one PDF containing the controlled Markdown

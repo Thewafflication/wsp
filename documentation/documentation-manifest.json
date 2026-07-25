@@ -5,6 +5,7 @@
   "outputName": "wsp-documentation.pdf",
   "files": [
     "README.md",
+    "CHANGELOG.md",
     "architecture/README.md",
     "architecture/adr-guidance.md",
     "architecture/adr-0001-adoption-by-git-submodule.md",

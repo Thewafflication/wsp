@@ -1,0 +1,36 @@
+# Changelog
+
+**Content type:** Controlled release history
+
+This file records material changes to WSP releases. Requirement identifiers are
+not reused when requirements are removed or superseded.
+
+## Unreleased — v1.0 Candidate
+
+### Added
+
+- common requirements management and adoption by pinned Git submodule;
+- architecture decision record guidance and templates;
+- an iterative WSP software lifecycle and common project-process requirements;
+- Personal Software Process alignment and a selectable personal-process
+  profile;
+- a selectable Security/DFS profile aligned with IEC 62443-4-1 and related
+  ISO/IEC and ISO/IEC/IEEE standards;
+- ISO/IEC/IEEE 29119-aligned testing requirements, templates, and evidence
+  conventions;
+- documentation, identifier, C, PowerShell, and CMake style rules;
+- reusable validation and report-generation tools; and
+- a Pandoc and MiKTeX pipeline for one linked release PDF.
+
+### Changed
+
+- standardized the project name as Waughtal Software Process;
+- established Design for Security as the canonical DFS term while preserving
+  a mapping for WPM's legacy Security Design title; and
+- grouped reusable templates at the end of the release document.
+
+### Release Conditions
+
+Before this section becomes version `1.0.0`, the release shall pass the WSP
+release-readiness process, use a clean tagged source revision, and publish the
+verified release PDF with its source baseline.

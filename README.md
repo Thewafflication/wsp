@@ -86,8 +86,12 @@ tools/           Validation and report-generation utilities
 Each directory should contain a README that describes its scope and distinguishes
 normative content from supporting guidance.
 
-The first established section is [Architecture](architecture/README.md), which
-defines how projects record durable architectural decisions.
+The established sections are:
+
+- [Architecture](architecture/README.md), which defines how projects record
+  durable architectural decisions; and
+- [Style](style/README.md), which defines shared writing, identifier, source,
+  PowerShell, and CMake conventions.
 
 ## Requirement Format
 

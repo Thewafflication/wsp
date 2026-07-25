@@ -100,3 +100,16 @@ Release automation should:
 
 The document version should match the software or WSP release tag. Development
 builds may use the source revision returned by Git.
+
+## GitHub Actions
+
+The `Documentation PDF` workflow builds and validates the PDF for pushes to
+the primary branch, version tags, pull requests, manual dispatches, and
+published GitHub releases. Every successful build retains the PDF as a workflow
+artifact for 14 days.
+
+When a GitHub release is published, a second job downloads the exact artifact
+produced by the successful build job and uploads `wsp-documentation.pdf` to
+that release. The publish job uses the release tag as the document version and
+requires only the workflow-provided `GITHUB_TOKEN` with release-content write
+permission. No long-lived publication credential is required.

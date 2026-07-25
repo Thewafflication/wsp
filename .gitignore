@@ -2,8 +2,26 @@
 /tmp/
 /tools/.cache/
 
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.bak
+*~
+
+# LaTeX intermediate files outside the normal temporary directory
 *.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
 *.log
+*.nav
 *.out
+*.run.xml
+*.snm
 *.synctex.gz
 *.toc

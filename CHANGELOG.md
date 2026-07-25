@@ -22,8 +22,12 @@ not reused when requirements are removed or superseded.
 - Windows executable and DLL version-resource requirements and template;
 - Windows Authenticode signing, Defender scanning, and false-positive response
   requirements and release-evidence template;
-- reusable validation and report-generation tools; and
-- a Pandoc and MiKTeX pipeline for one linked release PDF.
+- reusable validation and report-generation tools;
+- a Pandoc and MiKTeX pipeline for one linked release PDF;
+- a GitHub Actions workflow that builds the PDF and publishes it with GitHub
+  releases; and
+- repository ignore rules for generated documentation, tool caches, editor
+  state, operating-system metadata, and LaTeX intermediates.
 
 ### Changed
 

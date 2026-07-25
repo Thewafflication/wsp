@@ -262,6 +262,11 @@ The default output is `output/pdf/wsp-documentation.pdf`. See the
 [documentation build guide](documentation/README.md) for dependencies,
 manifest structure, project adoption, and release use.
 
+GitHub Actions builds the same PDF for primary-branch pushes, version tags,
+pull requests, manual runs, and published releases. Every successful run
+retains a workflow artifact; a published release also receives the PDF as a
+release asset.
+
 ## Contributing
 
 Changes should be proposed through review and should:

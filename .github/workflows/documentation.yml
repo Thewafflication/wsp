@@ -1,0 +1,101 @@
+name: Documentation PDF
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - "v*"
+  pull_request:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build documentation
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Pandoc and MiKTeX
+        shell: pwsh
+        run: |
+          choco install pandoc miktex --yes --no-progress
+          $machinePath = [Environment]::GetEnvironmentVariable(
+            'Path', 'Machine')
+          $userPath = [Environment]::GetEnvironmentVariable(
+            'Path', 'User')
+          $env:Path = "$machinePath;$userPath"
+          "PATH=$env:Path" | Out-File -FilePath $env:GITHUB_ENV `
+            -Encoding utf8 -Append
+          initexmf --admin --set-config-value=[MPM]AutoInstall=1
+          mpm --admin --update-db
+
+      - name: Run common-tool tests
+        shell: pwsh
+        run: ./tools/tests/run-tests.ps1
+
+      - name: Build PDF
+        shell: pwsh
+        run: |
+          $version = if ('${{ github.event_name }}' -eq 'release') {
+            '${{ github.event.release.tag_name }}'
+          }
+          else {
+            $null
+          }
+          ./tools/Build-Documentation.ps1 -Version $version
+
+      - name: Verify PDF
+        shell: pwsh
+        run: |
+          $pdf = 'output/pdf/wsp-documentation.pdf'
+          if (-not (Test-Path -LiteralPath $pdf -PathType Leaf)) {
+            throw "Documentation PDF was not created: $pdf"
+          }
+          if ((Get-Item -LiteralPath $pdf).Length -eq 0) {
+            throw "Documentation PDF is empty: $pdf"
+          }
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wsp-documentation
+          path: output/pdf/wsp-documentation.pdf
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    name: Publish release PDF
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download documentation artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wsp-documentation
+          path: release-assets
+
+      - name: Upload PDF to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: >-
+          gh release upload "$RELEASE_TAG"
+          release-assets/wsp-documentation.pdf
+          --repo "$GITHUB_REPOSITORY"
+          --clobber

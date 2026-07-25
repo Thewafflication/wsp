@@ -69,11 +69,15 @@ The key words **shall**, **should**, and **may** have the following meanings:
 Not every practice applies to every project. WSP separates broadly applicable
 engineering practices from technology and delivery profiles such as:
 
-- Windows software projects;
-- C and C-compatible projects;
+Common practices cover requirements management, the software lifecycle,
+documentation, and testing. Selectable profiles currently cover:
+
+- Personal Software Process practices;
+- Security and Design for Security;
+- C and C-compatible source;
 - PowerShell automation;
 - CMake-based builds; and
-- WPM packages and signed releases.
+- common tool consumers.
 
 An adopting project should select only the profiles that match its product,
 toolchain, and delivery model. Profile-specific requirements supplement rather
@@ -105,7 +109,8 @@ The established sections are:
 - [Requirements](requirements/README.md), which defines the common requirement
   management baseline and adoption records; and
 - [Processes](processes/README.md), which defines individual and project process
-  guidance, including Personal Software Process alignment; and
+  guidance, including the WSP lifecycle and Personal Software Process
+  alignment; and
 - [Security and DFS](security/README.md), which defines selectable security
   requirements and the project Design for Security artifact; and
 - [Style](style/README.md), which defines shared writing, identifier, source,

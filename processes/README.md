@@ -7,6 +7,9 @@ and improved.
 
 ## Contents
 
+- [WSP software lifecycle](software-lifecycle.md) connects adoption, planning,
+  requirements, design, implementation, review, verification, release,
+  support, and improvement.
 - [Personal Software Process alignment](personal-software-process-alignment.md)
   explains where WSP uses concepts from the Personal Software Process (PSP).
 - [Personal process](personal-process.md) defines the selectable
@@ -14,6 +17,7 @@ and improved.
 
 ## Scope
 
+The software lifecycle is the common organizing model for adopting projects.
 PSP applies primarily to the work of an individual engineer. WSP uses PSP where
 personal estimates, time and defect data, reviews, quality planning, and
 postmortem improvement can improve project outcomes.

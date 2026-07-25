@@ -13,6 +13,8 @@ method by which projects adopt, tailor, trace, and baseline them.
   for project and WSP requirement documents.
 - [Adoption record template](adoption-record-template.md) records the WSP
   version, selected profiles, and tailoring decisions for a project.
+- [WSP software lifecycle](../processes/software-lifecycle.md) maps these
+  obligations into one iterative project flow.
 
 Technology-specific requirements may live with the guidance they govern. The
 following requirement sets are currently defined outside this directory:

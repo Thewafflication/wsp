@@ -12,16 +12,29 @@
 
 **Approval:** Change, review, or other controlled approval reference
 
-## Selected Profiles
+## Common Baseline
 
-| Profile | Applicable | Project scope or rationale |
+| Requirement set or practice | Applicability | Project artifact or scope |
 | --- | --- | --- |
 | Common requirements management | Yes | All controlled project requirements |
+| WSP software lifecycle | Yes | Project lifecycle or mapped process |
+| Documentation requirements | Yes | Controlled project documentation |
+| Documentation style and identifiers | Yes | Project-authored artifacts |
+| Testing requirements | Yes | Project verification and evidence |
+
+Common requirements may be tailored only through an approved requirement
+disposition. They are not removed by omitting a selectable profile.
+
+## Selected Profiles
+
+| Profile | Selected | Project scope or rationale |
+| --- | --- | --- |
 | Personal process | Yes / No | Individual planning and improvement |
 | Security/DFS | Yes / No | Security scope, design, and verification |
 | C source style | Yes / No | Owned C files, or N/A rationale |
 | PowerShell style | Yes / No | In-scope automation, or reason not applicable |
 | CMake style | Yes / No | In-scope build files, or reason not applicable |
+| Common tools | Yes / No | Reusable validation and reporting tools |
 
 Add every profile present in the adopted WSP baseline.
 

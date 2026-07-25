@@ -90,6 +90,8 @@ The established sections are:
 
 - [Architecture](architecture/README.md), which defines how projects record
   durable architectural decisions; and
+- [Requirements](requirements/README.md), which defines the common requirement
+  management baseline and adoption records; and
 - [Style](style/README.md), which defines shared writing, identifier, source,
   PowerShell, and CMake conventions.
 

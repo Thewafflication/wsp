@@ -23,6 +23,7 @@ following requirement sets are currently defined outside this directory:
 | --- | --- | --- |
 | `WSP-CSTYLE-####` | [C style](../style/c-style.md) | C projects |
 | `WSP-DOC-####` | [Docs](../documentation/requirements.md) | All projects |
+| `WSP-PROC-####` | [Process](../processes/project-process.md) | All projects |
 | `WSP-PSP-####` | [PSP](../processes/personal-process.md) | Profile |
 | `WSP-SEC-####` | [Security](../security/security-requirements.md) | Profile |
 | `WSP-TEST-####` | [Testing](../testing/test-strategy.md) | All projects |

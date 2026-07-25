@@ -10,6 +10,10 @@ and improved.
 - [WSP software lifecycle](software-lifecycle.md) connects adoption, planning,
   requirements, design, implementation, review, verification, release,
   support, and improvement.
+- [Project process requirements](project-process.md) define the common
+  `WSP-PROC-####` obligations for every adopting project.
+- [Release-readiness template](release-readiness-template.md) provides a
+  standard project-owned release decision record.
 - [Personal Software Process alignment](personal-software-process-alignment.md)
   explains where WSP uses concepts from the Personal Software Process (PSP).
 - [Personal process](personal-process.md) defines the selectable
@@ -17,7 +21,8 @@ and improved.
 
 ## Scope
 
-The software lifecycle is the common organizing model for adopting projects.
+The software lifecycle and project-process requirements are common to adopting
+projects.
 PSP applies primarily to the work of an individual engineer. WSP uses PSP where
 personal estimates, time and defect data, reviews, quality planning, and
 postmortem improvement can improve project outcomes.

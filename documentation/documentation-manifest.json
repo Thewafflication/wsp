@@ -15,6 +15,8 @@
     "requirements/adoption-record-template.md",
     "processes/README.md",
     "processes/software-lifecycle.md",
+    "processes/project-process.md",
+    "processes/release-readiness-template.md",
     "processes/personal-software-process-alignment.md",
     "processes/personal-process.md",
     "security/README.md",

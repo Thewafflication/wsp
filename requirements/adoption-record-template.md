@@ -18,6 +18,7 @@
 | --- | --- | --- |
 | Common requirements management | Yes | All controlled project requirements |
 | WSP software lifecycle | Yes | Project lifecycle or mapped process |
+| Project process | Yes | Planning through support and improvement |
 | Documentation requirements | Yes | Controlled project documentation |
 | Documentation style and identifiers | Yes | Project-authored artifacts |
 | Testing requirements | Yes | Project verification and evidence |

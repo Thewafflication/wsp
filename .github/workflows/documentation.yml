@@ -20,6 +20,10 @@ jobs:
   build:
     name: Build documentation
     runs-on: windows-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
 
     steps:
       - name: Check out source
@@ -67,11 +71,33 @@ jobs:
             throw "Documentation PDF is empty: $pdf"
           }
 
+      - name: Generate SHA-256 checksum
+        shell: pwsh
+        run: |
+          ./tools/New-ArtifactChecksum.ps1 `
+            -Path output/pdf/wsp-documentation.pdf `
+            -OutputPath output/pdf/SHA256SUMS
+          $pdf = 'output/pdf/wsp-documentation.pdf'
+          $expected = (Get-FileHash -LiteralPath $pdf `
+              -Algorithm SHA256).Hash.ToLowerInvariant()
+          $actual = (Get-Content output/pdf/SHA256SUMS -Raw).Trim()
+          if ($actual -ne "$expected  wsp-documentation.pdf") {
+            throw 'Generated SHA256SUMS entry did not match the PDF.'
+          }
+
+      - name: Attest PDF build provenance
+        if: github.event_name != 'pull_request'
+        uses: actions/attest@v4
+        with:
+          subject-path: output/pdf/wsp-documentation.pdf
+
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
           name: wsp-documentation
-          path: output/pdf/wsp-documentation.pdf
+          path: |
+            output/pdf/wsp-documentation.pdf
+            output/pdf/SHA256SUMS
           if-no-files-found: error
           retention-days: 14
 
@@ -97,5 +123,6 @@ jobs:
         run: >-
           gh release upload "$RELEASE_TAG"
           release-assets/wsp-documentation.pdf
+          release-assets/SHA256SUMS
           --repo "$GITHUB_REPOSITORY"
           --clobber

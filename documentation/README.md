@@ -44,6 +44,10 @@ The JSON manifest controls identity and document order:
 {
   "title": "Project Engineering Documentation",
   "subtitle": "Requirements, architecture, verification, and practices",
+  "author": "Project publisher",
+  "subject": "Project engineering documentation",
+  "keywords": ["requirements", "architecture", "testing"],
+  "language": "en-US",
   "repositoryUrl": "https://github.com/example/project",
   "outputName": "project-documentation.pdf",
   "files": [
@@ -56,9 +60,11 @@ The JSON manifest controls identity and document order:
 ```
 
 The repository URL is displayed as a hyperlink on the title page. The build
-adds the release date, version, and abbreviated source commit beside it. Every
-path is relative to the adopting-project root unless it is absolute. The array
-order is the PDF chapter order. Missing and duplicate files fail the build.
+adds the release date, version, and abbreviated source commit beside it. The
+identity fields populate the PDF information dictionary and document language.
+Every path is relative to the adopting-project root unless it is absolute. The
+array order is the PDF chapter order. Missing, duplicate, or incomplete
+manifest data fails the build.
 
 ## Adopting Projects
 
@@ -108,8 +114,35 @@ the primary branch, version tags, pull requests, manual dispatches, and
 published GitHub releases. Every successful build retains the PDF as a workflow
 artifact for 14 days.
 
-When a GitHub release is published, a second job downloads the exact artifact
-produced by the successful build job and uploads `wsp-documentation.pdf` to
-that release. The publish job uses the release tag as the document version and
-requires only the workflow-provided `GITHUB_TOKEN` with release-content write
-permission. No long-lived publication credential is required.
+Trusted non-pull-request builds generate GitHub build-provenance attestation
+for the PDF. Pull requests still build and validate the document but do not
+receive the OIDC and attestation permissions used for signed provenance.
+
+When a GitHub release is published, a second job downloads the exact artifacts
+produced by the successful build job and uploads `wsp-documentation.pdf` and
+`SHA256SUMS` to that release. The publish job uses the release tag as the
+document version and requires only the workflow-provided `GITHUB_TOKEN` with
+release-content write permission. No long-lived publication credential is
+required.
+
+Verify provenance after downloading a public release with:
+
+```powershell
+gh attestation verify wsp-documentation.pdf `
+  --repo Thewafflication/wsp
+```
+
+Compare the independently calculated SHA-256 digest with `SHA256SUMS` as a
+separate exact-file check.
+
+## Selectable PDF Signing
+
+An adopting project may apply a PAdES signature after the PDF is completely
+built and verified. It should select at least PAdES-B-T with an RFC 3161 trusted
+timestamp, or PAdES-B-LT where long-term validation data must be embedded.
+
+PAdES signing requires a document-signing certificate and protected private
+key. A Windows Authenticode certificate is not assumed to authorize document
+signing. The certificate policy, extended-key usage, and issuer terms must
+explicitly allow the intended use. Signing occurs before calculating the
+published digest and generating provenance for the final PDF bytes.

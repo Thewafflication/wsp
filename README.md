@@ -265,7 +265,10 @@ manifest structure, project adoption, and release use.
 GitHub Actions builds the same PDF for primary-branch pushes, version tags,
 pull requests, manual runs, and published releases. Every successful run
 retains a workflow artifact; a published release also receives the PDF as a
-release asset.
+release asset. Trusted builds receive signed GitHub provenance, and releases
+include `SHA256SUMS` for exact-file verification. PAdES document signing is a
+selectable control when an appropriate document-signing identity is available
+or a customer, contract, regulation, or risk assessment requires it.
 
 ## Contributing
 

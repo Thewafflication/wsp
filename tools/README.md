@@ -11,6 +11,7 @@ WCRT while removing repository-specific paths and assumptions.
 | Tool | Purpose |
 | --- | --- |
 | `Build-Documentation.ps1` | Build a linked release documentation PDF |
+| `New-ArtifactChecksum.ps1` | Write SHA-256 release checksums |
 | `Test-CSourceQuality.ps1` | Enforce Doxygen and 80-column C rules |
 | `Test-Traceability.ps1` | Validate requirement, test, and runner links |
 | `Test-TestEvidence.ps1` | Validate complete passing LaTeX evidence |

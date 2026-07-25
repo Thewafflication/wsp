@@ -169,11 +169,34 @@ Build completed.
     }
     Write-Output '[PASS] Warning summary contains warning count'
 
+    $checksumRoot = Join-Path $workRoot 'checksums'
+    $checksumInput = Join-Path $checksumRoot 'artifact.bin'
+    $checksumOutput = Join-Path $checksumRoot 'SHA256SUMS'
+    Write-Fixture $checksumInput 'WSP checksum fixture'
+    $checksumTool = Join-Path $toolsRoot 'New-ArtifactChecksum.ps1'
+    $checksumArguments = @(
+        '-Path', $checksumInput,
+        '-OutputPath', $checksumOutput
+    )
+    Invoke-ToolTest $checksumTool $checksumArguments 0 `
+        'Checksum generation succeeds'
+    $checksumLine = Get-Content -LiteralPath $checksumOutput -Raw
+    $expectedHash = (Get-FileHash -LiteralPath $checksumInput `
+            -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ($checksumLine.Trim() -ne "$expectedHash  artifact.bin") {
+        throw 'Checksum output did not identify the expected artifact.'
+    }
+    Write-Output '[PASS] Checksum identifies exact artifact'
+
     $documentationRoot = Join-Path $workRoot 'documentation'
     $manifest = Join-Path $documentationRoot 'manifest.json'
     Write-Fixture $manifest @'
 {
   "title": "Invalid fixture",
+  "author": "WSP tests",
+  "subject": "Negative documentation-build fixture",
+  "keywords": ["test"],
+  "language": "en-US",
   "repositoryUrl": "https://github.com/example/wsp-tests",
   "outputName": "invalid.pdf",
   "files": ["missing.md"]

@@ -27,7 +27,10 @@ not reused when requirements are removed or superseded.
 - a GitHub Actions workflow that builds the PDF and publishes it with GitHub
   releases; and
 - repository ignore rules for generated documentation, tool caches, editor
-  state, operating-system metadata, and LaTeX intermediates.
+  state, operating-system metadata, and LaTeX intermediates;
+- embedded PDF identity metadata and SHA-256 release checksums;
+- GitHub build-provenance attestations for trusted PDF builds; and
+- a selectable ETSI PAdES document-signing profile.
 
 ### Changed
 

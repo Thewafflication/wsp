@@ -53,15 +53,39 @@ function Find-Executable {
     throw "$Name was not found. Supply its path explicitly."
 }
 
+function ConvertTo-LatexMetadata {
+    param([Parameter(Mandatory)][string]$Value)
+
+    return $Value.Replace('\', '\textbackslash{}').
+        Replace('#', '\#').
+        Replace('$', '\$').
+        Replace('%', '\%').
+        Replace('&', '\&').
+        Replace('_', '\_').
+        Replace('{', '\{').
+        Replace('}', '\}').
+        Replace('^', '\textasciicircum{}').
+        Replace('~', '\textasciitilde{}')
+}
+
 $manifestFullPath = Resolve-ProjectPath $ManifestPath
 $manifest = Get-Content -LiteralPath $manifestFullPath -Raw |
     ConvertFrom-Json
 
-foreach ($property in 'title', 'repositoryUrl', 'outputName', 'files') {
+foreach ($property in @(
+        'title',
+        'author',
+        'subject',
+        'keywords',
+        'language',
+        'repositoryUrl',
+        'outputName',
+        'files')) {
     if (-not $manifest.$property) {
         throw "Documentation manifest is missing '$property'."
     }
 }
+$repositoryUrl = [string]$manifest.repositoryUrl
 
 $inputFiles = [Collections.Generic.List[string]]::new()
 $seen = [Collections.Generic.HashSet[string]]::new(
@@ -132,6 +156,7 @@ $titleDate = "$buildDate — Version $Version — Commit " +
 $sharedHeader = Join-Path $wspRoot 'documentation/preamble.tex'
 $linkFilter = Join-Path $wspRoot 'documentation/internal-links.lua'
 $buildInformation = Join-Path $temporaryDirectory 'build-information.md'
+$metadataHeader = Join-Path $temporaryDirectory 'metadata.tex'
 $buildInformationLines = @(
     '# Build Information',
     '',
@@ -147,6 +172,22 @@ $buildInformationLines = @(
 )
 $buildInformationLines | Set-Content -LiteralPath $buildInformation `
     -Encoding utf8
+$metadataHeaderLines = @(
+    '\AtBeginDocument{\hypersetup{',
+    '  pdfinfo={',
+    ('    WSPVersion={' +
+        (ConvertTo-LatexMetadata $Version) + '},'),
+    ('    WSPSourceRevision={' +
+        (ConvertTo-LatexMetadata $sourceRevision) + '},'),
+    ('    WSPRepositoryURL={' +
+        (ConvertTo-LatexMetadata $repositoryUrl) + '}'),
+    '  }',
+    '}}'
+)
+[IO.File]::WriteAllLines(
+    $metadataHeader,
+    $metadataHeaderLines,
+    [Text.UTF8Encoding]::new($false))
 
 $arguments = [Collections.Generic.List[string]]::new()
 $arguments.Add('--from=gfm+smart')
@@ -160,6 +201,7 @@ $arguments.Add('--pdf-engine=' + $pdfLatexPath)
 $arguments.Add('--output=' + $outputFullPath)
 $arguments.Add('--resource-path=' + $RepositoryRoot)
 $arguments.Add('--include-in-header=' + $sharedHeader)
+$arguments.Add('--include-in-header=' + $metadataHeader)
 $arguments.Add('--lua-filter=' + $linkFilter)
 $arguments.Add('--variable=documentclass:report')
 $arguments.Add('--variable=classoption:openany')
@@ -167,16 +209,21 @@ $arguments.Add('--variable=papersize:letter')
 $arguments.Add('--variable=geometry:margin=0.85in')
 $arguments.Add('--variable=fontsize:10pt')
 $arguments.Add('--metadata=title:' + [string]$manifest.title)
+$arguments.Add('--metadata=author:' + [string]$manifest.author)
+$arguments.Add('--metadata=subject:' + [string]$manifest.subject)
+$keywords = @($manifest.keywords) -join ', '
+$arguments.Add('--metadata=keywords:' + $keywords)
+$arguments.Add('--metadata=lang:' + [string]$manifest.language)
 if ($manifest.subtitle) {
     $arguments.Add('--metadata=subtitle:' + [string]$manifest.subtitle)
 }
-$repositoryUrl = [string]$manifest.repositoryUrl
 $repositoryLink = '\href{' + $repositoryUrl + '}{\nolinkurl{' +
     $repositoryUrl + '}}'
 $arguments.Add('--variable=author:' + $repositoryLink)
 $arguments.Add('--metadata=date:' + $titleDate)
 $arguments.Add('--metadata=version:' + $Version)
 $arguments.Add('--metadata=source-revision:' + $sourceRevision)
+$arguments.Add('--metadata=repository-url:' + $repositoryUrl)
 $arguments.Add('--metadata=pandoc-version:' + $pandocVersion)
 $arguments.Add('--metadata=pdf-engine-version:' + $latexVersion)
 foreach ($header in $HeaderPath) {

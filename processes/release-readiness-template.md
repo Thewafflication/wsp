@@ -29,6 +29,8 @@ set, and excluded or deferred work.
 | Documentation | Reference | Pass / Fail / N/A | |
 | Provenance and dependency record | Reference | Pass / Fail / N/A | |
 | Windows signing and Defender scan | Reference | Pass / Fail / N/A | |
+| PDF metadata, digest, and provenance | Reference | Pass / Fail / N/A | |
+| PAdES signature, when selected | Reference | Pass / Fail / N/A | |
 | Installation, rollback, and recovery | Reference | Pass / Fail / N/A | |
 
 ## Artifacts

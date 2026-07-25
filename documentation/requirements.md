@@ -70,3 +70,42 @@ extractable text, table-of-contents presence, bookmarks, link annotations, and
 visual defects in rendered pages.
 
 **Verification:** Automated PDF inspection and documented visual review.
+
+## WSP-DOC-0010 — Descriptive Metadata
+
+The release PDF shall embed its title, author or publisher, subject, keywords,
+language, version, full source revision, repository URL, creation date, and the
+tools that produced it. The displayed title-page and build information shall
+agree with the embedded metadata.
+
+**Verification:** PDF information-dictionary, document-catalog, and rendered
+identity inspection.
+
+## WSP-DOC-0011 — Release Digest
+
+Each published release PDF shall have a SHA-256 digest in a simultaneously
+published `SHA256SUMS` file. The digest entry shall identify the exact published
+file name and bytes.
+
+**Verification:** Independent digest calculation against the published PDF and
+checksum file.
+
+## WSP-DOC-0012 — Build Provenance Attestation
+
+Public release automation shall generate a cryptographically signed provenance
+attestation that binds the PDF digest to its source repository, source
+revision, and build workflow. A GitHub-hosted project shall use GitHub artifact
+attestations or document an approved equivalent.
+
+**Verification:** Verify the downloaded PDF with the applicable provenance
+verification tool and expected repository identity.
+
+## WSP-DOC-0013 — Selectable PAdES Signature
+
+A project shall select PAdES signing when required. It shall use a protected
+private key, RFC 3161 timestamp, and document-signing certificate whose policy,
+extended-key usage, and issuer terms authorize that use. An Authenticode
+certificate is not assumed suitable. PAdES-B-T is the minimum profile;
+PAdES-B-LT should be used when long-term validation data must be embedded.
+
+**Verification:** Signature-policy review and independent PAdES validation.

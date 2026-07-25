@@ -1,6 +1,17 @@
 {
   "title": "Waughtal Software Process",
   "subtitle": "Engineering requirements, architecture, testing, and tools",
+  "author": "Waughtal",
+  "subject": "Software engineering process, requirements, and verification",
+  "keywords": [
+    "WSP",
+    "requirements",
+    "architecture",
+    "testing",
+    "IEC 29119",
+    "Personal Software Process"
+  ],
+  "language": "en-US",
   "repositoryUrl": "https://github.com/Thewafflication/wsp",
   "outputName": "wsp-documentation.pdf",
   "files": [

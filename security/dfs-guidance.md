@@ -61,3 +61,8 @@ execution, downgrade protection, and audit records.
 An adopting WPM baseline should preserve those product-specific decisions in
 its own DFS and map them to `WSP-SEC-####` requirements. WSP does not replace
 the detailed WPM trust, signature, package, or repository requirements.
+
+WSP uses **Design for Security (DFS)** as the canonical term. WPM's existing
+document titled **WPM Security Design (DFS)** is the corresponding legacy
+artifact and may retain that filename and title. WPM should record the mapping
+when it adopts this profile; a rename is not required for conformity to WSP.

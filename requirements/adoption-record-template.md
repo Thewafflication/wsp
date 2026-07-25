@@ -1,4 +1,6 @@
-# WSP Adoption Record
+# Template — WSP Adoption Record
+
+**Content type:** Template
 
 **Project:** Project name
 

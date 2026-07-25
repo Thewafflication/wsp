@@ -1,4 +1,6 @@
-# ADR-NNNN: Short Decision Title
+# Template — ADR-NNNN: Short Decision Title
+
+**Content type:** Template
 
 **Status:** Proposed
 

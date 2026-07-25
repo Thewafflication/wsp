@@ -5,6 +5,10 @@
 This directory defines the WSP security profile and the Design for Security
 (DFS) artifact used by adopting projects.
 
+**Design for Security (DFS)** is the canonical WSP term. Existing project
+artifacts may retain a legacy title when their adoption record maps it to the
+WSP DFS.
+
 The profile separates two concerns:
 
 - [Security requirements](security-requirements.md) define common, tailorable

@@ -1,4 +1,6 @@
-# Test Report — Project and Baseline
+# Template — Test Report: Project and Baseline
+
+**Content type:** Template
 
 This report structure is aligned with the test-documentation purpose of
 ISO/IEC/IEEE 29119-3:2021. Projects claiming conformity require a separate

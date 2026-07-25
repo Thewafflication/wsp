@@ -1,4 +1,6 @@
-# REQ-NNNN — Short Requirement Title
+# Template — REQ-NNNN: Short Requirement Title
+
+**Content type:** Template
 
 **Status:** Proposed
 

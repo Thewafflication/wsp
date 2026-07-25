@@ -122,7 +122,9 @@ The established sections are:
   source quality, traceability, test evidence, reports, build warnings, and
   documentation builds; and
 - [Documentation](documentation/README.md), which defines the consistent
-  Pandoc and MiKTeX release-PDF pipeline.
+  Pandoc and MiKTeX release-PDF pipeline; and
+- [Template library](templates/README.md), which indexes reusable project-owned
+  artifact starting points grouped at the end of the release PDF.
 
 ## Requirement Format
 

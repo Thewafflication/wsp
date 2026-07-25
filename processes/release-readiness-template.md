@@ -28,6 +28,7 @@ set, and excluded or deferred work.
 | Defect and vulnerability review | Reference | Pass / Fail / N/A | |
 | Documentation | Reference | Pass / Fail / N/A | |
 | Provenance and dependency record | Reference | Pass / Fail / N/A | |
+| Windows signing and Defender scan | Reference | Pass / Fail / N/A | |
 | Installation, rollback, and recovery | Reference | Pass / Fail / N/A | |
 
 ## Artifacts

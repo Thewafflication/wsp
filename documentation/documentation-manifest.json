@@ -20,6 +20,7 @@
     "security/standards-alignment.md",
     "security/dfs-guidance.md",
     "security/security-requirements.md",
+    "security/windows-code-signing-and-defender.md",
     "style/README.md",
     "style/documentation-style.md",
     "style/artifact-identifiers.md",
@@ -42,6 +43,7 @@
     "processes/release-readiness-template.md",
     "security/dfs-template.md",
     "testing/test-report-template.md",
-    "templates/windows-version-resource-template.md"
+    "templates/windows-version-resource-template.md",
+    "templates/windows-release-trust-template.md"
   ]
 }

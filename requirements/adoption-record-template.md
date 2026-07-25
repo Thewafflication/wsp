@@ -38,6 +38,7 @@ disposition. They are not removed by omitting a selectable profile.
 | PowerShell style | Yes / No | In-scope automation, or reason not applicable |
 | CMake style | Yes / No | In-scope build files, or reason not applicable |
 | Windows version resources | Yes / No | Shipped project-owned EXEs and DLLs |
+| Windows code signing and Defender | Yes / No | Shipped Windows artifacts |
 | Common tools | Yes / No | Reusable validation and reporting tools |
 
 Add every profile present in the adopted WSP baseline.

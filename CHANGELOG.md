@@ -20,6 +20,8 @@ not reused when requirements are removed or superseded.
   conventions;
 - documentation, identifier, C, PowerShell, and CMake style rules;
 - Windows executable and DLL version-resource requirements and template;
+- Windows Authenticode signing, Defender scanning, and false-positive response
+  requirements and release-evidence template;
 - reusable validation and report-generation tools; and
 - a Pandoc and MiKTeX pipeline for one linked release PDF.
 

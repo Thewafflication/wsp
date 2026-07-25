@@ -105,11 +105,12 @@ and an approved verification or test report.
 
 The project confirms release criteria, known limitations, security findings,
 artifact identity, version, source revision, dependency baseline, test status,
-and required documentation. Released artifacts and evidence are retained under
-project policy.
+required documentation, and applicable signing and malware-scan evidence.
+Released artifacts and evidence are retained under project policy.
 
 **Principal WSP material:** Test release gates, documentation requirements,
-common tools, semantic versioning, and security update requirements.
+common tools, semantic versioning, security update requirements, and selected
+release-trust profiles.
 
 **Expected output:** Identified release artifacts, release documentation,
 approval, and reproducible source and dependency references.

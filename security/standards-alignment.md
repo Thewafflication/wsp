@@ -43,6 +43,14 @@ techniques used within those processes. WSP applies its existing 29119-aligned
 test strategy to security requirements, threats, abuse cases, malformed input,
 control failures, and recovery behavior.
 
+### CA/Browser Forum Code Signing Baseline Requirements
+
+The CA/Browser Forum requirements govern participating certification
+authorities that issue publicly trusted code-signing certificates. WSP uses
+them as the industry baseline for certificate issuance and protected private
+keys. They complement, but do not replace, project secure-development and
+release-verification requirements.
+
 ## WSP Mapping
 
 | WSP concern | Principal relationship |
@@ -55,6 +63,7 @@ control failures, and recovery behavior.
 | Security test-design techniques | ISO/IEC/IEEE 29119-4 |
 | Defect and vulnerability response | IEC 62443-4-1 |
 | Updates, rollback, and end of support | IEC 62443-4-1; ISO/IEC/IEEE 12207 |
+| Public code-signing identity and key protection | CA/Browser Forum |
 
 ## Conformity Position
 
@@ -71,3 +80,5 @@ certification process independently of WSP adoption.
 - [ISO/IEC/IEEE 12207:2026](https://www.iso.org/standard/90219.html)
 - [ISO/IEC/IEEE 29119-2:2021](https://www.iso.org/standard/79428.html)
 - [ISO/IEC/IEEE 29119-4:2021](https://www.iso.org/standard/79430.html)
+- CA/Browser Forum, Code Signing Baseline Requirements:
+  <https://cabforum.org/working-groups/code-signing/>

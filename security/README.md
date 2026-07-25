@@ -13,12 +13,15 @@ The profile separates two concerns:
 
 - [Security requirements](security-requirements.md) define common, tailorable
   obligations identified as `WSP-SEC-####`.
+- [Windows code signing and Defender](windows-code-signing-and-defender.md)
+  defines selectable release-trust obligations identified as `WSP-SIGN-####`.
 - [DFS guidance](dfs-guidance.md) defines the project-owned security design
   that applies those obligations to a product and its threat environment.
 - [DFS template](dfs-template.md) provides a starting structure for that
   project-owned design.
 - [Standards alignment](standards-alignment.md) maps the profile to IEC 62443,
-  ISO/IEC 27034, ISO/IEC/IEEE 12207, and ISO/IEC/IEEE 29119.
+  ISO/IEC 27034, ISO/IEC/IEEE 12207, ISO/IEC/IEEE 29119, and the CA/Browser
+  Forum Code Signing Baseline Requirements.
 
 The security profile is selectable. A project that does not select it shall
 record that decision and its rationale in the WSP adoption record. Selection

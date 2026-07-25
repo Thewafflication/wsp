@@ -85,7 +85,9 @@ Before release approval, the project shall evaluate:
 - unresolved defects, vulnerabilities, risks, and limitations;
 - supported platforms and compatibility commitments;
 - required documentation, notices, and installation or recovery information;
-- source revision, dependency baseline, and build provenance; and
+- source revision, dependency baseline, and build provenance;
+- applicable signing, timestamp, malware-scan, and artifact-trust evidence;
+- package integrity and exact published-artifact digests; and
 - rollback, support, and communication needs.
 
 Exceptions shall identify an owner, rationale, impact, approval, and completion

@@ -78,6 +78,7 @@ documentation, and testing. Selectable profiles currently cover:
 - PowerShell automation;
 - CMake-based builds; and
 - Windows executable and DLL version resources; and
+- Windows code signing, Defender scanning, and false-positive response;
 - common tool consumers.
 
 An adopting project should select only the profiles that match its product,

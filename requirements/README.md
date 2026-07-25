@@ -20,6 +20,11 @@ following requirement sets are currently defined outside this directory:
 | Requirement set | Location | Applicability |
 | --- | --- | --- |
 | `WSP-CSTYLE-####` | [C style](../style/c-style.md) | C projects |
+| `WSP-DOC-####` | [Docs](../documentation/requirements.md) | All projects |
+| `WSP-PSP-####` | [PSP](../processes/personal-process.md) | Profile |
+| `WSP-SEC-####` | [Security](../security/security-requirements.md) | Profile |
+| `WSP-TEST-####` | [Testing](../testing/test-strategy.md) | All projects |
+| `WSP-TOOL-####` | [Common tools](../tools/requirements.md) | Tool consumers |
 
 This index shall be updated whenever a normative requirement set is added,
 moved, renamed, or retired.

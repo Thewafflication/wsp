@@ -1,0 +1,65 @@
+% WSP structured test-case definitions.
+% Aligned with ISO/IEC/IEEE 29119-3:2021 test documentation and derived from
+% the ISO/IEC/IEEE 29119-3-oriented WPM and WCRT templates.
+
+% Test-case attributes.
+\def\TCID{TC-NNNN}
+\def\TCTitle{}
+\def\TCPurpose{}
+\def\TCPriority{}
+
+% Traceability.
+\def\TCRequirementRef{}
+\def\TCDesignRef{}
+\def\TCFeatureRef{}
+\def\TCTestTechnique{}
+
+% Preconditions.
+\def\TCPreconditions{}
+\def\TCEnvironment{}
+\def\TCAssumptions{}
+
+% Test data.
+\def\TCInputData{}
+\def\TCInitialState{}
+
+% Execution.
+\def\TCProcedure{}
+\def\TCExpectedResult{}
+\def\TCPostConditions{}
+
+% Controlled priorities.
+\def\TCPriorityLow{Low}
+\def\TCPriorityMedium{Medium}
+\def\TCPriorityHigh{High}
+\def\TCPriorityCritical{Critical}
+
+% Controlled execution statuses.
+\def\TCStatusPass{Pass}
+\def\TCStatusFail{Fail}
+\def\TCStatusBlocked{Blocked}
+\def\TCStatusInconclusive{Inconclusive}
+\def\TCStatusNotRun{Not run}
+\def\TCStatusNotApplicable{Not applicable}
+
+\newcommand{\TCTemplate}{%
+  \subsection*{\TCID\ -- \TCTitle}
+  \begin{description}
+    \item[Purpose] \TCPurpose\par
+    \item[Priority] \TCPriority\par
+    \item[Requirement Reference] \TCRequirementRef\par
+    \item[Design Reference] \TCDesignRef\par
+    \item[Feature Reference] \TCFeatureRef\par
+    \item[Test Technique] \TCTestTechnique\par
+    \item[Preconditions] \TCPreconditions\par
+    \item[Environment] \TCEnvironment\par
+    \item[Assumptions] \TCAssumptions\par
+    \item[Input Data] \TCInputData\par
+    \item[Initial State] \TCInitialState\par
+    \item[Procedure] \mbox{}\TCProcedure\par
+    \item[Expected Result] \mbox{}\TCExpectedResult\par
+    \item[Postconditions] \TCPostConditions\par
+  \end{description}
+  \hrule
+  \vspace{1em}
+}

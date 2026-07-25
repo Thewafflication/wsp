@@ -1,0 +1,9 @@
+/output/
+/tmp/
+/tools/.cache/
+
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc

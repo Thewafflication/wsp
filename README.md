@@ -1,10 +1,15 @@
-# Waughtal Software Practices
+# Waughtal Software Process
 
-Waughtal Software Practices (**WSP**) contains reusable engineering
+The Waughtal Software Process (**WSP**) contains reusable engineering
 requirements, practices, templates, and validation tools for Waughtal projects.
 It provides a common foundation for architecture, implementation, verification,
 release, and reporting while allowing each project to document justified
 deviations and project-specific needs.
+
+WSP testing terminology, processes, test documentation, and test-design
+guidance are aligned with the ISO/IEC/IEEE 29119 software-testing series. WSP
+uses the series as its primary testing reference and identifies project-specific
+automation and evidence rules where WPM and WCRT require additional detail.
 
 The repository is intended to answer two questions:
 
@@ -30,6 +35,12 @@ identification; signed WPM packages; and architecture-specific release
 artifacts. WPM and WCRT also share a requirements-to-evidence model based on
 stable requirement and test-case identifiers.
 
+WSP references the Software Engineering Institute's Personal Software Process
+(PSP) where individual planning, estimation, measurement, reviews, defect
+management, and process improvement are applicable. PSP informs the personal
+discipline within WSP; it does not replace project governance, architecture,
+requirements management, or ISO/IEC/IEEE 29119 testing processes.
+
 Project-specific product behavior, design decisions, source code, test results,
 and release evidence belong in the project that owns them. This repository
 defines shared expectations and reusable starting points; it does not replace a
@@ -41,9 +52,9 @@ Every document should clearly identify which of the following types it contains:
 
 | Type | Meaning |
 | --- | --- |
-| **Requirement** | A normative rule that an adopting project must satisfy or formally tailor. |
-| **Guidance** | Recommended practices, rationale, and examples that help satisfy requirements. |
-| **Template** | A reusable starting point for a project-owned engineering artifact. |
+| **Requirement** | A rule a project must satisfy or formally tailor. |
+| **Guidance** | Recommended practices, rationale, and examples. |
+| **Template** | A starting point for a project-owned artifact. |
 | **Example** | An illustrative artifact that is informative and not binding. |
 
 The key words **shall**, **should**, and **may** have the following meanings:
@@ -77,14 +88,15 @@ requirements/    Common, uniquely identified requirements
 architecture/    Architecture decision record guidance and templates
 testing/         Test strategy, case, procedure, and report guidance
 processes/       Review, change-control, and release practices
+security/        Security requirements, DFS guidance, and template
 style/           Requirements, code, and documentation conventions
 templates/       Reusable project document templates
 schemas/         Machine-readable artifact definitions
 tools/           Validation and report-generation utilities
 ```
 
-Each directory should contain a README that describes its scope and distinguishes
-normative content from supporting guidance.
+Each directory should contain a README that describes its scope and
+distinguishes normative content from supporting guidance.
 
 The established sections are:
 
@@ -92,8 +104,20 @@ The established sections are:
   durable architectural decisions; and
 - [Requirements](requirements/README.md), which defines the common requirement
   management baseline and adoption records; and
+- [Processes](processes/README.md), which defines individual and project process
+  guidance, including Personal Software Process alignment; and
+- [Security and DFS](security/README.md), which defines selectable security
+  requirements and the project Design for Security artifact; and
 - [Style](style/README.md), which defines shared writing, identifier, source,
-  PowerShell, and CMake conventions.
+  PowerShell, and CMake conventions; and
+- [Testing](testing/README.md), which defines test specifications, automated
+  execution, evidence, reports, CI, release verification, and alignment with
+  ISO/IEC/IEEE 29119; and
+- [Common tools](tools/README.md), which provide reusable enforcement for
+  source quality, traceability, test evidence, reports, build warnings, and
+  documentation builds; and
+- [Documentation](documentation/README.md), which defines the consistent
+  Pandoc and MiKTeX release-PDF pipeline.
 
 ## Requirement Format
 
@@ -125,15 +149,40 @@ critical behavior.
 **Verification:** Test and code review.
 ```
 
-Identifiers are permanent. An identifier must not be reused after its requirement
-is removed or superseded.
+Identifiers are permanent. An identifier must not be reused after its
+requirement is removed or superseded.
 
 ## Adoption and Tailoring
 
-A project adopts this repository by referencing a released version or immutable
-commit. For example:
+A project adopts this repository as a Git submodule at `wsp/`. The submodule
+gitlink pins the exact WSP commit used by the project, making the applicable
+practices reproducible and upgrades reviewable.
 
-> This project adopts Waughtal Software Practices v1.2.0.
+Add WSP to a project with:
+
+```powershell
+git submodule add <wsp-repository-url> wsp
+git -C wsp checkout <release-tag>
+git add .gitmodules wsp
+```
+
+After cloning an adopting project, initialize WSP with:
+
+```powershell
+git submodule update --init wsp
+```
+
+The project shall record the adopted release and pinned commit in its WSP
+adoption record. For example:
+
+> This project adopts the Waughtal Software Process v1.2.0.
+
+To upgrade, fetch WSP releases within the submodule, check out the selected
+release, update the adoption record, assess changed requirements, and commit
+the resulting `wsp` gitlink change through normal review.
+
+See [ADR-0001](architecture/adr-0001-adoption-by-git-submodule.md) for the
+decision and its consequences.
 
 The adopting project should record each applicable common requirement with one
 of these dispositions:
@@ -182,6 +231,24 @@ Released versions of this repository use semantic versioning:
 Projects remain bound to the version they adopted until they intentionally
 upgrade. Changes to normative content should be summarized in a changelog so
 projects can assess the impact of upgrading.
+
+## Release Documentation
+
+Each WSP release includes one PDF containing the controlled Markdown
+documentation in manifest order. Pandoc assembles and converts the source,
+while MiKTeX provides the PDFLaTeX engine. The shared WSP preamble supplies
+consistent typography, headings, tables, hyperlinks, page numbers, and a
+linked table of contents.
+
+Build the WSP release document with:
+
+```powershell
+pwsh -File tools/Build-Documentation.ps1
+```
+
+The default output is `output/pdf/wsp-documentation.pdf`. See the
+[documentation build guide](documentation/README.md) for dependencies,
+manifest structure, project adoption, and release use.
 
 ## Contributing
 

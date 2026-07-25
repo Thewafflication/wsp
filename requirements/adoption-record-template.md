@@ -4,6 +4,10 @@
 
 **WSP baseline:** Release tag or immutable commit
 
+**Submodule path:** `wsp/`
+
+**Pinned commit:** Full WSP commit identifier
+
 **Status:** Proposed
 
 **Approval:** Change, review, or other controlled approval reference
@@ -13,6 +17,8 @@
 | Profile | Applicable | Project scope or rationale |
 | --- | --- | --- |
 | Common requirements management | Yes | All controlled project requirements |
+| Personal process | Yes / No | Individual planning and improvement |
+| Security/DFS | Yes / No | Security scope, design, and verification |
 | C source style | Yes / No | Owned C files, or N/A rationale |
 | PowerShell style | Yes / No | In-scope automation, or reason not applicable |
 | CMake style | Yes / No | In-scope build files, or reason not applicable |
@@ -54,3 +60,7 @@ For every non-applicable disposition, record:
 | Date | WSP baseline | Project change | Summary |
 | --- | --- | --- | --- |
 | YYYY-MM-DD | `vX.Y.Z` | Review or commit | Initial adoption |
+
+The current baseline, pinned commit, and `wsp` gitlink shall agree. An upgrade
+entry should reference the adopting-project change that reviewed the new WSP
+requirements and tailoring impact.

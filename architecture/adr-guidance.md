@@ -28,7 +28,7 @@ Use one of these status values:
 | --- | --- |
 | **Proposed** | The decision is under review and is not yet authoritative. |
 | **Accepted** | The decision is approved and governs the project. |
-| **Deprecated** | The decision remains part of the history but should no longer guide new work. |
+| **Deprecated** | Retained as history; no longer guides new work. |
 | **Superseded by ADR-NNNN** | A later ADR replaces the decision. |
 | **Rejected** | The proposal was considered but not adopted. |
 

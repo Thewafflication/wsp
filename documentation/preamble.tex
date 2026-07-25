@@ -1,0 +1,46 @@
+% Shared WSP release-document styling for Pandoc and MiKTeX.
+% Use packages already loaded by Pandoc's standard LaTeX template so release
+% builds do not require interactive MiKTeX package installation.
+
+\definecolor{WspNavy}{HTML}{17365D}
+\definecolor{WspBlue}{HTML}{2F5597}
+\definecolor{WspLink}{HTML}{1F5A94}
+\definecolor{WspRule}{HTML}{A6A6A6}
+
+\AtBeginDocument{%
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=WspLink,
+    urlcolor=WspLink,
+    citecolor=WspLink,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    pdfdisplaydoctitle=true
+  }
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\renewcommand{\arraystretch}{1.15}
+\pagestyle{headings}
+\AtBeginDocument{\urlstyle{same}}
+
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{20pt}%
+  {\parindent 0pt\raggedright\normalfont\color{WspNavy}%
+    \ifnum\c@secnumdepth>\m@ne
+      \huge\bfseries\@chapapp\space\thechapter\par\nobreak
+      \vskip 18pt
+    \fi
+    \Huge\bfseries #1\par\nobreak
+    \vskip 30pt}}
+\def\@makeschapterhead#1{%
+  \vspace*{20pt}%
+  {\parindent 0pt\raggedright\normalfont\color{WspNavy}%
+    \Huge\bfseries #1\par\nobreak
+    \vskip 30pt}}
+\makeatother

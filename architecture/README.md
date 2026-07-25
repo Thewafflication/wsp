@@ -19,6 +19,11 @@ ADRs complement requirements and design documentation:
   supersede a decision record.
 - [ADR template](adr-template.md) provides the standard document structure.
 
+## WSP Decisions
+
+- [ADR-0001](adr-0001-adoption-by-git-submodule.md) selects a Git submodule as
+  the WSP adoption and distribution mechanism.
+
 ## Adoption
 
 Projects should store ADRs in a documented location, normally `docs/`, and use

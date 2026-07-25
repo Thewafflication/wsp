@@ -1,0 +1,47 @@
+\documentclass[letterpaper]{article}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+
+% Compile from the adopting-project repository root so this path resolves to
+% the pinned WSP submodule.
+\input{wsp/testing/test-case-library.tex}
+
+\begin{document}
+
+\def\TCID{TC-NNNN}
+\def\TCTitle{Short test-case title}
+\def\TCPurpose{%
+  Verify an observable requirement or behavior.}
+\def\TCPriority{\TCPriorityHigh}
+
+\def\TCRequirementRef{REQ-NNNN}
+\def\TCDesignRef{Related ADR or design reference, or Not applicable.}
+\def\TCFeatureRef{Relevant source, interface, process, or artifact.}
+\def\TCTestTechnique{%
+  ISO/IEC/IEEE 29119-4 technique and coverage, or Not applicable.}
+
+\def\TCPreconditions{%
+  State required software, data, permissions, and system state.}
+\def\TCEnvironment{%
+  State the target, operating system, toolchain, and configuration.}
+\def\TCAssumptions{%
+  State controlled assumptions, or Not applicable.}
+
+\def\TCInputData{%
+  Identify controlled inputs and boundary values.}
+\def\TCInitialState{%
+  Describe the state before execution and isolation from earlier runs.}
+
+\def\TCProcedure{%
+  \begin{enumerate}
+    \item Perform one reproducible action.
+    \item Capture the result and required diagnostic evidence.
+  \end{enumerate}}
+\def\TCExpectedResult{%
+  State objective pass criteria for every required observation.}
+\def\TCPostConditions{%
+  Describe cleanup, retained outputs, and final system state.}
+
+\TCTemplate
+
+\end{document}

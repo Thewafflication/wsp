@@ -81,6 +81,7 @@ by inspection of relationships that cannot be checked automatically.
 An adopting project shall maintain a controlled adoption record that identifies:
 
 - the adopted WSP release or immutable commit;
+- the path and pinned commit of the WSP Git submodule;
 - applicable technology and delivery profiles;
 - the disposition of every applicable WSP requirement;
 - every tailoring decision and its rationale; and
@@ -91,7 +92,7 @@ An adopting project shall maintain a controlled adoption record that identifies:
 or modifications visible.
 
 **Verification:** Inspection of the project's adoption record against the WSP
-requirement index.
+requirement index and its committed `wsp` gitlink.
 
 ### WSP-REQM-0007 — Tailoring Control
 

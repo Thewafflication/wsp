@@ -1,0 +1,102 @@
+# Documentation Build
+
+**Content type:** Requirements, guidance, and build configuration
+
+WSP uses Pandoc and MiKTeX to assemble controlled Markdown documentation into
+one consistently formatted release PDF. The output includes:
+
+- a title page with project and version metadata;
+- a linked, numbered table of contents;
+- numbered chapters and sections;
+- clickable internal and external links;
+- consistent headings, tables, lists, and code blocks;
+- running headers and page numbers; and
+- PDF bookmarks and document metadata.
+
+The [documentation requirements](requirements.md) define the release baseline.
+
+## Dependencies
+
+- Pandoc 3 or newer
+- MiKTeX with `pdflatex`
+- PowerShell 7
+
+The build tool searches `PATH`, common Windows installation locations, and an
+optional `-Pandoc` or `-PdfLatex` path. CI should install pinned dependency
+versions and record them with the release evidence.
+
+## WSP Build
+
+From the WSP repository root:
+
+```powershell
+pwsh -File tools/Build-Documentation.ps1
+```
+
+The build reads [documentation-manifest.json](documentation-manifest.json) and
+writes `output/pdf/wsp-documentation.pdf` by default.
+
+## Manifest
+
+The JSON manifest controls identity and document order:
+
+```json
+{
+  "title": "Project Engineering Documentation",
+  "subtitle": "Requirements, architecture, verification, and practices",
+  "repositoryUrl": "https://github.com/example/project",
+  "outputName": "project-documentation.pdf",
+  "files": [
+    "README.md",
+    "docs/requirements.md",
+    "wsp/requirements/requirements-management.md",
+    "wsp/testing/test-strategy.md"
+  ]
+}
+```
+
+The repository URL is displayed as a hyperlink on the title page. The build
+adds the release date, version, and abbreviated source commit beside it. Every
+path is relative to the adopting-project root unless it is absolute. The array
+order is the PDF chapter order. Missing and duplicate files fail the build.
+
+## Adopting Projects
+
+An adopting project should store its manifest in
+`documentation/documentation-manifest.json` and invoke the build tool through
+the pinned submodule:
+
+```powershell
+pwsh -File wsp/tools/Build-Documentation.ps1 `
+  -RepositoryRoot . `
+  -ManifestPath documentation/documentation-manifest.json
+```
+
+The manifest may mix project-owned files with pinned `wsp/` files. This keeps a
+release's product documentation and applicable WSP baseline in one PDF without
+copying WSP source.
+
+## Styling
+
+The shared `preamble.tex` file is applied by the build tool. Projects may supply
+an additional `-HeaderPath` only to add project identity or narrowly scoped
+formatting. They should not override the semantic hierarchy, hyperlink
+behavior, margins, or status colors without a documented tailoring decision.
+
+Markdown remains authoritative. Generated TeX, logs, rendered pages, and PDFs
+are written beneath `tmp/pdfs/` and `output/pdf/` and are not committed by
+default.
+
+## Release Use
+
+Release automation should:
+
+1. initialize the pinned WSP submodule;
+2. install the pinned Pandoc and MiKTeX toolchain;
+3. invoke `Build-Documentation.ps1` with the release version;
+4. inspect the PDF metadata, page count, links, and rendered pages;
+5. retain the build log and verification results; and
+6. publish the PDF with the other release artifacts.
+
+The document version should match the software or WSP release tag. Development
+builds may use the source revision returned by Git.

@@ -37,6 +37,7 @@ disposition. They are not removed by omitting a selectable profile.
 | C source style | Yes / No | Owned C files, or N/A rationale |
 | PowerShell style | Yes / No | In-scope automation, or reason not applicable |
 | CMake style | Yes / No | In-scope build files, or reason not applicable |
+| Windows version resources | Yes / No | Shipped project-owned EXEs and DLLs |
 | Common tools | Yes / No | Reusable validation and reporting tools |
 
 Add every profile present in the adopted WSP baseline.

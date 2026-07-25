@@ -27,6 +27,7 @@
     "style/c-style.md",
     "style/powershell-style.md",
     "style/cmake-style.md",
+    "style/windows-version-resources.md",
     "testing/README.md",
     "testing/iso-iec-ieee-29119-alignment.md",
     "testing/test-strategy.md",
@@ -40,6 +41,7 @@
     "requirements/adoption-record-template.md",
     "processes/release-readiness-template.md",
     "security/dfs-template.md",
-    "testing/test-report-template.md"
+    "testing/test-report-template.md",
+    "templates/windows-version-resource-template.md"
   ]
 }

@@ -20,6 +20,8 @@ that every project uses the same language or toolchain.
 - [PowerShell style](powershell-style.md) is a profile for automation and test
   scripts.
 - [CMake style](cmake-style.md) is a profile for CMake projects and presets.
+- [Windows version resources](windows-version-resources.md) defines executable
+  and DLL `VERSIONINFO` requirements.
 
 ## Adoption
 
@@ -35,3 +37,6 @@ file.
 Generated and third-party content is excluded unless a project explicitly
 states otherwise. Existing projects may retain established conventions when a
 mechanical conversion would add risk without improving clarity.
+
+Published project-owned Windows executables and DLLs should select the Windows
+version-resource profile even when their implementation language is not C.

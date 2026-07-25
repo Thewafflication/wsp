@@ -19,6 +19,7 @@ not reused when requirements are removed or superseded.
 - ISO/IEC/IEEE 29119-aligned testing requirements, templates, and evidence
   conventions;
 - documentation, identifier, C, PowerShell, and CMake style rules;
+- Windows executable and DLL version-resource requirements and template;
 - reusable validation and report-generation tools; and
 - a Pandoc and MiKTeX pipeline for one linked release PDF.
 

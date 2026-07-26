@@ -11,7 +11,9 @@ not reused when requirements are removed or superseded.
 
 - GitHub Action runtime-currency requirements that default new and updated
   workflows to maintained action majors on supported runtimes and require
-  compatibility checks for self-hosted runners.
+  compatibility checks for self-hosted runners; and
+- Annex A documenting the GitHub Node.js 20 deprecation, current WSP action
+  defaults, migration review, and compatibility exceptions.
 
 ### Changed
 

@@ -78,11 +78,10 @@ that its runner version, operating system, and architecture satisfy the
 action's requirements. A temporary compatibility exception shall identify the
 affected action, reason, owner, and removal condition.
 
-As of 2026-07-26, the WSP GitHub-hosted workflow uses
-`actions/checkout@v6`, `actions/upload-artifact@v7`, and
-`actions/download-artifact@v8`. These versions are implementation examples,
-not permanent pins for adopting projects; projects shall reassess action
-currency when authoring or materially updating a workflow.
+See [Annex A — GitHub Node 20 Deprecation][annex-a] for the current WSP action
+defaults and migration guidance.
 
 **Verification:** Workflow action-version inspection, action runtime review,
 and self-hosted runner compatibility evidence when applicable.
+
+[annex-a]: ../documentation/annex-a-github-node20-deprecation.md

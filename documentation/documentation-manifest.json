@@ -55,6 +55,7 @@
     "security/dfs-template.md",
     "testing/test-report-template.md",
     "templates/windows-version-resource-template.md",
-    "templates/windows-release-trust-template.md"
+    "templates/windows-release-trust-template.md",
+    "documentation/annex-a-github-node20-deprecation.md"
   ]
 }

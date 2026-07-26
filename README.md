@@ -241,8 +241,7 @@ Projects remain bound to the version they adopted until they intentionally
 upgrade. Changes to normative content should be summarized in a changelog so
 projects can assess the impact of upgrading.
 
-See the [changelog](CHANGELOG.md) for the current v1.0 candidate scope and
-release conditions.
+See the [changelog](CHANGELOG.md) for the WSP 1.0.0 release scope and history.
 
 ## Release Documentation
 
@@ -286,6 +285,5 @@ matures.
 
 ## Status
 
-This repository is being established. Its structure and conventions may change
-before the first tagged release. Content should not be treated as a controlled
-baseline until that release is published.
+Version 1.0.0 is the first controlled WSP baseline. Projects should adopt an
+immutable release tag and record the corresponding commit as described above.

@@ -5,7 +5,7 @@
 This file records material changes to WSP releases. Requirement identifiers are
 not reused when requirements are removed or superseded.
 
-## Unreleased — v1.0 Candidate
+## 1.0.0 — 2026-07-26
 
 ### Added
 
@@ -38,9 +38,3 @@ not reused when requirements are removed or superseded.
 - established Design for Security as the canonical DFS term while preserving
   a mapping for WPM's legacy Security Design title; and
 - grouped reusable templates at the end of the release document.
-
-### Release Conditions
-
-Before this section becomes version `1.0.0`, the release shall pass the WSP
-release-readiness process, use a clean tagged source revision, and publish the
-verified release PDF with its source baseline.

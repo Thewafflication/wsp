@@ -5,6 +5,19 @@
 This file records material changes to WSP releases. Requirement identifiers are
 not reused when requirements are removed or superseded.
 
+## Unreleased
+
+### Added
+
+- GitHub Action runtime-currency requirements that default new and updated
+  workflows to maintained action majors on supported runtimes and require
+  compatibility checks for self-hosted runners.
+
+### Changed
+
+- updated the WSP documentation workflow to Node.js 24-based releases of the
+  checkout and artifact actions.
+
 ## 1.0.0 — 2026-07-26
 
 ### Added

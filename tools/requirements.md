@@ -64,3 +64,25 @@ Each common tool shall have automated positive and negative tests before its
 behavior is used as a required release gate by an adopting project.
 
 **Verification:** WSP test inventory and CI evidence.
+
+## WSP-TOOL-0009 — GitHub Action Runtime Currency
+
+A project using GitHub Actions shall select maintained action releases whose
+declared JavaScript runtime is supported by GitHub Actions. New and updated
+workflows should default to the latest stable compatible major release rather
+than rely on the runner to force an action from a deprecated runtime onto a
+newer runtime.
+
+Before upgrading an action, a project using self-hosted runners shall verify
+that its runner version, operating system, and architecture satisfy the
+action's requirements. A temporary compatibility exception shall identify the
+affected action, reason, owner, and removal condition.
+
+As of 2026-07-26, the WSP GitHub-hosted workflow uses
+`actions/checkout@v6`, `actions/upload-artifact@v7`, and
+`actions/download-artifact@v8`. These versions are implementation examples,
+not permanent pins for adopting projects; projects shall reassess action
+currency when authoring or materially updating a workflow.
+
+**Verification:** Workflow action-version inspection, action runtime review,
+and self-hosted runner compatibility evidence when applicable.

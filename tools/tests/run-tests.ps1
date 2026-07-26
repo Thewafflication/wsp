@@ -223,3 +223,4 @@ finally {
 }
 
 Write-Output 'All WSP common-tool tests passed.'
+exit 0

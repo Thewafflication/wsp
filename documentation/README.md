@@ -110,20 +110,20 @@ builds may use the source revision returned by Git.
 ## GitHub Actions
 
 The `Documentation PDF` workflow builds and validates the PDF for pushes to
-the primary branch, version tags, pull requests, manual dispatches, and
-published GitHub releases. Every successful build retains the PDF as a workflow
-artifact for 14 days.
+the primary branch, semantic-version tags, pull requests, and manual
+dispatches. Every successful build retains the PDF as a workflow artifact for
+14 days.
 
 Trusted non-pull-request builds generate GitHub build-provenance attestation
 for the PDF. Pull requests still build and validate the document but do not
 receive the OIDC and attestation permissions used for signed provenance.
 
-When a GitHub release is published, a second job downloads the exact artifacts
-produced by the successful build job and uploads `wsp-documentation.pdf` and
-`SHA256SUMS` to that release. The publish job uses the release tag as the
-document version and requires only the workflow-provided `GITHUB_TOKEN` with
-release-content write permission. No long-lived publication credential is
-required.
+When a semantic-version tag such as `1.0.0` is pushed, a second job downloads
+the exact artifacts produced by the successful build job, creates the
+corresponding GitHub release, and uploads `wsp-documentation.pdf` and
+`SHA256SUMS`. The publish job uses the tag as the document version and requires
+only the workflow-provided `GITHUB_TOKEN` with release-content write
+permission. No long-lived publication credential is required.
 
 Verify provenance after downloading a public release with:
 

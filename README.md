@@ -261,13 +261,13 @@ The default output is `output/pdf/wsp-documentation.pdf`. See the
 [documentation build guide](documentation/README.md) for dependencies,
 manifest structure, project adoption, and release use.
 
-GitHub Actions builds the same PDF for primary-branch pushes, version tags,
-pull requests, manual runs, and published releases. Every successful run
-retains a workflow artifact; a published release also receives the PDF as a
-release asset. Trusted builds receive signed GitHub provenance, and releases
-include `SHA256SUMS` for exact-file verification. PAdES document signing is a
-selectable control when an appropriate document-signing identity is available
-or a customer, contract, regulation, or risk assessment requires it.
+GitHub Actions builds the same PDF for primary-branch pushes, semantic-version
+tags, pull requests, and manual runs. Every successful run retains a workflow
+artifact. A semantic-version tag such as `1.0.0` also creates the corresponding
+GitHub release and uploads the PDF and `SHA256SUMS` automatically. Trusted
+builds receive signed GitHub provenance. PAdES document signing is a selectable
+control when an appropriate document-signing identity is available or a
+customer, contract, regulation, or risk assessment requires it.
 
 ## Contributing
 

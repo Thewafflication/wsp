@@ -6,12 +6,9 @@ on:
       - main
       - master
     tags:
-      - "v*"
+      - "*.*.*"
   pull_request:
   workflow_dispatch:
-  release:
-    types:
-      - published
 
 permissions:
   contents: read
@@ -74,13 +71,12 @@ jobs:
 
       - name: Build PDF
         shell: pwsh
+        env:
+          RELEASE_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
         run: |
-          $version = if ('${{ github.event_name }}' -eq 'release') {
-            '${{ github.event.release.tag_name }}'
-          }
-          else {
-            $null
-          }
+          $version = if ($env:RELEASE_VERSION) {
+            $env:RELEASE_VERSION
+          } else { $null }
           ./tools/Build-Documentation.ps1 -Version $version
 
       - name: Verify PDF
@@ -126,7 +122,7 @@ jobs:
 
   publish:
     name: Publish release PDF
-    if: github.event_name == 'release'
+    if: github.event_name == 'push' && github.ref_type == 'tag'
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -139,13 +135,24 @@ jobs:
           name: wsp-documentation
           path: release-assets
 
-      - name: Upload PDF to release
+      - name: Create release and upload PDF
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: >-
-          gh release upload "$RELEASE_TAG"
-          release-assets/wsp-documentation.pdf
-          release-assets/SHA256SUMS
-          --repo "$GITHUB_REPOSITORY"
-          --clobber
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" \
+              release-assets/wsp-documentation.pdf \
+              release-assets/SHA256SUMS \
+              --repo "$GITHUB_REPOSITORY" \
+              --clobber
+          else
+            gh release create "$RELEASE_TAG" \
+              release-assets/wsp-documentation.pdf \
+              release-assets/SHA256SUMS \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --title "WSP $RELEASE_TAG" \
+              --generate-notes
+          fi

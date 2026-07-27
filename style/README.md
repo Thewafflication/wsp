@@ -11,6 +11,8 @@ that every project uses the same language or toolchain.
 
 - [Documentation style](documentation-style.md) applies to project-authored
   Markdown documentation.
+- [Visual style](visual-style.md) defines the preferred color palette and
+  typography for project-owned web pages and rendered documentation.
 - [Artifact identifiers](artifact-identifiers.md) defines stable names for
   requirements, test cases, and ADRs.
 - [Requirements writing](requirements-writing.md) defines how to write

@@ -17,6 +17,7 @@ WCRT while removing repository-specific paths and assumptions.
 | `Test-TestEvidence.ps1` | Validate complete passing LaTeX evidence |
 | `New-TestReport.ps1` | Combine a test case and evidence into a report |
 | `Write-BuildWarningSummary.ps1` | Add build warnings to a CI summary |
+| [`logging/`](logging/README.md) | Consistent colored console and plain file logging for C, PowerShell, and CMake |
 
 The [tool requirements](requirements.md) define behavior common to every WSP
 tool.

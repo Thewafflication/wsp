@@ -1,0 +1,26 @@
+get_filename_component(logging_root "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
+include("${logging_root}/WspLogging.cmake")
+
+if(WSP_LOG_FILE STREQUAL "")
+  message(FATAL_ERROR "WSP_LOG_FILE is required by this test")
+endif()
+
+set(WSP_LOG_CONSOLE_LEVEL OFF)
+set(WSP_LOG_FILE_LEVEL DEBUG)
+wsp_log(DEBUG "diagnostic value=42")
+wsp_log(PASS "verification passed")
+
+file(READ "${WSP_LOG_FILE}" records)
+if(NOT records MATCHES "\\[DEBUG\\] diagnostic value=42")
+  message(FATAL_ERROR "CMake debug record is missing")
+endif()
+if(NOT records MATCHES "\\[PASS \\] verification passed")
+  message(FATAL_ERROR "CMake pass record is missing")
+endif()
+string(ASCII 27 escape)
+string(FIND "${records}" "${escape}[" ansi_position)
+if(NOT ansi_position EQUAL -1)
+  message(FATAL_ERROR "CMake file output contains ANSI escapes")
+endif()
+
+message("[PASS ] CMake logging file sink")

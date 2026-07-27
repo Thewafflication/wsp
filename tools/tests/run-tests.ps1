@@ -10,7 +10,7 @@ $workRoot = Join-Path ([IO.Path]::GetTempPath()) (
 function Invoke-ToolTest {
     param(
         [Parameter(Mandatory)][string]$Script,
-        [Parameter(Mandatory)][string[]]$Arguments,
+        [Parameter(Mandatory)][AllowEmptyCollection()][string[]]$Arguments,
         [Parameter(Mandatory)][int]$ExpectedExitCode,
         [Parameter(Mandatory)][string]$Name
     )
@@ -57,6 +57,10 @@ try {
         throw ($parseFailures -join "`n")
     }
     Write-Output '[PASS] PowerShell syntax'
+
+    $loggingTest = Join-Path $toolsRoot 'logging\tests\Test-Logging.ps1'
+    Invoke-ToolTest $loggingTest @() 0 `
+        'PowerShell logging adapter succeeds'
 
     $traceRoot = Join-Path $workRoot 'traceability'
     Write-Fixture (Join-Path $traceRoot 'docs\req-0001-example.md') `

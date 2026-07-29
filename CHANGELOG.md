@@ -13,12 +13,17 @@ not reused when requirements are removed or superseded.
   workflows to maintained action majors on supported runtimes and require
   compatibility checks for self-hosted runners; and
 - Annex A documenting the GitHub Node.js 20 deprecation, current WSP action
-  defaults, migration review, and compatibility exceptions.
+  defaults, migration review, and compatibility exceptions; and
+- Annex B recording WPM's native standard-input testing lesson, false-positive
+  mechanism, review questions, and a regression matrix for WCRT and other
+  native runtimes.
 
 ### Changed
 
 - updated the WSP documentation workflow to Node.js 24-based releases of the
-  checkout and artifact actions.
+  checkout and artifact actions; and
+- linked the common test strategy to Annex B for interactive native-input
+  verification.
 
 ## 1.0.0 — 2026-07-26
 

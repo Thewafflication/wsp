@@ -266,3 +266,8 @@ Each project should maintain a short test-strategy document that identifies:
 
 Project strategy may reference this document instead of restating the common
 requirements.
+
+Native programs that make decisions from standard input or console input
+should apply [Annex B — Native Standard-Input Testing](../documentation/annex-b-native-standard-input-testing.md).
+Acceptance and rejection tests shall distinguish supplied input from EOF or an
+input failure and shall prove the selected branch through an observable effect.

@@ -250,6 +250,69 @@ coverage.
 **Standards reference:** ISO/IEC/IEEE 29119-4 test techniques and the
 ISO/IEC/IEEE 29119-2 test design and implementation process.
 
+### WSP-TEST-0016 — Debug Build Evidence
+
+Every successful CI job that builds and tests a Debug configuration shall
+retain one downloadable artifact set containing:
+
+- the machine-readable test results and human-readable failure output;
+- the exact Debug binaries that were tested;
+- debugger symbols required to inspect those binaries; and
+- the Debug package, when the project produces an installable or distributable
+  package for that matrix entry.
+
+The artifact name and included metadata shall identify the source revision,
+target architecture, toolchain, and Debug configuration. CI shall upload the
+artifact only after the build and test commands have completed, including on a
+test failure when the CI system permits failed-job artifact retention.
+
+**Verification:** CI configuration inspection, successful Debug run, and
+artifact-content inspection.
+
+### WSP-TEST-0017 — Native ARM64 CI Execution
+
+An ARM64 build claimed as tested shall execute its tests on an ARM64 runner or
+an explicitly approved ARM64 emulator. GitHub Actions projects shall select a
+native ARM64 runner for normal ARM64 CI; cross-compilation on an x64 runner
+alone is build evidence and shall not be reported as an ARM64 test pass.
+
+The runner architecture shall be recorded in the test execution metadata. An
+emulated exception shall identify the emulator and version and document the
+residual difference from the supported native environment.
+
+**Verification:** Workflow inspection and comparison of runner architecture
+with test-result metadata.
+
+### WSP-TEST-0018 — Debug Failure Backtraces
+
+GDB shall be the default debugger for automated WSP Debug testing. Projects
+shall install or provision a GDB build capable of debugging the target
+architecture on each applicable CI runner.
+
+When a Debug test executed in CI terminates abnormally or returns a failing
+status, GNU-compatible jobs shall automatically invoke GDB in non-interactive
+batch mode against the failing test executable and retain a stack trace with
+the original test result. The debugger command shall request backtraces for all
+threads and shall not replace or hide the test runner's exit status or output.
+
+Projects should use a command equivalent to:
+
+```text
+gdb --batch --quiet -ex run -ex "thread apply all backtrace full" --args <test> <arguments>
+```
+
+TinyCC Debug binaries shall be built with `-gdwarf` so GDB receives a compatible
+symbol format. TinyCC's `-g.pdb` output may be retained for Microsoft debuggers,
+but a PDB alone shall not satisfy the Debug symbol or GDB backtrace
+requirements.
+
+CI shall fail clearly if this requirement applies but GDB is unavailable. A
+project on a platform where GDB cannot inspect the target shall record an
+approved tailoring decision and automate an equivalent stack-trace mechanism.
+
+**Verification:** Controlled failing Debug test and inspection of the retained
+test output and debugger trace.
+
 ## Project Test Strategy
 
 Each project should maintain a short test-strategy document that identifies:

@@ -9,6 +9,12 @@ not reused when requirements are removed or superseded.
 
 ### Added
 
+- toolchain-specific TinyCC and GCC/Clang C flags for WSP Debug and Release
+  profiles, with GDB and DWARF as the default Debug path;
+- Debug CI evidence requirements covering test results, tested binaries,
+  symbols, and applicable packages;
+- native ARM64 execution requirements for normal ARM64 GitHub CI; and
+- automatic GDB all-thread backtraces for failing Debug tests;
 - GitHub Action runtime-currency requirements that default new and updated
   workflows to maintained action majors on supported runtimes and require
   compatibility checks for self-hosted runners; and

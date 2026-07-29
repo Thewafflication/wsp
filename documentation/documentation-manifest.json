@@ -57,6 +57,7 @@
     "templates/windows-version-resource-template.md",
     "templates/windows-release-trust-template.md",
     "documentation/annex-a-github-node20-deprecation.md",
-    "documentation/annex-b-native-standard-input-testing.md"
+    "documentation/annex-b-native-standard-input-testing.md",
+    "documentation/annex-c-logging-and-visual-style.md"
   ]
 }

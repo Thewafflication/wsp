@@ -16,7 +16,10 @@ not reused when requirements are removed or superseded.
   defaults, migration review, and compatibility exceptions; and
 - Annex B recording WPM's native standard-input testing lesson, false-positive
   mechanism, review questions, and a regression matrix for WCRT and other
-  native runtimes.
+  native runtimes; and
+- Annex C documenting the shared logging tools and visual-style guidance as
+  interim additions planned for incorporation into the main chapters in WSP
+  1.1.
 
 ### Changed
 

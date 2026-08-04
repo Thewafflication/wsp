@@ -10,11 +10,29 @@
 #include <string.h>
 #include <time.h>
 
-#if defined(_WIN32)
+/*
+ * C99 defines va_copy, but some otherwise usable compilers and libraries do
+ * not expose it. Prefer a standard or compiler copy primitive when present;
+ * older implementations commonly use an assignment-compatible va_list.
+ * A target with a different representation may define WSP_VA_COPY itself.
+ */
+#if !defined(WSP_VA_COPY)
+#if defined(WSP_LOG_FORCE_VA_COPY_ASSIGNMENT)
+#define WSP_VA_COPY(destination, source) ((destination) = (source))
+#elif defined(va_copy)
+#define WSP_VA_COPY(destination, source) va_copy(destination, source)
+#elif defined(__va_copy)
+#define WSP_VA_COPY(destination, source) __va_copy(destination, source)
+#else
+#define WSP_VA_COPY(destination, source) ((destination) = (source))
+#endif
+#endif
+
+#if !defined(WSP_LOG_NO_TTY) && defined(_WIN32)
 #include <io.h>
 #define WSP_ISATTY _isatty
 #define WSP_FILENO _fileno
-#else
+#elif !defined(WSP_LOG_NO_TTY)
 #include <unistd.h>
 #define WSP_ISATTY isatty
 #define WSP_FILENO fileno
@@ -55,7 +73,12 @@ static int wsp_use_color(const wsp_logger *logger, FILE *stream)
     if (logger->color_mode == WSP_LOG_COLOR_ALWAYS) {
         return 1;
     }
+#if defined(WSP_LOG_NO_TTY)
+    (void)stream;
+    return 0;
+#else
     return WSP_ISATTY(WSP_FILENO(stream)) != 0;
+#endif
 }
 
 /** Write an ISO 8601 UTC timestamp to a stream. */
@@ -190,12 +213,12 @@ void wsp_log_write(wsp_logger *logger, wsp_log_level level,
     write_file = logger->file != NULL && level >= logger->file_level;
     va_start(arguments, format);
     if (write_console) {
-        va_copy(copy, arguments);
+        WSP_VA_COPY(copy, arguments);
         wsp_write_console(logger, level, format, copy);
         va_end(copy);
     }
     if (write_file) {
-        va_copy(copy, arguments);
+        WSP_VA_COPY(copy, arguments);
         wsp_write_file(logger->file, level, format, copy);
         va_end(copy);
     }

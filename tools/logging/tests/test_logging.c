@@ -25,11 +25,12 @@ int main(int argc, char **argv)
         return 2;
     }
     wsp_log_init(&logger);
-    wsp_log_set_console_level(&logger, WSP_LOG_OFF);
+    wsp_log_set_console_level(&logger, WSP_LOG_DEBUG);
+    wsp_log_set_color_mode(&logger, WSP_LOG_COLOR_NEVER);
     if (wsp_log_open_file(&logger, argv[1], 0) != 0) {
         return 3;
     }
-    wsp_log_write(&logger, WSP_LOG_DEBUG, "value=%d", 42);
+    wsp_log_write(&logger, WSP_LOG_DEBUG, "%s=%d", "value", 42);
     wsp_log_close(&logger);
 
     input = fopen(argv[1], "r");

@@ -54,6 +54,16 @@ The C implementation is C99, process-local, and not thread-safe. The caller
 must create the parent directory before opening a file sink. Append mode is
 recommended for an existing build log; truncate mode begins a new log.
 
+Targets without `<unistd.h>` or Microsoft `_isatty` support may configure with
+`-DWSP_LOG_NO_TTY=ON`, or define `WSP_LOG_NO_TTY` when compiling `wsp_log.c`
+directly. Automatic color detection then conservatively disables color;
+explicit `WSP_LOG_COLOR_ALWAYS` mode remains available.
+
+The C logger uses `va_copy` when the standard library provides it, falls back
+to compiler `__va_copy`, and otherwise supports assignment-compatible legacy
+`va_list` implementations. A toolchain with a different representation may
+define `WSP_VA_COPY(destination, source)` to its supported copy primitive.
+
 ## PowerShell
 
 Import the module through the pinned WSP checkout:

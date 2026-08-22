@@ -7,6 +7,8 @@ not reused when requirements are removed or superseded.
 
 ## Unreleased
 
+## 1.1.0 — 2026-08-22
+
 ### Added
 
 - toolchain-specific TinyCC and GCC/Clang C flags for WSP Debug and Release
@@ -24,15 +26,21 @@ not reused when requirements are removed or superseded.
   mechanism, review questions, and a regression matrix for WCRT and other
   native runtimes; and
 - Annex C documenting the shared logging tools and visual-style guidance as
-  interim additions planned for incorporation into the main chapters in WSP
-  1.1.
+  interim additions planned for incorporation into the main chapters in a
+  later release; and
+- a reusable milestone-document pack, generalized from WSH practice, covering
+  work planning, design, review, closeout, and optional chronological work
+  logging.
 
 ### Changed
 
 - updated the WSP documentation workflow to Node.js 24-based releases of the
   checkout and artifact actions; and
 - linked the common test strategy to Annex B for interactive native-input
-  verification.
+  verification; and
+- clarified that approved deferred objectives do not by themselves block a
+  release, remain outside completion and verification claims, and must be
+  closed, revised, or explicitly carried forward during release approval.
 
 ## 1.0.0 — 2026-07-26
 

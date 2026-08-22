@@ -199,7 +199,13 @@ of these dispositions:
 - **Applicable** — implemented and verified by the project;
 - **Tailored** — modified for the project's context, with rationale;
 - **Not applicable** — excluded, with rationale; or
-- **Deferred** — planned for a later milestone, with an owner and due condition.
+- **Deferred** — not yet satisfied and planned for a later milestone or
+  release, with an owner and completion condition.
+
+An approved deferred disposition does not by itself block a release. It remains
+outside the current release's completion and verification claims and shall not
+also be designated as a required gate for that release. Each release approval
+should close, revise, or explicitly carry forward every outstanding deferral.
 
 Projects should not silently modify copied requirements. Project-specific
 refinements should retain a reference to the originating common requirement.

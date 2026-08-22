@@ -9,9 +9,9 @@ after WSP 1.0.0. It makes the additions visible in the controlled document
 while preserving the released 1.0 baseline.
 
 The material is planned for incorporation into the applicable Tools and Style
-chapters in WSP 1.1. At that time, this annex should be removed or marked as
-superseded. Until then, adopting projects may select either or both additions
-and record the selection in their WSP adoption record.
+chapters in a later release. At that time, this annex should be removed or
+marked as superseded. Until then, adopting projects may select either or both
+additions and record the selection in their WSP adoption record.
 
 ## C.2 Shared Logging Tools
 
@@ -66,7 +66,7 @@ fonts would create an unsuitable external dependency.
 The complete palette, semantic CSS custom properties, font stacks, and usage
 guidance are maintained in `style/visual-style.md`.
 
-## C.4 Verification and WSP 1.1 Disposition
+## C.4 Verification and Later-Release Disposition
 
 Before adopting the logging tools, a project should run the common-tool tests
 and verify colored interactive output, uncolored redirected output, plain file
@@ -77,7 +77,7 @@ Before adopting the visual profile, a project should review representative
 rendered pages or interfaces at supported sizes and verify contrast, focus and
 status cues, font fallback behavior, and readability without color.
 
-For WSP 1.1, maintainers should:
+In a later release, maintainers should:
 
 1. place the logging guidance in the main Tools chapter;
 2. place the visual palette and typography guidance in the main Style chapter;

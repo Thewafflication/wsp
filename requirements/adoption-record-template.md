@@ -57,7 +57,13 @@ Permitted dispositions are:
 - **Applicable** — satisfied without changing the WSP obligation;
 - **Tailored** — changed for project context with approved rationale;
 - **Not applicable** — excluded with approved rationale; and
-- **Deferred** — not yet satisfied, with an owner and completion condition.
+- **Deferred** — not yet satisfied and planned for a later milestone or
+  release, with an owner and completion condition.
+
+An approved deferred disposition does not by itself block a release. It shall
+not be reported as satisfied or verified, and it shall not also be designated
+as a required gate for the current release. Each release approval shall close,
+revise, or explicitly carry forward outstanding deferrals.
 
 ## Tailoring Decisions
 
@@ -70,7 +76,8 @@ For every non-applicable disposition, record:
 - **Impact:** Consequences and risks introduced by the disposition
 - **Compensating control:** Alternative protection, or `None`
 - **Owner:** Responsible person or role
-- **Completion condition:** Required for deferred items; otherwise `N/A`
+- **Target release or completion condition:** Required for deferred items;
+  otherwise `N/A`
 - **Approval:** Controlled approval reference
 
 ## Baseline History

@@ -12,6 +12,18 @@ and improved.
   support, and improvement.
 - [Project process requirements](project-process.md) define the common
   `WSP-PROC-####` obligations for every adopting project.
+- [Milestone work-plan template](milestone-plan-template.md) defines scope,
+  allocation, risks, evidence, estimates, exit gates, and deferrals for an
+  independently reviewable work package.
+- [Milestone design-record template](design-record-template.md) captures work-
+  package boundaries, interfaces, ownership, failure behavior, security,
+  compatibility, and verification allocation.
+- [Review-record template](review-record-template.md) captures review inputs,
+  criteria, findings, dispositions, residual boundaries, and approval.
+- [Milestone closeout template](milestone-closeout-template.md) reconciles
+  scope, required gates, evidence, artifacts, measures, deferrals, and handoff.
+- [Optional work-log template](work-log-template.md) provides a lightweight
+  chronological execution and verification history when one is useful.
 - [Release-readiness template](release-readiness-template.md) provides a
   standard project-owned release decision record.
 - [Personal Software Process alignment](personal-software-process-alignment.md)

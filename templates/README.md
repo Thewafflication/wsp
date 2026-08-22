@@ -16,11 +16,13 @@ template.
 - ADR template;
 - requirement template;
 - WSP adoption-record template;
+- milestone work-plan, design, review, closeout, and optional work-log
+  templates;
 - release-readiness record;
 - Design for Security;
-- test report; and
+- test report;
 - Windows executable and DLL version resource;
-- Windows release trust, code-signing, and false-positive evidence; and
+- Windows release trust, code-signing, and false-positive evidence;
 - LaTeX test-case definitions and template, supplied as source files in the
   `testing/` directory.
 

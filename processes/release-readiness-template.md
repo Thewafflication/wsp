@@ -15,7 +15,9 @@
 ## Release Scope
 
 Describe the intended release, included changes, supported platforms, artifact
-set, and excluded or deferred work.
+set, and excluded or deferred work. Deferred objectives do not by themselves
+block release, but they remain outside this release's completion and
+verification claims.
 
 ## Gate Summary
 
@@ -32,6 +34,21 @@ set, and excluded or deferred work.
 | PDF metadata, digest, and provenance | Reference | Pass / Fail / N/A | |
 | PAdES signature, when selected | Reference | Pass / Fail / N/A | |
 | Installation, rollback, and recovery | Reference | Pass / Fail / N/A | |
+
+List only gates required for this release. A deferred objective shall not be
+recorded as a failed gate; it is outside the current release scope. Every
+required gate shall pass before approval. Use `N/A` only with a recorded
+applicability rationale.
+
+## Deferred Objectives
+
+| Objective | Impact | Owner | Target release or completion condition | Compensating control | Approval |
+| --- | --- | --- | --- | --- | --- |
+| Reference | Consequence | Role | Release or condition | Control or `None` | Reference |
+
+For each prior deferral, record whether this release closes it, revises it, or
+explicitly carries it forward. Do not report a deferred objective as complete
+or verified.
 
 ## Artifacts
 
@@ -52,6 +69,10 @@ set, and excluded or deferred work.
 - **Date:** YYYY-MM-DD
 - **Rationale:** Decision basis
 - **Support or communication actions:** Required follow-up
+
+`Approve with exceptions` may be selected for documented deferrals or accepted
+residual risk only when every required release gate passes and the designated
+approving authority accepts the remaining risk.
 
 ## Baseline Record
 

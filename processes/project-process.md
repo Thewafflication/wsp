@@ -93,6 +93,18 @@ Before release approval, the project shall evaluate:
 Exceptions shall identify an owner, rationale, impact, approval, and completion
 or review condition.
 
+An approved deferred objective does not by itself block release. A deferred
+objective shall not also be designated as a required gate for the current
+release, shall remain outside the release's completion and verification claims,
+and shall identify a target release or other objective completion condition.
+Before each release approval, the project shall close, revise, or explicitly
+carry forward every outstanding deferral.
+
+A release may be approved with documented deferrals or accepted residual risk
+when every required release gate passes and the designated approving authority
+accepts the remaining risk. A failed or unknown required release gate, or risk
+that the designated authority has not accepted, prevents release approval.
+
 **Verification:** Completed release-readiness record inspection.
 
 ### WSP-PROC-0008 — Release Approval and Baseline
@@ -102,7 +114,8 @@ approval, release date, and retained verification summary.
 
 Published artifacts shall be traceable to the approved release baseline. A
 release shall not be represented as verified when a required release gate
-failed or its result is unknown.
+failed or its result is unknown. Deferred work shall remain excluded from the
+release's completion and verification claims.
 
 **Verification:** Release record, artifacts, and baseline inspection.
 

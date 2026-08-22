@@ -37,8 +37,8 @@ The project identifies scope, stakeholders, risks, milestones, responsibilities,
 verification activities, release criteria, and required evidence. Projects
 using the personal-process profile also estimate and plan individual work.
 
-**Principal WSP material:** Requirements management, test strategy, Security/DFS
-profile, and personal-process profile.
+**Principal WSP material:** Requirements management, milestone work-plan
+template, test strategy, Security/DFS profile, and personal-process profile.
 
 **Expected output:** Project, work, test, and quality plans proportional to the
 work.
@@ -62,7 +62,8 @@ and rejected alternatives are recorded as ADRs. Security-relevant projects
 maintain a DFS containing their trust model, threats, controls, and residual
 risk decisions.
 
-**Principal WSP material:** ADR guidance and Security/DFS guidance.
+**Principal WSP material:** Milestone design-record template, ADR guidance, and
+Security/DFS guidance.
 
 **Expected output:** Reviewable design information, accepted ADRs, and an
 updated DFS when applicable.
@@ -84,8 +85,9 @@ Requirements, design, source, tests, documentation, dependencies, and release
 changes receive review proportional to their risk. Findings become controlled
 defects, requirement changes, ADR updates, or approved risk decisions.
 
-**Principal WSP material:** Requirements management, ADR guidance, security
-review requirements, style rules, and personal review practices.
+**Principal WSP material:** Review-record template, requirements management,
+ADR guidance, security review requirements, style rules, and personal review
+practices.
 
 **Expected output:** Review records and resolved or dispositioned findings.
 
@@ -134,8 +136,9 @@ findings, build warnings, incidents, and release outcomes. Improvements update
 project checklists and practices or enter the WSP change process when they are
 generally reusable.
 
-**Principal WSP material:** Personal-process postmortems, requirement change
-analysis, warning summaries, and retained verification evidence.
+**Principal WSP material:** Milestone closeout and work-log templates, personal-
+process postmortems, requirement change analysis, warning summaries, and
+retained verification evidence.
 
 **Expected output:** Approved process changes and traceable improvement
 proposals.

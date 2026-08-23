@@ -19,6 +19,11 @@ lettered annex. Durable material is moved into its authoritative chapter at the
 next integration release, and the superseded annex is removed from the
 controlled manifest.
 
+These requirements govern the controlled documentation build and release
+artifact. Product manuals, help, reference, tutorials, and other information
+for users are governed by the separate
+[information-for-users profile](../user-information/README.md).
+
 ## Dependencies
 
 - Pandoc 3 or newer

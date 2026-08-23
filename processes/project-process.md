@@ -150,6 +150,8 @@ obligations:
 - `WSP-REQM-####` controls requirements and change impact;
 - `WSP-TEST-####` controls verification and release-test evidence;
 - `WSP-DOC-####` controls release documentation;
+- `WSP-INFO-####` controls manuals, help, reference information, and other
+  information for users;
 - `WSP-UX-####` controls human-centred design, accessibility, and UX/UI
   evaluation;
 - `WSP-SEC-####` controls security design and vulnerability response;

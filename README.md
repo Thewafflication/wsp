@@ -74,6 +74,7 @@ documentation, and testing. Selectable profiles currently cover:
 
 - Personal Software Process practices;
 - human-centred UX/UI design and accessibility;
+- manuals, help, reference, tutorials, and other information for users;
 - Security and Design for Security;
 - C and C-compatible source;
 - PowerShell automation;
@@ -98,6 +99,7 @@ architecture/    Architecture decision record guidance and templates
 testing/         Test strategy, case, procedure, and report guidance
 processes/       Review, change-control, and release practices
 ux/              Human-centred UX/UI and accessibility requirements
+user-information/ User manuals, help, reference, and information quality
 security/        Security requirements, DFS guidance, and template
 style/           Requirements, code, and documentation conventions
 templates/       Reusable project document templates
@@ -119,6 +121,9 @@ The established sections are:
   alignment; and
 - [UX/UI](ux/README.md), which defines the human-centred design, interaction,
   information-presentation, accessibility, and evaluation profile; and
+- [Information for users](user-information/README.md), which defines the
+  ISO/IEC/IEEE 26514:2022-linked manual, help, reference, information-quality,
+  release, and maintenance profile; and
 - [Security and DFS](security/README.md), which defines selectable security
   requirements and the project Design for Security artifact; and
 - [Style](style/README.md), which defines shared writing, identifier, source,

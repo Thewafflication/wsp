@@ -9,6 +9,11 @@ not reused when requirements are removed or superseded.
 
 ### Added
 
+- a selectable information-for-users profile linked to ISO/IEC/IEEE
+  26514:2022, with atomic requirements for planning, audience and task
+  analysis, manuals and help content, command and API reference, information
+  quality, accessibility, validation, synchronized release, maintenance, and a
+  project-owned information plan and acceptance record;
 - a selectable UX/UI profile covering human-centred development, interaction
   and interface design, accessible information presentation, EN 301 549
   applicability, assistive-technology interoperability, evaluation, and

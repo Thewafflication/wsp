@@ -34,6 +34,7 @@ disposition. They are not removed by omitting a selectable profile.
 | --- | --- | --- |
 | Personal process | Yes / No | Individual planning and improvement |
 | UX/UI | Yes / No | Interactive interfaces, outputs, and accessibility |
+| Information for users | Yes / No | Manuals, help, reference, tutorials, and user documentation |
 | Security/DFS | Yes / No | Security scope, design, and verification |
 | C source style | Yes / No | Owned C files, or N/A rationale |
 | PowerShell style | Yes / No | In-scope automation, or reason not applicable |

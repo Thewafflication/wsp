@@ -19,6 +19,9 @@ template.
 - UX acceptance specification, including user groups, principal tasks,
   supported configurations, measurable criteria, sampling, and assistive-
   technology coverage;
+- information plan and acceptance record, including information-product
+  inventory, audiences, tasks, traceability, configurations, measurable
+  criteria, reviews, release acceptance, and maintenance;
 - milestone work-plan, design, review, closeout, and optional work-log
   templates;
 - release-readiness record;

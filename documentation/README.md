@@ -14,9 +14,10 @@ one consistently formatted release PDF. The output includes:
 - PDF bookmarks and document metadata.
 
 The [documentation requirements](requirements.md) define the release baseline.
-Time-sensitive guidance developed between releases is retained as a lettered
-annex at the end of the controlled document until it is incorporated into or
-superseded by a later WSP release.
+Time-sensitive guidance developed between releases may be retained as a
+lettered annex. Durable material is moved into its authoritative chapter at the
+next integration release, and the superseded annex is removed from the
+controlled manifest.
 
 ## Dependencies
 

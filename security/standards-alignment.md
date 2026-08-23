@@ -58,6 +58,7 @@ release-verification requirements.
 | Security scope and controlled DFS | IEC 62443-4-1; ISO/IEC 27034-1 |
 | Trust model, threats, and derived requirements | IEC 62443-4-1 |
 | Secure design, implementation, and review | IEC 62443-4-1 |
+| Native compiler and linker hardening | IEC 62443-4-1 |
 | Lifecycle integration and retirement | ISO/IEC/IEEE 12207 |
 | Security verification | IEC 62443-4-1; ISO/IEC/IEEE 29119-2 |
 | Security test-design techniques | ISO/IEC/IEEE 29119-4 |

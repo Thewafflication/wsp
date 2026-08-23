@@ -7,6 +7,12 @@ pages and other rendered documentation. It is intended to keep related
 interfaces recognizable without requiring every project to use the same
 layout or component library.
 
+This visual guidance does not replace the normative interaction, information-
+presentation, or accessibility requirements in the
+[UX/UI profile](../ux/README.md). When the preferred palette or typography
+conflicts with an applicable UX/UI requirement or user preference, the
+normative requirement and user preference take precedence.
+
 ## Color Palette
 
 The default palette is dark and uses deep green surfaces with bright botanical
@@ -101,3 +107,21 @@ samp {
 Font suggestions apply when a project can load or package the fonts without
 creating an unsuitable external dependency. Documentation and offline tools
 may rely entirely on the listed system fallbacks.
+
+## Adoption Verification
+
+Before adopting this visual profile, review representative rendered pages and
+interface states at every supported size and platform presentation mode. The
+review should verify:
+
+- applicable UX/UI acceptance criteria and EN 301 549 contrast requirements;
+- visible and programmatic focus and status cues;
+- preservation of meaning with color removed and in forced-colors modes;
+- heading, body, control, code, and technical-data font fallbacks;
+- readability when preferred web fonts are unavailable;
+- text scaling, reflow, and clipping behavior; and
+- semantic-token consistency across normal, active, disabled, success,
+  warning, and error states.
+
+Retain the reviewed configurations, rendered evidence, measurements, findings,
+and approved exceptions with the project's UX/UI evidence.

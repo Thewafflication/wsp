@@ -53,7 +53,7 @@ command-line compatibility and may silently ignore them.
 
 | Toolchain | Profile | C flags | Purpose |
 | --- | --- | --- | --- |
-| TinyCC | Common | `-Wall -Werror` | Enable TinyCC's useful warnings and make them build failures. |
+| TinyCC | Common | `-Wall -Wunsupported -Werror` | Enable TinyCC's useful warnings, report ignored GCC-compatible options, and make warnings build failures. |
 | TinyCC | Debug | `-gdwarf` | Emit GDB-compatible DWARF debug information. |
 | TinyCC | Release | `-O2 -DNDEBUG` | Select Release preprocessing behavior and disable assertions controlled by `NDEBUG`. |
 | GCC or Clang | Common | `-Wall -Wextra -Wpedantic` | Enable the portable warning baseline. |
@@ -93,6 +93,55 @@ optimization or strip the only retained debug symbols.
 Other compilers shall provide documented semantic equivalents. For example,
 MSVC projects normally use `/W4`, `/Od`, and `/Zi` for the common warning and
 Debug behavior, and `/O2` plus `NDEBUG` for Release behavior.
+
+## Static Analysis
+
+C and C++ projects shall apply the [static-analysis profile](static-analysis.md)
+through a dedicated build preset or equivalent controlled CI configuration.
+Static analysis supplements, but does not replace, compilation and testing with
+the project's supported compilers. In particular, TinyCC remains the default
+WSP compiler even when clang-tidy parses its source and compile arguments.
+
+The analysis configuration shall fail when clang-tidy is missing or reports a
+finding. It shall use CMake's Ninja or Makefile generators, which execute the
+target clang-tidy property; IDE generators that merely retain the property do
+not satisfy the build-time gate. Analysis shall be target-scoped so
+project-owned targets can be distinguished from generated and third-party code.
+Projects shall not set a directory-wide analyzer property that unintentionally
+analyzes vendored dependencies.
+
+## Native Build Hardening
+
+Projects selecting the Security/DFS profile shall apply
+[WSP-SEC-0015](../security/security-requirements.md#wsp-sec-0015--native-build-hardening)
+and verify the result under WSP-SEC-0016. The standard CMake implementation
+uses these controls:
+
+| Compiler and target | Compile controls | Final-link controls |
+| --- | --- | --- |
+| TinyCC on Windows | Unsupported-option diagnostics; optional Debug `-b` bounds checks | `-Wl,-dynamicbase -Wl,-nxcompat` and `-Wl,-high-entropy-va` on 64-bit targets |
+| TinyCC on Linux | Unsupported-option diagnostics; optional Debug `-b` bounds checks | Verify TinyCC's emitted PIE, GNU RELRO, and immediate binding; TinyCC has no WSP switch for stack canaries or executable-stack metadata |
+| GCC or Clang on Linux | `-fstack-protector-strong`; `_FORTIFY_SOURCE=2` in optimized profiles; `-fPIE` for executables | `-pie` and `-z relro`, `-z now`, and `-z noexecstack` |
+| GCC or Clang on Windows | `-fstack-protector-strong` | PE dynamic-base, NX-compatible, and 64-bit high-entropy-VA flags |
+| MSVC-compatible on Windows | `/GS /guard:cf`; `/sdl` for MSVC | `/DYNAMICBASE /NXCOMPAT /guard:cf` and `/HIGHENTROPYVA` on 64-bit targets |
+
+TinyCC does not implement compiler-inserted stack canaries. `-b` performs
+different and more intrusive runtime bounds checks and shall not be reported as
+a stack-canary equivalent. A project requiring stack protection shall use a
+GCC, Clang, or MSVC hardened-release configuration for the applicable release
+artifact, while retaining TinyCC as its default compiler, or shall approve and
+record a tailoring decision with compensating controls.
+
+Build scripts shall not pass GCC security options to TinyCC and assume they
+worked. TinyCC builds shall enable `-Wunsupported` with `-Werror` so ignored
+compatibility options fail visibly. Security switches shall be applied to every
+first-party compiled target and to each final executable or shared library;
+hardening a static library alone cannot set final-image linker properties.
+
+The reusable [`WspBuild.cmake`](../tools/cmake/README.md) module implements this
+baseline with target properties. `WSP_ENABLE_HARDENING` is enabled by default,
+while a hardened secondary preset can set
+`WSP_REQUIRE_STACK_PROTECTION=ON` to reject TinyCC for the final artifact.
 
 ## Reproducibility
 

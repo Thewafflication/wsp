@@ -12,7 +12,9 @@ that every project uses the same language or toolchain.
 - [Documentation style](documentation-style.md) applies to project-authored
   Markdown documentation.
 - [Visual style](visual-style.md) defines the preferred color palette and
-  typography for project-owned web pages and rendered documentation.
+  typography for project-owned web pages and rendered documentation; normative
+  interaction, presentation, and accessibility behavior is defined by the
+  [UX/UI profile](../ux/README.md).
 - [Artifact identifiers](artifact-identifiers.md) defines stable names for
   requirements, test cases, and ADRs.
 - [Requirements writing](requirements-writing.md) defines how to write
@@ -22,6 +24,8 @@ that every project uses the same language or toolchain.
 - [PowerShell style](powershell-style.md) is a profile for automation and test
   scripts.
 - [CMake style](cmake-style.md) is a profile for CMake projects and presets.
+- [Static analysis](static-analysis.md) defines the clang-tidy baseline,
+  required CI gate, finding control, and evidence.
 - [Windows version resources](windows-version-resources.md) defines executable
   and DLL `VERSIONINFO` requirements.
 

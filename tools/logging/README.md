@@ -117,4 +117,21 @@ same file.
 - Treat failure to initialize the requested file sink as a visible diagnostic;
   do not silently claim that evidence was recorded.
 
+## Adoption Verification
+
+Before using a logging implementation as project or release evidence, execute
+the common-tool tests and verify on every supported platform:
+
+- all five severity tags and their ordering;
+- colored output to a suitable interactive terminal;
+- uncolored output when redirected and when `NO_COLOR` is nonempty;
+- plain UTF-8-compatible file records with UTC ISO 8601 timestamps;
+- independent console and file thresholds;
+- visible handling of a requested file sink that cannot be initialized;
+- append, truncate, close, and repeated-write behavior; and
+- caller-controlled return, exception, and exit status after an error record.
+
+The adopting project records log rotation, retention, and sensitive-data rules
+outside the adapter and verifies those project controls separately.
+
 [no-color]: https://no-color.org/

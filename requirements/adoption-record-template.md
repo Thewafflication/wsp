@@ -33,6 +33,7 @@ disposition. They are not removed by omitting a selectable profile.
 | Profile | Selected | Project scope or rationale |
 | --- | --- | --- |
 | Personal process | Yes / No | Individual planning and improvement |
+| UX/UI | Yes / No | Interactive interfaces, outputs, and accessibility |
 | Security/DFS | Yes / No | Security scope, design, and verification |
 | C source style | Yes / No | Owned C files, or N/A rationale |
 | PowerShell style | Yes / No | In-scope automation, or reason not applicable |

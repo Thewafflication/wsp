@@ -16,6 +16,9 @@ template.
 - ADR template;
 - requirement template;
 - WSP adoption-record template;
+- UX acceptance specification, including user groups, principal tasks,
+  supported configurations, measurable criteria, sampling, and assistive-
+  technology coverage;
 - milestone work-plan, design, review, closeout, and optional work-log
   templates;
 - release-readiness record;

@@ -7,6 +7,39 @@ not reused when requirements are removed or superseded.
 
 ## Unreleased
 
+### Added
+
+- a selectable UX/UI profile covering human-centred development, interaction
+  and interface design, accessible information presentation, EN 301 549
+  applicability, assistive-technology interoperability, evaluation, and
+  release evidence, with atomic behavioral controls and a project-owned
+  acceptance-specification template for exact thresholds and coverage;
+- a standardized clang-tidy profile for project-owned C and C++ source, with
+  controlled configuration, fail-closed CI, finding disposition, and retained
+  release evidence requirements;
+- target-scoped CMake helpers that apply the common warning baseline, run
+  clang-tidy during compilation, and enable compiler and linker hardening;
+- a PE image verifier for ASLR, NX, 64-bit high-entropy address space, and
+  optional Control Flow Guard characteristics;
+- TinyCC-first hardening that rejects silently ignored compatibility options,
+  enables supported Windows PE protections, documents its built-in ELF
+  protections, and preserves TinyCC as the default compiler; and
+- native build-hardening and final-binary verification requirements covering
+  stack protection, ASLR/PIE, non-executable memory, fortified library calls,
+  ELF RELRO/immediate binding, and available control-flow protection.
+
+### Changed
+
+- integrated former Annex A into the common GitHub Action requirements and
+  migration guidance, former Annex B into three native standard-input testing
+  requirements and its test-design guidance, and former Annex C into the main
+  logging and visual-style chapters;
+- added the logging and visual-style chapters to the controlled documentation
+  manifest and retired the three superseded interim annex chapters;
+- the TinyCC warning baseline now includes `-Wunsupported`, ensuring options
+  accepted only for GCC compatibility cannot be mistaken for implemented
+  security controls.
+
 ## 1.1.0 — 2026-08-22
 
 ### Added

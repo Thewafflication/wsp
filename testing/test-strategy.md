@@ -313,6 +313,57 @@ approved tailoring decision and automate an equivalent stack-trace mechanism.
 **Verification:** Controlled failing Debug test and inspection of the retained
 test output and debugger trace.
 
+### WSP-TEST-0019 — Native Standard-Input Decision Coverage
+
+A native program test for a consequential decision read from standard input or
+console input shall exercise at least one accepting value, one rejecting value,
+and end-of-file before data. Each case shall assert a different externally
+observable branch effect when the specified behavior differs.
+
+An input failure shall also be tested when the program exposes or can inject
+that condition. Prompt text or process status alone shall not establish that
+the intended input branch executed.
+
+**Verification:** Test-specification inspection and controlled execution of
+the accepting, rejecting, EOF, and applicable input-failure cases.
+
+**Standards reference:** ISO/IEC/IEEE 29119-2 dynamic test implementation and
+execution and ISO/IEC/IEEE 29119-4 test-design techniques.
+
+### WSP-TEST-0020 — Native Standard-Input Transport Fidelity
+
+An integration test that supplies redirected standard input to a native child
+shall create the child with a genuine redirected operating-system standard-
+input handle, write the exact specified bytes and line ending, close the writer
+at the specified point, and retain evidence that distinguishes consumption of
+those bytes from EOF or input failure.
+
+A shell object pipeline, replaced stream, or direct call to an internal parser
+shall not be the sole evidence for handle inheritance, runtime initialization,
+buffering, or byte consumption.
+
+**Verification:** Harness inspection, captured input-byte evidence, and
+controlled execution with data followed by EOF and EOF before data.
+
+**Standards reference:** ISO/IEC/IEEE 29119-2 test environment and execution
+processes and ISO/IEC/IEEE 29119-3 test documentation.
+
+### WSP-TEST-0021 — Native Input-Mode Separation
+
+When the released program supports redirected input, file input, genuine
+console input, or an unattended bypass option, its test strategy shall treat
+each supported mode as a separate matrix entry unless an approved equivalence
+analysis demonstrates the same operating-system handle and runtime path.
+
+An unattended bypass result shall not be reported as verification of the
+interactive input path.
+
+**Verification:** Release-matrix, equivalence-analysis, test-specification, and
+execution-evidence inspection.
+
+**Standards reference:** ISO/IEC/IEEE 29119-2 test planning and environment
+processes and ISO/IEC/IEEE 29119-4 coverage selection.
+
 ## Project Test Strategy
 
 Each project should maintain a short test-strategy document that identifies:
@@ -330,7 +381,54 @@ Each project should maintain a short test-strategy document that identifies:
 Project strategy may reference this document instead of restating the common
 requirements.
 
-Native programs that make decisions from standard input or console input
-should apply [Annex B — Native Standard-Input Testing](../documentation/annex-b-native-standard-input-testing.md).
-Acceptance and rejection tests shall distinguish supplied input from EOF or an
-input failure and shall prove the selected branch through an observable effect.
+## Native Standard-Input Test Design
+
+The native-input requirements address a false-positive mechanism observed when
+a rejection-only test piped `n` through a shell and received the safe
+cancellation result even when the C runtime returned EOF without consuming the
+byte. Testing the affirmative branch exposed the missing input path.
+
+For a consequential interactive decision, a controlled test normally:
+
+1. launches the native child using the platform process API;
+2. redirects the child's standard handles explicitly;
+3. writes the exact bytes, including the intended CRLF or LF ending;
+4. closes the writer so end-of-input is deterministic;
+5. asserts the externally observable effect of the selected branch; and
+6. repeats through a genuine console when console and redirected behavior can
+   differ.
+
+### Native Runtime Regression Matrix
+
+A C runtime, compatibility runtime, or input abstraction covers, as
+applicable:
+
+- accepting and rejecting values;
+- CRLF and LF line endings;
+- data followed by EOF and EOF before data;
+- partial reads and input longer than the destination buffer;
+- redirected pipe and redirected file input;
+- genuine console input;
+- `stdin`, `fgets`, related stream operations, return values, `feof`, `ferror`,
+  buffer contents, and consumed-byte behavior;
+- x86, x64, ARM64, and other supported runtime builds; and
+- repeated reads from the same stream.
+
+Unit tests that replace the stream or call an internal parser remain useful for
+parsing behavior, but they do not cover handle inheritance, runtime
+initialization, buffering, or console-versus-pipe behavior.
+
+### Review Questions
+
+Reviewers ask:
+
+- Could EOF or an input error produce the same observed result as the supplied
+  value?
+- Does the evidence prove that the child consumed the intended bytes?
+- Is each meaningful decision branch verified through an observable effect?
+- Does the harness reproduce the production handle type and line ending?
+- Are runtime, architecture, and console-versus-redirection differences in the
+  test matrix or explicitly dispositioned?
+
+This reusable lesson originated in WPM after version 1.0.13 and applies to WCRT
+and other native runtime implementations as well as application-level tests.

@@ -38,7 +38,8 @@ verification activities, release criteria, and required evidence. Projects
 using the personal-process profile also estimate and plan individual work.
 
 **Principal WSP material:** Requirements management, milestone work-plan
-template, test strategy, Security/DFS profile, and personal-process profile.
+template, test strategy, UX/UI profile, Security/DFS profile, and personal-
+process profile.
 
 **Expected output:** Project, work, test, and quality plans proportional to the
 work.
@@ -50,7 +51,8 @@ attributes, and applicable security obligations become uniquely identified,
 verifiable project requirements.
 
 **Principal WSP material:** Requirements management, requirements-writing
-style, artifact identifiers, and Security/DFS requirements.
+style, artifact identifiers, UX/UI requirements, and Security/DFS
+requirements.
 
 **Expected output:** Reviewed and baselined project requirements with planned
 verification.
@@ -62,8 +64,8 @@ and rejected alternatives are recorded as ADRs. Security-relevant projects
 maintain a DFS containing their trust model, threats, controls, and residual
 risk decisions.
 
-**Principal WSP material:** Milestone design-record template, ADR guidance, and
-Security/DFS guidance.
+**Principal WSP material:** Milestone design-record template, ADR guidance,
+UX/UI profile, and Security/DFS guidance.
 
 **Expected output:** Reviewable design information, accepted ADRs, and an
 updated DFS when applicable.
@@ -74,8 +76,8 @@ Source, automation, configuration, build definitions, and documentation are
 created under the applicable style, security, and tool requirements. Generated
 and third-party content remain distinguishable from project-owned work.
 
-**Principal WSP material:** Style profiles, Security/DFS requirements, and
-common tools.
+**Principal WSP material:** UX/UI and style profiles, Security/DFS
+requirements, and common tools.
 
 **Expected output:** Traceable implementation and repeatable build inputs.
 
@@ -98,7 +100,8 @@ demonstrations. Verification maintains bidirectional traceability and produces
 objective evidence and a report suitable for release decisions.
 
 **Principal WSP material:** ISO/IEC/IEEE 29119 alignment, test strategy,
-test-case templates, report template, and evidence tools.
+test-case templates, UX/UI evaluation requirements, report template, and
+evidence tools.
 
 **Expected output:** Requirement coverage, execution evidence, defect records,
 and an approved verification or test report.
@@ -111,8 +114,8 @@ required documentation, and applicable signing and malware-scan evidence.
 Released artifacts and evidence are retained under project policy.
 
 **Principal WSP material:** Test release gates, documentation requirements,
-common tools, semantic versioning, security update requirements, and selected
-release-trust profiles.
+UX/UI release evidence, common tools, semantic versioning, security update
+requirements, and selected release-trust profiles.
 
 **Expected output:** Identified release artifacts, release documentation,
 approval, and reproducible source and dependency references.
@@ -123,8 +126,8 @@ Supported products receive defect and vulnerability triage, maintenance,
 updates, and recovery action. Material operational evidence feeds requirements,
 threat analysis, tests, and process improvement.
 
-**Principal WSP material:** Security vulnerability response, requirements
-change control, testing, and project support policy.
+**Principal WSP material:** UX/UI lifecycle feedback, security vulnerability
+response, requirements change control, testing, and project support policy.
 
 **Expected output:** Controlled issues, maintenance changes, security updates,
 and support decisions.

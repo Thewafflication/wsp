@@ -73,12 +73,15 @@ Common practices cover requirements management, the software lifecycle,
 documentation, and testing. Selectable profiles currently cover:
 
 - Personal Software Process practices;
+- human-centred UX/UI design and accessibility;
 - Security and Design for Security;
 - C and C-compatible source;
 - PowerShell automation;
-- CMake-based builds; and
-- Windows executable and DLL version resources; and
-- Windows code signing, Defender scanning, and false-positive response;
+- CMake-based builds;
+- C and C++ static analysis with clang-tidy;
+- native compiler and linker hardening with TinyCC as the default compiler;
+- Windows executable and DLL version resources;
+- Windows code signing, Defender scanning, and false-positive response; and
 - common tool consumers.
 
 An adopting project should select only the profiles that match its product,
@@ -94,6 +97,7 @@ requirements/    Common, uniquely identified requirements
 architecture/    Architecture decision record guidance and templates
 testing/         Test strategy, case, procedure, and report guidance
 processes/       Review, change-control, and release practices
+ux/              Human-centred UX/UI and accessibility requirements
 security/        Security requirements, DFS guidance, and template
 style/           Requirements, code, and documentation conventions
 templates/       Reusable project document templates
@@ -113,6 +117,8 @@ The established sections are:
 - [Processes](processes/README.md), which defines individual and project process
   guidance, including the WSP lifecycle and Personal Software Process
   alignment; and
+- [UX/UI](ux/README.md), which defines the human-centred design, interaction,
+  information-presentation, accessibility, and evaluation profile; and
 - [Security and DFS](security/README.md), which defines selectable security
   requirements and the project Design for Security artifact; and
 - [Style](style/README.md), which defines shared writing, identifier, source,
@@ -247,7 +253,8 @@ Projects remain bound to the version they adopted until they intentionally
 upgrade. Changes to normative content should be summarized in a changelog so
 projects can assess the impact of upgrading.
 
-See the [changelog](CHANGELOG.md) for the WSP 1.0.0 release scope and history.
+See the [changelog](CHANGELOG.md) for released scope and the changes planned for
+WSP 1.2.0.
 
 ## Release Documentation
 
@@ -291,5 +298,7 @@ matures.
 
 ## Status
 
-Version 1.0.0 is the first controlled WSP baseline. Projects should adopt an
-immutable release tag and record the corresponding commit as described above.
+Version 1.1.0 is the latest controlled WSP baseline. The unreleased native
+hardening and static-analysis work is planned for 1.2.0. Projects should adopt
+an immutable release tag and record the corresponding commit as described
+above.

@@ -1,0 +1,60 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(wsp_build_baseline_tests LANGUAGES C)
+
+if(NOT DEFINED WSP_MODULE_ROOT)
+  get_filename_component(WSP_MODULE_ROOT "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
+endif()
+
+include("${WSP_MODULE_ROOT}/WspBuild.cmake")
+
+add_executable(wsp_build_fixture fixture.c)
+wsp_apply_build_baseline(wsp_build_fixture)
+
+get_target_property(_compile_options wsp_build_fixture COMPILE_OPTIONS)
+if(WSP_ENABLE_BUILD_WARNINGS AND NOT _compile_options)
+  message(FATAL_ERROR "WSP warning options were not attached")
+endif()
+
+if(WSP_ENABLE_HARDENING)
+  string(JOIN " " _compile_text ${_compile_options})
+  get_target_property(_link_options wsp_build_fixture LINK_OPTIONS)
+  string(JOIN " " _link_text ${_link_options})
+
+  if(CMAKE_C_COMPILER_ID STREQUAL "MSVC" OR
+      CMAKE_C_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
+    if(NOT _compile_text MATCHES "/GS")
+      message(FATAL_ERROR "MSVC stack protection was not attached")
+    endif()
+    if(NOT _link_text MATCHES "/DYNAMICBASE")
+      message(FATAL_ERROR "Windows ASLR protection was not attached")
+    endif()
+  elseif(CMAKE_C_COMPILER_ID MATCHES
+      "^(GNU|Clang|AppleClang|IntelLLVM)$")
+    if(NOT _compile_text MATCHES "-fstack-protector-strong")
+      message(FATAL_ERROR "GNU-style stack protection was not attached")
+    endif()
+    if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND
+        NOT _link_text MATCHES "LINKER:-z,relro")
+      message(FATAL_ERROR "ELF RELRO protection was not attached")
+    endif()
+  elseif(CMAKE_C_COMPILER_ID STREQUAL "TinyCC")
+    if(WSP_REQUIRE_STACK_PROTECTION)
+      message(FATAL_ERROR "TinyCC stack-protection rejection did not run")
+    endif()
+    if(WIN32 AND NOT _link_text MATCHES "-Wl,-dynamicbase")
+      message(FATAL_ERROR "TinyCC Windows ASLR protection was not attached")
+    endif()
+  endif()
+endif()
+
+if(WSP_ENABLE_STATIC_ANALYSIS)
+  get_target_property(_clang_tidy wsp_build_fixture C_CLANG_TIDY)
+  if(NOT _clang_tidy)
+    message(FATAL_ERROR "clang-tidy was not attached to the C target")
+  endif()
+  string(JOIN " " _clang_tidy_text ${_clang_tidy})
+  if(NOT _clang_tidy_text MATCHES "--warnings-as-errors=\\*")
+    message(FATAL_ERROR "clang-tidy findings are not build failures")
+  endif()
+endif()

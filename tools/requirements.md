@@ -1,6 +1,6 @@
 # Common Tool Requirements
 
-**Content type:** Requirements
+**Content type:** Requirements and guidance
 
 ## WSP-TOOL-0001 — Pinned Tool Revision
 
@@ -78,10 +78,66 @@ that its runner version, operating system, and architecture satisfy the
 action's requirements. A temporary compatibility exception shall identify the
 affected action, reason, owner, and removal condition.
 
-See [Annex A — GitHub Node 20 Deprecation][annex-a] for the current WSP action
-defaults and migration guidance.
-
 **Verification:** Workflow action-version inspection, action runtime review,
 and self-hosted runner compatibility evidence when applicable.
 
-[annex-a]: ../documentation/annex-a-github-node20-deprecation.md
+## GitHub Action Maintenance Guidance
+
+GitHub deprecated the Node.js 20 runtime used by JavaScript actions and began
+forcing affected actions to run on Node.js 24 in June 2026. A warning that an
+action targets Node.js 20 means that the workflow still selects an action
+release built for the deprecated runtime. The forced runtime is a transition
+aid, not evidence that the selected release is maintained or compatible.
+
+### WSP Migration Baseline
+
+The WSP workflow baseline dated 2026-07-26 uses:
+
+| Purpose | WSP baseline |
+| --- | --- |
+| Repository checkout | `actions/checkout@v6` |
+| Workflow artifact upload | `actions/upload-artifact@v7` |
+| Workflow artifact download | `actions/download-artifact@v8` |
+| Build provenance attestation | `actions/attest@v4` |
+
+These versions document the integrated migration baseline; they are not
+permanent defaults. A project creating or materially changing a workflow
+reviews upstream release notes for a newer maintained compatible major.
+
+### Migration Review
+
+When resolving a JavaScript-action runtime deprecation, maintainers:
+
+1. identify every affected `uses:` reference;
+2. review the selected action's current maintained major and breaking changes;
+3. update paired actions, including artifact upload and download, to compatible
+   releases;
+4. confirm the minimum runner, operating-system, and architecture requirements
+   of self-hosted runners;
+5. execute the workflow and inspect its artifacts, permissions, provenance,
+   and retention behavior; and
+6. retain or reference the successful run as verification evidence.
+
+`ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION` is not a permanent resolution.
+`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24` changes runner behavior but does not update
+the selected action release and does not establish runtime currency.
+
+### Compatibility Exceptions
+
+A temporary older-major exception records the action and selected version, the
+platform or runner constraint, security and support impact, responsible owner,
+and the runner upgrade, platform update, or date that ends the exception.
+
+### References
+
+- [GitHub — Deprecation of Node 20 on GitHub Actions runners][github-node20]
+- [GitHub — actions/checkout][checkout]
+- [GitHub — actions/upload-artifact][upload]
+- [GitHub — actions/download-artifact][download]
+- [GitHub — actions/attest][attest]
+
+[github-node20]: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+[checkout]: https://github.com/actions/checkout
+[upload]: https://github.com/actions/upload-artifact
+[download]: https://github.com/actions/download-artifact
+[attest]: https://github.com/actions/attest

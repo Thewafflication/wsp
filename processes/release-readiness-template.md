@@ -26,6 +26,8 @@ verification claims.
 | Requirements baseline | Reference | Pass / Fail / N/A | |
 | Architecture and DFS review | Reference | Pass / Fail / N/A | |
 | Build and package | Reference | Pass / Fail / N/A | |
+| Static analysis | Reference | Pass / Fail / N/A | |
+| Native binary hardening | Reference | Pass / Fail / N/A | |
 | Verification and test report | Reference | Pass / Fail / N/A | |
 | Defect and vulnerability review | Reference | Pass / Fail / N/A | |
 | Documentation | Reference | Pass / Fail / N/A | |

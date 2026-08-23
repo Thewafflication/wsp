@@ -58,6 +58,11 @@ try {
     }
     Write-Output '[PASS] PowerShell syntax'
 
+    $cmakeBuildTest = Join-Path $toolsRoot `
+        'cmake\tests\Test-BuildBaseline.ps1'
+    Invoke-ToolTest $cmakeBuildTest @() 0 `
+        'CMake build-baseline tests succeed'
+
     $loggingTest = Join-Path $toolsRoot 'logging\tests\Test-Logging.ps1'
     Invoke-ToolTest $loggingTest @() 0 `
         'PowerShell logging adapter succeeds'
@@ -172,6 +177,32 @@ Build completed.
         throw 'Warning summary did not report the expected warning.'
     }
     Write-Output '[PASS] Warning summary contains warning count'
+
+    $peRoot = Join-Path $workRoot 'pe-hardening'
+    $peImage = Join-Path $peRoot 'fixture.exe'
+    New-Item -ItemType Directory -Path $peRoot | Out-Null
+    [byte[]]$peBytes = New-Object byte[] 512
+    $peBytes[0] = [byte][char]'M'
+    $peBytes[1] = [byte][char]'Z'
+    [BitConverter]::GetBytes([uint32]0x80).CopyTo($peBytes, 0x3c)
+    $peBytes[0x80] = [byte][char]'P'
+    $peBytes[0x81] = [byte][char]'E'
+    [BitConverter]::GetBytes([uint16]0x8664).CopyTo($peBytes, 0x84)
+    [BitConverter]::GetBytes([uint16]0x00f0).CopyTo($peBytes, 0x94)
+    [BitConverter]::GetBytes([uint16]0x020b).CopyTo($peBytes, 0x98)
+    [BitConverter]::GetBytes([uint16]0x4160).CopyTo($peBytes, 0xde)
+    [IO.File]::WriteAllBytes($peImage, $peBytes)
+    $peTool = Join-Path $toolsRoot 'Test-PeHardening.ps1'
+    $peArguments = @(
+        '-Path', $peImage,
+        '-RequireControlFlowGuard'
+    )
+    Invoke-ToolTest $peTool $peArguments 0 `
+        'PE hardening accepts required image flags'
+    [BitConverter]::GetBytes([uint16]0x4060).CopyTo($peBytes, 0xde)
+    [IO.File]::WriteAllBytes($peImage, $peBytes)
+    Invoke-ToolTest $peTool $peArguments 1 `
+        'PE hardening rejects a missing NX flag'
 
     $checksumRoot = Join-Path $workRoot 'checksums'
     $checksumInput = Join-Path $checksumRoot 'artifact.bin'

@@ -17,7 +17,15 @@ else {
 }
 
 $testScript = Join-Path $PSScriptRoot 'test_documentation_pdf.py'
-& $pythonPath $testScript
-if ($LASTEXITCODE -ne 0) {
-    exit $LASTEXITCODE
+$previousBytecodeSetting = $env:PYTHONDONTWRITEBYTECODE
+try {
+    $env:PYTHONDONTWRITEBYTECODE = '1'
+    & $pythonPath $testScript
+    $testExitCode = $LASTEXITCODE
+}
+finally {
+    $env:PYTHONDONTWRITEBYTECODE = $previousBytecodeSetting
+}
+if ($testExitCode -ne 0) {
+    exit $testExitCode
 }

@@ -226,14 +226,14 @@ Build completed.
     Write-Output '[PASS] Checksum identifies exact artifact'
 
     $pdfTestTool = Join-Path $toolsRoot 'pdf\tests\run-tests.ps1'
-    $pdfTestArguments = if ($Python) {
-        @('-Python', $Python)
+    if ($Python) {
+        Invoke-ToolTest $pdfTestTool @('-Python', $Python) 0 `
+            'Documentation PDF verifier self-tests succeed'
     }
     else {
-        @()
+        Invoke-ToolTest $pdfTestTool @() 0 `
+            'Documentation PDF verifier self-tests succeed'
     }
-    Invoke-ToolTest $pdfTestTool $pdfTestArguments 0 `
-        'Documentation PDF verifier self-tests succeed'
 
     $documentationRoot = Join-Path $workRoot 'documentation'
     $manifest = Join-Path $documentationRoot 'manifest.json'

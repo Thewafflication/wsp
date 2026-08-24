@@ -51,14 +51,39 @@ Projects that compile C shall provide `Debug` and `Release` profiles. The WSP
 baseline is toolchain-specific because TinyCC accepts many GCC options only for
 command-line compatibility and may silently ignore them.
 
-| Toolchain | Profile | C flags | Purpose |
-| --- | --- | --- | --- |
-| TinyCC | Common | `-Wall -Wunsupported -Werror` | Enable TinyCC's useful warnings, report ignored GCC-compatible options, and make warnings build failures. |
-| TinyCC | Debug | `-gdwarf` | Emit GDB-compatible DWARF debug information. |
-| TinyCC | Release | `-O2 -DNDEBUG` | Select Release preprocessing behavior and disable assertions controlled by `NDEBUG`. |
-| GCC or Clang | Common | `-Wall -Wextra -Wpedantic` | Enable the portable warning baseline. |
-| GCC or Clang | Debug | `-O0 -g3 -fno-omit-frame-pointer` | Preserve source-level debug information and reliable stack frames. |
-| GCC or Clang | Release | `-O2 -DNDEBUG` | Enable production optimization and disable assertions controlled by `NDEBUG`. |
+### TinyCC common profile
+
+- **C flags:** `-Wall -Wunsupported -Werror`
+- **Purpose:** Enable TinyCC's useful warnings, report ignored GCC-compatible
+  options, and make warnings build failures.
+
+### TinyCC Debug profile
+
+- **C flags:** `-gdwarf`
+- **Purpose:** Emit GDB-compatible DWARF debug information.
+
+### TinyCC Release profile
+
+- **C flags:** `-O2 -DNDEBUG`
+- **Purpose:** Select Release preprocessing behavior and disable assertions
+  controlled by `NDEBUG`.
+
+### GCC or Clang common profile
+
+- **C flags:** `-Wall -Wextra -Wpedantic`
+- **Purpose:** Enable the portable warning baseline.
+
+### GCC or Clang Debug profile
+
+- **C flags:** `-O0 -g3 -fno-omit-frame-pointer`
+- **Purpose:** Preserve source-level debug information and reliable stack
+  frames.
+
+### GCC or Clang Release profile
+
+- **C flags:** `-O2 -DNDEBUG`
+- **Purpose:** Enable production optimization and disable assertions controlled
+  by `NDEBUG`.
 
 TinyCC does not provide GCC-style optimization levels. Its `-O2` option
 defines `__OPTIMIZE__` but does not promise the transformations associated
@@ -117,13 +142,38 @@ Projects selecting the Security/DFS profile shall apply
 and verify the result under WSP-SEC-0016. The standard CMake implementation
 uses these controls:
 
-| Compiler and target | Compile controls | Final-link controls |
-| --- | --- | --- |
-| TinyCC on Windows | Unsupported-option diagnostics; optional Debug `-b` bounds checks | `-Wl,-dynamicbase -Wl,-nxcompat` and `-Wl,-high-entropy-va` on 64-bit targets |
-| TinyCC on Linux | Unsupported-option diagnostics; optional Debug `-b` bounds checks | Verify TinyCC's emitted PIE, GNU RELRO, and immediate binding; TinyCC has no WSP switch for stack canaries or executable-stack metadata |
-| GCC or Clang on Linux | `-fstack-protector-strong`; `_FORTIFY_SOURCE=2` in optimized profiles; `-fPIE` for executables | `-pie` and `-z relro`, `-z now`, and `-z noexecstack` |
-| GCC or Clang on Windows | `-fstack-protector-strong` | PE dynamic-base, NX-compatible, and 64-bit high-entropy-VA flags |
-| MSVC-compatible on Windows | `/GS /guard:cf`; `/sdl` for MSVC | `/DYNAMICBASE /NXCOMPAT /guard:cf` and `/HIGHENTROPYVA` on 64-bit targets |
+### TinyCC on Windows
+
+- **Compile controls:** Unsupported-option diagnostics and optional Debug `-b`
+  bounds checks
+- **Final-link controls:** `-Wl,-dynamicbase -Wl,-nxcompat` and
+  `-Wl,-high-entropy-va` on 64-bit targets
+
+### TinyCC on Linux
+
+- **Compile controls:** Unsupported-option diagnostics and optional Debug `-b`
+  bounds checks
+- **Final-link controls:** Verify TinyCC's emitted PIE, GNU RELRO, and immediate
+  binding. TinyCC has no WSP switch for stack canaries or executable-stack
+  metadata.
+
+### GCC or Clang on Linux
+
+- **Compile controls:** `-fstack-protector-strong`, `_FORTIFY_SOURCE=2` in
+  optimized profiles, and `-fPIE` for executables
+- **Final-link controls:** `-pie`, `-z relro`, `-z now`, and `-z noexecstack`
+
+### GCC or Clang on Windows
+
+- **Compile controls:** `-fstack-protector-strong`
+- **Final-link controls:** PE dynamic-base, NX-compatible, and 64-bit
+  high-entropy-VA flags
+
+### MSVC-compatible on Windows
+
+- **Compile controls:** `/GS /guard:cf` and `/sdl` for MSVC
+- **Final-link controls:** `/DYNAMICBASE /NXCOMPAT /guard:cf` and
+  `/HIGHENTROPYVA` on 64-bit targets
 
 TinyCC does not implement compiler-inserted stack canaries. `-b` performs
 different and more intrusive runtime bounds checks and shall not be reported as

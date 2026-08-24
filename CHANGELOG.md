@@ -33,6 +33,15 @@ not reused when requirements are removed or superseded.
   stack protection, ASLR/PIE, non-executable memory, fortified library calls,
   ELF RELRO/immediate binding, and available control-flow protection.
 
+### Fixed
+
+- release-document tables that could extend beyond the printable page area;
+- documentation CI now verifies manifest and bookmark order, metadata,
+  extractable text, table-of-contents placement, internal and external links,
+  and page boundaries, with positive and controlled negative tests; and
+- the release-readiness record now captures every-page visual review evidence
+  and an explicit PAdES applicability decision and rationale.
+
 ### Changed
 
 - integrated former Annex A into the common GitHub Action requirements and

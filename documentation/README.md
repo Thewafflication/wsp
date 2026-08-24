@@ -29,6 +29,8 @@ for users are governed by the separate
 - Pandoc 3 or newer
 - MiKTeX with `pdflatex`
 - PowerShell 7
+- Python 3.12 or newer with the pinned packages in
+  `tools/pdf/requirements.txt`
 
 The build tool searches `PATH`, common Windows installation locations, and an
 optional `-Pandoc` or `-PdfLatex` path. CI should install pinned dependency
@@ -44,6 +46,23 @@ pwsh -File tools/Build-Documentation.ps1
 
 The build reads [documentation-manifest.json](documentation-manifest.json) and
 writes `output/pdf/wsp-documentation.pdf` by default.
+
+Install the verification dependencies and run the automated release check with:
+
+```powershell
+python -m pip install --requirement tools/pdf/requirements.txt
+$revision = (git rev-parse HEAD).Trim()
+pwsh -File tools/Test-DocumentationPdf.ps1 `
+  -ExpectedVersion 1.2.0 `
+  -ExpectedSourceRevision $revision `
+  -OutputPath output/pdf/documentation-verification.json
+```
+
+The expected version must be the exact value passed to
+`Build-Documentation.ps1`. The verifier checks controlled document and bookmark
+order, metadata and displayed identity, extractable text, the table of contents,
+internal and external links, and page boundaries. It returns a nonzero exit code
+and writes diagnostics when any check fails.
 
 ## Manifest
 
@@ -109,19 +128,23 @@ Release automation should:
 1. initialize the pinned WSP submodule;
 2. install the pinned Pandoc and MiKTeX toolchain;
 3. invoke `Build-Documentation.ps1` with the release version;
-4. inspect the PDF metadata, page count, links, and rendered pages;
-5. retain the build log and verification results; and
-6. publish the PDF with the other release artifacts.
+4. run `Test-DocumentationPdf.ps1` against the final PDF bytes;
+5. render and visually review every page for clipping, overlap, illegibility,
+   navigation errors, and other presentation defects;
+6. retain the build log, automated result, rendered-page review record, and
+   final PDF digest; and
+7. publish the PDF with the other release artifacts.
 
 The document version should match the software or WSP release tag. Development
 builds may use the source revision returned by Git.
 
 ## GitHub Actions
 
-The `Documentation PDF` workflow builds and validates the PDF for pushes to
-the primary branch, semantic-version tags, pull requests, and manual
-dispatches. Every successful build retains the PDF as a workflow artifact for
-14 days.
+The `Documentation PDF` workflow builds and automatically validates the PDF for
+pushes to the primary branch, semantic-version tags, pull requests, and manual
+dispatches. Every successful build retains the PDF, checksum, and structured
+verification result as a workflow artifact for 14 days. A release approval
+still records the required visual review of every rendered page.
 
 Trusted non-pull-request builds generate GitHub build-provenance attestation
 for the PDF. Pull requests still build and validate the document but do not

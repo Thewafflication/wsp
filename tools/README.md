@@ -11,6 +11,7 @@ WCRT while removing repository-specific paths and assumptions.
 | Tool | Purpose |
 | --- | --- |
 | `Build-Documentation.ps1` | Build a linked release documentation PDF |
+| `Test-DocumentationPdf.ps1` | Verify PDF identity, structure, links, and page boundaries |
 | `New-ArtifactChecksum.ps1` | Write SHA-256 release checksums |
 | `Test-CSourceQuality.ps1` | Enforce Doxygen and 80-column C rules |
 | `Test-PeHardening.ps1` | Verify ASLR, NX, 64-bit high-entropy VA, and optional CFG image flags |
@@ -59,7 +60,9 @@ other PowerShell 7 platforms unless their purpose is explicitly Windows-only.
 External programs such as Git, Doxygen, and PDFLaTeX are dependencies only of
 the tools that invoke them. `WspBuild.cmake` requires CMake 3.20 or newer;
 its analysis mode also requires clang-tidy and a Ninja or Makefile generator.
-The PE hardening verifier has no external executable dependency.
+The documentation-PDF verifier requires Python and the packages pinned in
+`pdf/requirements.txt`. The PE hardening verifier has no external executable
+dependency.
 
 ## Candidate Future Tools
 

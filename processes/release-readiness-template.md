@@ -42,6 +42,38 @@ recorded as a failed gate; it is outside the current release scope. Every
 required gate shall pass before approval. Use `N/A` only with a recorded
 applicability rationale.
 
+## Documentation Verification
+
+- **Final PDF:** Exact file and version
+- **Automated verification record:** Metadata, page count, text, table of
+  contents, bookmarks, links, manifest order, and page-boundary result
+- **Rendered-page review record:** Reviewer, date, rendering method, page
+  coverage, defects found, and disposition
+- **Final PDF SHA-256:** Digest of the reviewed bytes
+- **Provenance verification:** Attestation result and repository identity
+
+The automated and rendered-page reviews shall apply to the same final PDF bytes
+identified by the recorded digest. A sampled rendered-page review does not
+satisfy a requirement for review of every page.
+
+## PAdES Applicability and Evidence
+
+- **Selected:** Yes / No
+- **Requirement or trigger:** Contractual, regulatory, customer, policy, or
+  project source, or `None`
+- **Applicability rationale:** Why PAdES is required or why it is not selected
+  for this release
+- **Profile:** PAdES-B-T / PAdES-B-LT / `N/A`
+- **Certificate authorization and protected-key evidence:** Reference or `N/A`
+- **RFC 3161 timestamp evidence:** Reference or `N/A`
+- **Independent validation result:** Reference or `N/A`
+- **Approval:** Role, record, and date
+
+When PAdES is selected, the signature and timestamp shall cover the final PDF
+before its digest and provenance are generated. When it is not selected, the
+recorded rationale makes the gate explicitly not applicable rather than
+silently omitting it.
+
 ## Deferred Objectives
 
 | Objective | Impact | Owner | Target release or completion condition | Compensating control | Approval |

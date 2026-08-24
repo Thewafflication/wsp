@@ -39,9 +39,13 @@ criteria describe observable characteristics used for participant recruitment
 or proxy-method selection. Record relevant permanent, temporary, and
 situational limitations without collecting unnecessary personal information.
 
-| User group | Goals and tasks | Inclusion criteria | Relevant capabilities and limitations | Research evidence |
-| --- | --- | --- | --- | --- |
-| `UG-NNNN` | Controlled task references | Exact participant or proxy criteria | Physical, sensory, cognitive, domain, and technical factors | Study, field, support, or stakeholder record |
+### UG-NNNN — User-group name
+
+- **Goals and tasks:** Controlled task references
+- **Inclusion criteria:** Exact participant or proxy criteria
+- **Relevant capabilities and limitations:** Physical, sensory, cognitive,
+  domain, and technical factors
+- **Research evidence:** Study, field, support, or stakeholder record
 
 ## Principal-Task Register
 
@@ -49,39 +53,68 @@ Completion conditions identify the observable product and user state that ends
 the task successfully. Record every applicable principal-task qualification
 from the WSP definition.
 
-| Task | User group | Entry state | Intended outcome and completion condition | Principal-task qualification | Critical use errors |
-| --- | --- | --- | --- | --- | --- |
-| `TASK-NNNN` | `UG-NNNN` | Exact initial state and data | Observable final state | Product commitment, primary outcome, critical consequence, or lifecycle/accessibility task | Use-error identifiers |
+### TASK-NNNN — Task title
+
+- **User group:** `UG-NNNN`
+- **Entry state:** Exact initial state and data
+- **Intended outcome and completion condition:** Observable final state
+- **Principal-task qualification:** Product commitment, primary outcome,
+  critical consequence, or lifecycle or accessibility task
+- **Critical use errors:** Use-error identifiers
 
 ## Supported-Configuration Register
 
 A bounded version range needs an objective inclusion rule and a method for
 selecting exact verification versions.
 
-| Configuration | Product build | Platform and host | Input and output | Locale and presentation | Assistive technology and settings | Support source |
-| --- | --- | --- | --- | --- | --- | --- |
-| `CFG-NNNN` | Exact revision or bounded release | OS, terminal, browser, runtime, or device versions | Keyboard, pointer, touch, speech, visual, audio, or haptic modes | Locale, scale, contrast, font, motion, and focus settings | Product, version, accessibility mode, and relevant preferences | Support-policy reference |
+### CFG-NNNN — Configuration title
+
+- **Product build:** Exact revision or bounded release
+- **Platform and host:** OS, terminal, browser, runtime, or device versions
+- **Input and output:** Keyboard, pointer, touch, speech, visual, audio, or
+  haptic modes
+- **Locale and presentation:** Locale, scale, contrast, font, motion, and focus
+  settings
+- **Assistive technology and settings:** Product, version, accessibility mode,
+  and relevant preferences
+- **Support source:** Support-policy reference
 
 ## Evaluation-Context Register
 
 Use a separate context when a difference can change an acceptance result or
 applicable risk.
 
-| Context | User group | Task | Environment and data | Configuration | Prior knowledge, training, and assistance |
-| --- | --- | --- | --- | --- | --- |
-| `CTX-NNNN` | `UG-NNNN` | `TASK-NNNN` | Location, noise, lighting, workload, connectivity, and controlled data | `CFG-NNNN` or a stated configuration rule | Exact permitted conditions |
+### CTX-NNNN — Context title
+
+- **User group:** `UG-NNNN`
+- **Task:** `TASK-NNNN`
+- **Environment and data:** Location, noise, lighting, workload, connectivity,
+  and controlled data
+- **Configuration:** `CFG-NNNN` or a stated configuration rule
+- **Prior knowledge, training, and assistance:** Exact permitted conditions
 
 ## Glossary and Convention Register
 
-| Term, symbol, unit, or pattern | Approved meaning or behavior | User groups and contexts | Source | Approved exception |
-| --- | --- | --- | --- | --- |
-| Interface term or pattern | Exact wording, semantics, sequence, or presentation | `UG-NNNN`, `CTX-NNNN` | Domain, platform, research, or product source | Exception reference or `None` |
+### TERM-NNNN — Term, symbol, unit, or pattern
+
+- **Approved meaning or behavior:** Exact wording, semantics, sequence, or
+  presentation
+- **User groups and contexts:** `UG-NNNN`, `CTX-NNNN`
+- **Source:** Domain, platform, research, or product source
+- **Approved exception:** Exception reference or `None`
 
 ## Use-Error Register
 
-| Use error | Trigger or sequence | Consequence | Foreseeability source | Critical | Preventable | Control and verification |
-| --- | --- | --- | --- | --- | --- | --- |
-| `UE-NNNN` | Invalid, missing, boundary, repeated, out-of-sequence, or observed action | Observable result | Research, field report, analysis, standard, or convention | Yes / No with rationale | Yes / No with feasibility reference | Requirement and test reference |
+### UE-NNNN — Use-error title
+
+- **Trigger or sequence:** Invalid, missing, boundary, repeated,
+  out-of-sequence, or observed action
+- **Consequence:** Observable result
+- **Foreseeability source:** Research, field report, analysis, standard, or
+  convention
+- **Critical:** Yes / No with rationale
+- **Preventable:** Yes / No with feasibility reference
+- **Control and verification:** Requirement and test reference
 
 ## Acceptance-Criterion Index
 
@@ -90,9 +123,14 @@ WSP-UX-0027 requirement, and critical use error needs criterion coverage. One
 criterion can cover several sources only when one result passes or fails them
 together.
 
-| Criterion | Source requirements, tasks, or risks | Contexts | Measure or classification | Pass threshold | Detailed record |
-| --- | --- | --- | --- | --- | --- |
-| `UX-AC-NNNN` | WSP, project requirement, `TASK-NNNN`, or `UE-NNNN` | `CTX-NNNN` | One observable outcome | Exact numeric or enumerated condition | Heading or controlled protocol reference |
+### UX-AC-NNNN — Criterion index entry
+
+- **Source requirements, tasks, or risks:** WSP or project requirement,
+  `TASK-NNNN`, or `UE-NNNN`
+- **Contexts:** `CTX-NNNN`
+- **Measure or classification:** One observable outcome
+- **Pass threshold:** Exact numeric or enumerated condition
+- **Detailed record:** Heading or controlled protocol reference
 
 ## UX-AC-NNNN — Criterion Title
 
@@ -124,19 +162,30 @@ Copy this section for every acceptance criterion.
 
 ## Feedback-Timing Allocation
 
-Use this table for WSP-UX-0016. Values below are placeholders, not WSP defaults.
-Every duration identifies its start and observable end events in a detailed
-criterion.
+Use this section for WSP-UX-0016. Values below are placeholders, not WSP
+defaults. Every duration identifies its start and observable end events in a
+detailed criterion.
 
-| Action or operation class | Criterion | Acknowledgement threshold | Processing-state threshold | Progress-update rule | Completion or timeout rule |
-| --- | --- | --- | --- | --- | --- |
-| Keystroke, command, navigation, background task, or remote operation | `UX-AC-NNNN` | Project value and percentile rule | Project value and percentile rule | Interval or event rule, or justified N/A | Project value, cancellation, timeout, or failure behavior |
+### TIMING-NNNN — Action or operation class
+
+- **Criterion:** `UX-AC-NNNN`
+- **Acknowledgement threshold:** Project value and percentile rule
+- **Processing-state threshold:** Project value and percentile rule
+- **Progress-update rule:** Interval or event rule, or justified `N/A`
+- **Completion or timeout rule:** Project value, cancellation, timeout, or
+  failure behavior
 
 ## Participant and Sampling Plan
 
-| Protocol | User groups | Recruitment and exclusion | Sample size | Task order and repetitions | Analysis and stopping rule |
-| --- | --- | --- | --- | --- | --- |
-| Controlled protocol reference | `UG-NNNN` | Observable criteria and conflict controls | Exact number per group | Randomization, counterbalancing, practice, and repetitions | Calculation, missing data, outlier, and early-stop rules |
+### PROTOCOL-NNNN — Protocol title
+
+- **User groups:** `UG-NNNN`
+- **Recruitment and exclusion:** Observable criteria and conflict controls
+- **Sample size:** Exact number per group
+- **Task order and repetitions:** Randomization, counterbalancing, practice,
+  and repetitions
+- **Analysis and stopping rule:** Calculation, missing data, outlier, and
+  early-stop rules
 
 Record why the selected sample and analysis can decide each assigned
 criterion. A convenience sample is not automatically representative.
@@ -149,24 +198,42 @@ with an approved risk record.
 
 **Coverage rule:** Exact algorithm or controlled rationale
 
-| Matrix entry | Configurations | Principal tasks | Input-only and display modes | Assistive technology, version, and settings | Expected results | Procedure and evidence |
-| --- | --- | --- | --- | --- | --- | --- |
-| `AT-NNNN` | `CFG-NNNN` | `TASK-NNNN` | Keyboard, forced colors, scaling, reduced motion, or other mode | Exact product and configuration | Observable output, operation, focus, semantics, and events | Test and result references |
+### AT-NNNN — Compatibility entry
+
+- **Configurations:** `CFG-NNNN`
+- **Principal tasks:** `TASK-NNNN`
+- **Input-only and display modes:** Keyboard, forced colors, scaling, reduced
+  motion, or other mode
+- **Assistive technology, version, and settings:** Exact product and
+  configuration
+- **Expected results:** Observable output, operation, focus, semantics, and
+  events
+- **Procedure and evidence:** Test and result references
 
 ## Traceability and Coverage
 
-| Source item | Required contexts | Acceptance criteria | Verification evidence | Coverage status |
-| --- | --- | --- | --- | --- |
-| User group, principal task, WSP requirement, project requirement, critical use error, or EN clause | `CTX-NNNN` | `UX-AC-NNNN` | Test, analysis, inspection, review, or demonstration | Covered / Missing / Not applicable with approval |
+### COVERAGE-NNNN — Source item
+
+- **Source type:** User group, principal task, WSP requirement, project
+  requirement, critical use error, or EN clause
+- **Required contexts:** `CTX-NNNN`
+- **Acceptance criteria:** `UX-AC-NNNN`
+- **Verification evidence:** Test, analysis, inspection, review, or
+  demonstration
+- **Coverage status:** Covered / Missing / Not applicable with approval
 
 Missing coverage, an unapproved criterion, or an invalid or unknown result is
 not a passing result.
 
 ## Results and Release Decision
 
-| Criterion or matrix entry | Result | Evidence | Deviations | Finding or risk disposition |
-| --- | --- | --- | --- | --- |
-| `UX-AC-NNNN` or `AT-NNNN` | Pass / Fail / Invalid / Not run / N/A | Exact retained record | None or approved deviation | Finding, risk, tailoring, or `None` |
+### RESULT-NNNN — Criterion or matrix entry
+
+- **Item:** `UX-AC-NNNN` or `AT-NNNN`
+- **Result:** Pass / Fail / Invalid / Not run / N/A
+- **Evidence:** Exact retained record
+- **Deviations:** None or approved deviation
+- **Finding or risk disposition:** Finding, risk, tailoring, or `None`
 
 **Coverage check:** Pass / Fail
 
@@ -178,6 +245,10 @@ not a passing result.
 
 ## Baseline History
 
-| Date | Product baseline | Specification revision | Change and impact summary | Approval |
-| --- | --- | --- | --- | --- |
-| YYYY-MM-DD | Version or revision | Controlled revision | Initial baseline or changed users, tasks, configurations, criteria, or thresholds | Review reference |
+### YYYY-MM-DD — Baseline entry
+
+- **Product baseline:** Version or revision
+- **Specification revision:** Controlled revision
+- **Change and impact summary:** Initial baseline or changed users, tasks,
+  configurations, criteria, or thresholds
+- **Approval:** Review reference

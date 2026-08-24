@@ -26,14 +26,45 @@ standards.
 
 ## Referenced Editions
 
-| Standard | Published scope | WSP use |
-| --- | --- | --- |
-| ISO 9241-210:2019 | Human-centred principles and activities across the lifecycle of computer-based interactive systems | Planning, context of use, user involvement, iteration, and evaluation |
-| ISO 9241-115:2024 | Conceptual, user-system interaction, user-interface, and navigation design | Required design outcomes and interaction specifications |
-| ISO 9241-110:2020 | Technology-independent interaction principles | Task suitability, self-description, expectations, learnability, controllability, error robustness, and engagement |
-| ISO 9241-171:2025 | Accessible software for a wide range of physical, sensory, and cognitive abilities | Inclusive user coverage, software behavior, preferences, and assistive-technology compatibility |
-| ISO 9241-112:2025 | Visual, auditory, and tactile or haptic presentation and exported information | Detectability, discriminability, conciseness, interpretation, freedom from distraction, and consistency |
-| EN 301 549 V3.2.1 (2021-03) | Testable accessibility requirements for ICT products and services | Clause-level applicability, behavioral acceptance, Annex C procedures, documentation, and support |
+### ISO 9241-210:2019
+
+- **Published scope:** Human-centred principles and activities across the
+  lifecycle of computer-based interactive systems
+- **WSP use:** Planning, context of use, user involvement, iteration, and
+  evaluation
+
+### ISO 9241-115:2024
+
+- **Published scope:** Conceptual, user-system interaction, user-interface, and
+  navigation design
+- **WSP use:** Required design outcomes and interaction specifications
+
+### ISO 9241-110:2020
+
+- **Published scope:** Technology-independent interaction principles
+- **WSP use:** Task suitability, self-description, expectations, learnability,
+  controllability, error robustness, and engagement
+
+### ISO 9241-171:2025
+
+- **Published scope:** Accessible software for a wide range of physical,
+  sensory, and cognitive abilities
+- **WSP use:** Inclusive user coverage, software behavior, preferences, and
+  assistive-technology compatibility
+
+### ISO 9241-112:2025
+
+- **Published scope:** Visual, auditory, and tactile or haptic presentation and
+  exported information
+- **WSP use:** Detectability, discriminability, conciseness, interpretation,
+  freedom from distraction, and consistency
+
+### EN 301 549 V3.2.1 (2021-03)
+
+- **Published scope:** Testable accessibility requirements for ICT products and
+  services
+- **WSP use:** Clause-level applicability, behavioral acceptance, Annex C
+  procedures, documentation, and support
 
 ISO 9241-210:2019 and ISO 9241-110:2020 were reviewed and confirmed in
 2025. ISO 9241-115:2024 is the first edition. ISO 9241-112:2025 and
@@ -43,17 +74,52 @@ edition does not change an adopted WSP baseline without controlled review.
 
 ## WSP Mapping
 
-| WSP concern | Requirements | Principal reference |
-| --- | --- | --- |
-| Human-centred planning and scope | WSP-UX-0001 through 0003 | ISO 9241-210; ISO 9241-171 |
-| User needs, involvement, and iteration | WSP-UX-0004 through 0009 | ISO 9241-210 |
-| Controlled UI design outcomes | WSP-UX-0010, 0012 through 0014 | ISO 9241-115 |
-| Interaction principles and atomic controls | WSP-UX-0011, 0015 through 0021, 0041 through 0047 | ISO 9241-110 |
-| Presentation of information | WSP-UX-0022 through 0027 | ISO 9241-112 |
-| Accessibility applicability and baseline | WSP-UX-0028 and 0029 | EN 301 549 |
-| Keyboard and assistive-technology behavior | WSP-UX-0030 through 0035, 0048 through 0055 | ISO 9241-171; EN 301 549 |
-| Accessible documentation and support | WSP-UX-0036, 0056, and 0057 | ISO 9241-171; EN 301 549 Clause 12 |
-| Acceptance and release evidence | WSP-UX-0037 through 0040 and 0058 | ISO 9241-210; ISO 9241-171; EN 301 549 Annex C |
+### Human-centred planning and scope
+
+- **Requirements:** WSP-UX-0001 through WSP-UX-0003
+- **Principal references:** ISO 9241-210 and ISO 9241-171
+
+### User needs, involvement, and iteration
+
+- **Requirements:** WSP-UX-0004 through WSP-UX-0009
+- **Principal reference:** ISO 9241-210
+
+### Controlled UI design outcomes
+
+- **Requirements:** WSP-UX-0010 and WSP-UX-0012 through WSP-UX-0014
+- **Principal reference:** ISO 9241-115
+
+### Interaction principles and atomic controls
+
+- **Requirements:** WSP-UX-0011, WSP-UX-0015 through WSP-UX-0021, and
+  WSP-UX-0041 through WSP-UX-0047
+- **Principal reference:** ISO 9241-110
+
+### Presentation of information
+
+- **Requirements:** WSP-UX-0022 through WSP-UX-0027
+- **Principal reference:** ISO 9241-112
+
+### Accessibility applicability and baseline
+
+- **Requirements:** WSP-UX-0028 and WSP-UX-0029
+- **Principal reference:** EN 301 549
+
+### Keyboard and assistive-technology behavior
+
+- **Requirements:** WSP-UX-0030 through WSP-UX-0035 and WSP-UX-0048 through
+  WSP-UX-0055
+- **Principal references:** ISO 9241-171 and EN 301 549
+
+### Accessible documentation and support
+
+- **Requirements:** WSP-UX-0036, WSP-UX-0056, and WSP-UX-0057
+- **Principal references:** ISO 9241-171 and EN 301 549 Clause 12
+
+### Acceptance and release evidence
+
+- **Requirements:** WSP-UX-0037 through WSP-UX-0040 and WSP-UX-0058
+- **Principal references:** ISO 9241-210, ISO 9241-171, and EN 301 549 Annex C
 
 ## Applying EN 301 549
 

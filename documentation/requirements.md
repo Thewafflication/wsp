@@ -65,11 +65,15 @@ invalid manifest, Pandoc error, LaTeX error, missing expected PDF, or empty PDF.
 
 ## WSP-DOC-0009 — Release Verification
 
-Before publication, the final PDF shall be checked for metadata, page count,
-extractable text, table-of-contents presence, bookmarks, link annotations, and
-visual defects in rendered pages.
+Before publication, the final PDF shall be checked automatically for metadata,
+page count, extractable text, manifest and bookmark order, table-of-contents
+presence, internal and external link annotations, and text or graphics outside
+page boundaries. Every rendered page shall also receive a documented visual
+review for clipping, overlap, illegibility, incorrect navigation, and other
+defects not decided by the automated checks.
 
-**Verification:** Automated PDF inspection and documented visual review.
+**Verification:** Passing `Test-DocumentationPdf.ps1` result for the final PDF
+bytes and documented visual review of every rendered page.
 
 ## WSP-DOC-0010 — Descriptive Metadata
 

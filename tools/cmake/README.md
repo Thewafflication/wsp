@@ -23,15 +23,41 @@ ignored GCC option.
 
 ## Options
 
-| Cache variable | Default | Effect |
-| --- | --- | --- |
-| `WSP_ENABLE_BUILD_WARNINGS` | `ON` | Apply the warning flags in the WSP CMake profile. |
-| `WSP_ENABLE_HARDENING` | `ON` | Apply compiler and linker security controls. |
-| `WSP_ENABLE_STATIC_ANALYSIS` | `OFF` | Run clang-tidy as part of compilation. |
-| `WSP_REQUIRE_STACK_PROTECTION` | `OFF` | Reject compilers, including TinyCC, that cannot emit stack canaries. |
-| `WSP_TINYCC_BOUNDS_CHECKING` | `OFF` | Enable TinyCC `-b` checks in Debug builds. |
-| `WSP_CLANG_TIDY_EXECUTABLE` | Discovered from `PATH` | Select an exact clang-tidy executable. |
-| `WSP_CLANG_TIDY_CONFIG` | WSP configuration | Select a controlled clang-tidy configuration. |
+### `WSP_ENABLE_BUILD_WARNINGS`
+
+- **Default:** `ON`
+- **Effect:** Apply the warning flags in the WSP CMake profile.
+
+### `WSP_ENABLE_HARDENING`
+
+- **Default:** `ON`
+- **Effect:** Apply compiler and linker security controls.
+
+### `WSP_ENABLE_STATIC_ANALYSIS`
+
+- **Default:** `OFF`
+- **Effect:** Run clang-tidy as part of compilation.
+
+### `WSP_REQUIRE_STACK_PROTECTION`
+
+- **Default:** `OFF`
+- **Effect:** Reject compilers, including TinyCC, that cannot emit stack
+  canaries.
+
+### `WSP_TINYCC_BOUNDS_CHECKING`
+
+- **Default:** `OFF`
+- **Effect:** Enable TinyCC `-b` checks in Debug builds.
+
+### `WSP_CLANG_TIDY_EXECUTABLE`
+
+- **Default:** Discovered from `PATH`
+- **Effect:** Select an exact clang-tidy executable.
+
+### `WSP_CLANG_TIDY_CONFIG`
+
+- **Default:** WSP configuration
+- **Effect:** Select a controlled clang-tidy configuration.
 
 Static analysis is disabled in ordinary local builds so that including the
 module does not introduce an undeclared host dependency. A required CI analysis

@@ -5,7 +5,7 @@
 This file records material changes to WSP releases. Requirement identifiers are
 not reused when requirements are removed or superseded.
 
-## Unreleased
+## 1.2.0 — 2026-08-27
 
 ### Added
 
@@ -31,7 +31,10 @@ not reused when requirements are removed or superseded.
   protections, and preserves TinyCC as the default compiler; and
 - native build-hardening and final-binary verification requirements covering
   stack protection, ASLR/PIE, non-executable memory, fortified library calls,
-  ELF RELRO/immediate binding, and available control-flow protection.
+  ELF RELRO/immediate binding, and available control-flow protection; and
+- an upstream-issue requirement for changes or workarounds affecting
+  Thewafflication-owned dependencies or dependencies distributed as WPM
+  packages, including attachment or linkage of the workaround.
 
 ### Fixed
 

@@ -258,8 +258,7 @@ Projects remain bound to the version they adopted until they intentionally
 upgrade. Changes to normative content should be summarized in a changelog so
 projects can assess the impact of upgrading.
 
-See the [changelog](CHANGELOG.md) for released scope and the changes planned for
-WSP 1.2.0.
+See the [changelog](CHANGELOG.md) for released scope and planned changes.
 
 ## Release Documentation
 
@@ -303,7 +302,5 @@ matures.
 
 ## Status
 
-Version 1.1.0 is the latest controlled WSP baseline. The unreleased native
-hardening and static-analysis work is planned for 1.2.0. Projects should adopt
-an immutable release tag and record the corresponding commit as described
-above.
+Version 1.2.0 is the latest controlled WSP baseline. Projects should adopt an
+immutable release tag and record the corresponding commit as described above.

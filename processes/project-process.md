@@ -142,6 +142,22 @@ improvements should be proposed to WSP.
 
 **Verification:** Retrospective and improvement-record inspection.
 
+### WSP-PROC-0011 — Upstream Dependency Workarounds
+
+When a project needs to change or work around a Git submodule or other
+dependency owned by `github.com/Thewafflication`, or a dependency distributed
+as a WPM package, the project shall create an issue in that dependency's GitHub
+repository. The issue shall describe the underlying problem and affected
+version and shall include or link to the workaround so the upstream owner can
+review, reproduce, and replace it with a maintained resolution.
+
+The consuming project shall reference the upstream issue from its local change
+or retained engineering record and shall review the workaround when the
+dependency publishes a resolution.
+
+**Verification:** Upstream issue, workaround, and consuming-project reference
+inspection.
+
 ## Relationship to Other WSP Requirements
 
 Project-process requirements coordinate rather than replace detailed

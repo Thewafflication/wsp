@@ -5,6 +5,17 @@
 This file records material changes to WSP releases. Requirement identifiers are
 not reused when requirements are removed or superseded.
 
+## 1.3.0 — 2026-09-01
+
+### Added
+
+- an ABI-safe C logging byte-sink contract for consumers that cannot share CRT
+  `FILE *` objects with WSP, including synchronous complete-record delivery,
+  consumer-owned context and close callbacks, configurable threshold reuse,
+  and observable consumer-defined write status; and
+- automated coverage for byte-sink formatting, error propagation, and exact
+  close ownership, resolving [issue 3](https://github.com/Thewafflication/wsp/issues/3).
+
 ## 1.2.0 — 2026-08-27
 
 ### Added

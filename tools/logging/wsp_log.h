@@ -29,12 +29,28 @@ typedef enum wsp_log_color_mode {
     WSP_LOG_COLOR_ALWAYS = 2 /**< Emit colors even when redirected. */
 } wsp_log_color_mode;
 
+/**
+ * Consume one complete log record without sharing a CRT stream.
+ *
+ * The callback shall consume or copy all @p length bytes synchronously before
+ * returning. Return zero on success or a consumer-defined nonzero status.
+ */
+typedef int (*wsp_log_sink_write_fn)(void *context, const char *bytes,
+    size_t length);
+
+/** Release a consumer-owned byte-sink context. */
+typedef void (*wsp_log_sink_close_fn)(void *context);
+
 /** Mutable state for one logger instance. */
 typedef struct wsp_logger {
     FILE *file;                    /**< Optional owned file stream. */
     wsp_log_level console_level;   /**< Minimum console severity. */
     wsp_log_level file_level;      /**< Minimum file severity. */
     wsp_log_color_mode color_mode; /**< Console color policy. */
+    wsp_log_sink_write_fn sink_write; /**< Optional ABI-safe byte sink. */
+    wsp_log_sink_close_fn sink_close; /**< Optional context release callback. */
+    void *sink_context;            /**< Consumer-owned callback context. */
+    int sink_status;               /**< Most recent nonzero sink status. */
 } wsp_logger;
 
 /**
@@ -83,7 +99,22 @@ void wsp_log_set_color_mode(wsp_logger *logger,
 int wsp_log_open_file(wsp_logger *logger, const char *path, int append);
 
 /**
- * Close the logger's file sink, if one is open.
+ * Set or replace an ABI-safe byte sink.
+ *
+ * Replacing a sink invokes its close callback first. The sink uses the file
+ * severity threshold and receives complete timestamped records without ANSI
+ * control bytes. WSP never interprets or frees the context.
+ *
+ * @return Zero on success and nonzero for an invalid logger or write callback.
+ */
+int wsp_log_set_sink(wsp_logger *logger, wsp_log_sink_write_fn write_callback,
+    wsp_log_sink_close_fn close_callback, void *context);
+
+/** Return the most recent nonzero byte-sink status, or zero. */
+int wsp_log_sink_status(const wsp_logger *logger);
+
+/**
+ * Close the logger's file and byte sinks, if configured.
  *
  * @param logger Initialized logger.
  */

@@ -302,5 +302,5 @@ matures.
 
 ## Status
 
-Version 1.2.0 is the latest controlled WSP baseline. Projects should adopt an
+Version 1.3.0 is the latest controlled WSP baseline. Projects should adopt an
 immutable release tag and record the corresponding commit as described above.

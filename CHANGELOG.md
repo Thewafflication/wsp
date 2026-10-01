@@ -5,6 +5,27 @@
 This file records material changes to WSP releases. Requirement identifiers are
 not reused when requirements are removed or superseded.
 
+## 1.4.0 — 2026-09-30
+
+### Added
+
+- WSP-STYLE-0001 through WSP-STYLE-0007 for strict 80-character source and
+  configuration lines, UTF-8, whitespace, scope, and documentation contracts;
+- WSP-LANG-0001 through WSP-LANG-0011 for C, C++, Python, YAML, JSON, Make,
+  PowerShell, C#, Visual Basic, CMake, and additional language profiles;
+- a shared physical source-style validator with boundary and failure tests,
+  Doxygen/native documentation examples, and explicit WPM/WFC/WSH scan steps.
+
+- pre-commit lint, documentation-build, and full-suite checks for WSP, with
+  positive, negative, expected-failure, and infrastructure-error coverage;
+- WSP-CHECK-0001 through WSP-CHECK-0008 for adopting-project commit gates,
+  reproducible setup, rule coverage, expected failures, and independent CI;
+- workflow-derived WPM, WFC, and WSH command examples with inspected dependency,
+  caching, and coverage gaps;
+- a C/PowerShell/CMake adoption example, copyable YAML configuration, linter
+  recommendations, and WSP-specific check inventory, addressing
+  [issue 4](https://github.com/Thewafflication/wsp/issues/4).
+
 ## 1.3.0 — 2026-09-01
 
 ### Added

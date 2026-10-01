@@ -1,0 +1,28 @@
+minimum_pre_commit_version: '3.2.0'
+default_install_hook_types: [pre-commit]
+default_stages: [pre-commit]
+fail_fast: true
+repos:
+  - repo: local
+    hooks:
+      - id: wsp-lint
+        name: WSP lint
+        entry: pwsh -NoProfile -File tools/Test-RepositorySyntax.ps1
+        language: system
+        always_run: true
+        pass_filenames: false
+        require_serial: true
+      - id: wsp-build
+        name: WSP documentation build
+        entry: pwsh -NoProfile -File tools/Build-Documentation.ps1
+        language: system
+        always_run: true
+        pass_filenames: false
+        require_serial: true
+      - id: wsp-tests
+        name: WSP full test suite
+        entry: pwsh -NoProfile -File tools/tests/run-all-tests.ps1
+        language: system
+        always_run: true
+        pass_filenames: false
+        require_serial: true

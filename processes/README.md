@@ -7,6 +7,9 @@ and improved.
 
 ## Contents
 
+- [Commit checks](commit-checks.md) define adopting-project gates, recommended
+  linters, and mapping of WSP rules to checks and review.
+
 - [WSP software lifecycle](software-lifecycle.md) connects adoption, planning,
   requirements, design, implementation, review, verification, release,
   support, and improvement.

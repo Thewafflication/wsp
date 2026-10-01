@@ -13,9 +13,19 @@ template.
 
 ## Included Templates
 
+- [Source style configurations](source-style-configurations.md) and a
+  [copyable EditorConfig](source-style.editorconfig) provide controlled starting
+  points for language checks and whitespace settings.
+
+- [Workflow-derived WPM, WFC, and WSH examples](workflow-derived-commit-checks.md)
+  record actual commands, dependencies, and identified coverage gaps.
+
 - ADR template;
 - requirement template;
 - WSP adoption-record template;
+- [commit-check adoption example](commit-checks-template.md), with a
+  [copyable YAML configuration](pre-commit-config.yaml), recommended rules,
+  C/PowerShell checks, and a WSP check inventory;
 - UX acceptance specification, including user groups, principal tasks,
   supported configurations, measurable criteria, sampling, and assistive-
   technology coverage;

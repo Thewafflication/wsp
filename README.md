@@ -288,6 +288,11 @@ customer, contract, regulation, or risk assessment requires it.
 
 ## Contributing
 
+Adopting projects should follow the
+[commit-check requirements and linter recommendations](processes/commit-checks.md)
+and adapt the [project example](templates/commit-checks-template.md).
+The setup below is for contributing to WSP itself.
+
 Changes should be proposed through review and should:
 
 - state the problem being solved;
@@ -297,10 +302,53 @@ Changes should be proposed through review and should:
 - avoid introducing project-specific policy into common content; and
 - describe the expected impact on adopting projects.
 
-Detailed contribution and review procedures will be added as the repository
-matures.
+Before contributing, install Git, PowerShell 7, Python 3.12 or newer,
+CMake 3.20 or newer, a C compiler supported by your CMake generator (for example,
+Visual Studio Build Tools with the C++ workload), Pandoc 3 or newer, and MiKTeX
+with PDFLaTeX. Allow MiKTeX to install missing LaTeX packages. See the
+[documentation build guide](documentation/README.md) for PDF setup.
+
+From the repository root, install the pinned development dependencies and
+activate the Git commit hook:
+
+```powershell
+python -m pip install --requirement tools/requirements-dev.txt
+pre-commit install
+pre-commit run --all-files
+```
+
+If using a Python virtual environment, activate it before these commands and
+before committing. Its Python and scripts directory must be on `PATH`.
+Run `pre-commit install` after each clone. The YAML configuration uses the
+[pre-commit framework](https://pre-commit.com/) to run, in order:
+
+1. Repository lint: parse all repository PowerShell scripts and modules.
+2. Build: generate the complete release documentation PDF.
+3. Tests: run common-tool/PDF verifier tests, C and CMake logging tests, and
+   commit-hook integration tests.
+
+Each check runs once per commit, including documentation-only and empty commits.
+A failure stops the sequence and blocks the commit; the failing command's
+diagnostics identify what to fix. Missing tools and test infrastructure errors
+also block commits. Existing tests accept failures only when their individual
+assertions explicitly expect them; ordinary nonzero suite exits remain failures.
+The integration tests also verify Python's explicitly expected-failure result.
+
+Run the same commands manually from the repository root:
+
+```powershell
+pwsh -NoProfile -File tools/Test-RepositorySyntax.ps1
+pwsh -NoProfile -File tools/Build-Documentation.ps1
+pwsh -NoProfile -File tools/tests/run-all-tests.ps1
+```
+
+Generated files and integration-test repositories stay beneath ignored
+`output/`. Hooks inspect the staged snapshot because pre-commit temporarily
+stashes unstaged tracked changes. Git hooks can be bypassed, so GitHub Actions
+independently runs these lint, build, and full-suite commands and verifies the
+built PDF as a backstop.
 
 ## Status
 
-Version 1.3.0 is the latest controlled WSP baseline. Projects should adopt an
+Version 1.4.0 is the latest controlled WSP baseline. Projects should adopt an
 immutable release tag and record the corresponding commit as described above.

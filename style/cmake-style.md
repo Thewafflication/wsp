@@ -5,6 +5,10 @@
 This profile applies to project-owned `CMakeLists.txt`, CMake modules, toolchain
 files, and presets.
 
+Apply the [common source/configuration baseline](source-style.md), including
+the strict 80-character physical ceiling. Public functions, arguments, targets,
+and cache variables need [structured documentation](source-documentation.md).
+
 ## General Style
 
 - Use lowercase CMake command names.

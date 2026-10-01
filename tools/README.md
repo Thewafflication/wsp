@@ -14,6 +14,7 @@ WCRT while removing repository-specific paths and assumptions.
 | `Test-DocumentationPdf.ps1` | Verify PDF identity, structure, links, and page boundaries |
 | `New-ArtifactChecksum.ps1` | Write SHA-256 release checksums |
 | `Test-CSourceQuality.ps1` | Enforce Doxygen and 80-column C rules |
+| `Test-SourceStyle.ps1` | Check physical source style across languages |
 | `Test-PeHardening.ps1` | Verify ASLR, NX, 64-bit high-entropy VA, and optional CFG image flags |
 | `Test-Traceability.ps1` | Validate requirement, test, and runner links |
 | `Test-TestEvidence.ps1` | Validate complete passing LaTeX evidence |
@@ -31,6 +32,14 @@ Run the common-tool self-tests with:
 ```powershell
 pwsh -File wsp/tools/tests/run-tests.ps1
 ```
+
+WSP contributors run the complete repository suite with
+`pwsh -File tools/tests/run-all-tests.ps1` from the WSP root. This adds the
+C logging tests and commit-hook integration tests to the common-tool tests.
+See [contributor setup](../README.md#contributing) for dependencies and hooks.
+Adopting projects use their own canonical commands and the
+[commit-check example](../templates/commit-checks-template.md), invoking shared
+validators through their pinned WSP submodule.
 
 ## Invocation from an Adopting Project
 

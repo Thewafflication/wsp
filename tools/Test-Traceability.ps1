@@ -137,3 +137,4 @@ Write-Output (
     "Traceability passed for $($requirements.Count) requirement(s), " +
     "$($specifications.Count) test specification(s), and " +
     "$($implementations.Count) implementation(s).")
+exit 0

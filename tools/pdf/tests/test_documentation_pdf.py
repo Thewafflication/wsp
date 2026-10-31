@@ -15,7 +15,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
 
-VERIFIER_PATH = Path(__file__).parents[1] / "test_documentation_pdf.py"
+VERIFIER_PATH = Path(__file__).parents[1] / "_documentation_pdf_script.py"
 SPECIFICATION = importlib.util.spec_from_file_location(
     "wsp_pdf_verifier", VERIFIER_PATH
 )

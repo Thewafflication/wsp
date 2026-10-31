@@ -93,6 +93,18 @@ Before release approval, the project shall evaluate:
 Exceptions shall identify an owner, rationale, impact, approval, and completion
 or review condition.
 
+An approved deferred objective does not by itself block release. A deferred
+objective shall not also be designated as a required gate for the current
+release, shall remain outside the release's completion and verification claims,
+and shall identify a target release or other objective completion condition.
+Before each release approval, the project shall close, revise, or explicitly
+carry forward every outstanding deferral.
+
+A release may be approved with documented deferrals or accepted residual risk
+when every required release gate passes and the designated approving authority
+accepts the remaining risk. A failed or unknown required release gate, or risk
+that the designated authority has not accepted, prevents release approval.
+
 **Verification:** Completed release-readiness record inspection.
 
 ### WSP-PROC-0008 — Release Approval and Baseline
@@ -102,7 +114,8 @@ approval, release date, and retained verification summary.
 
 Published artifacts shall be traceable to the approved release baseline. A
 release shall not be represented as verified when a required release gate
-failed or its result is unknown.
+failed or its result is unknown. Deferred work shall remain excluded from the
+release's completion and verification claims.
 
 **Verification:** Release record, artifacts, and baseline inspection.
 
@@ -129,6 +142,22 @@ improvements should be proposed to WSP.
 
 **Verification:** Retrospective and improvement-record inspection.
 
+### WSP-PROC-0011 — Upstream Dependency Workarounds
+
+When a project needs to change or work around a Git submodule or other
+dependency owned by `github.com/Thewafflication`, or a dependency distributed
+as a WPM package, the project shall create an issue in that dependency's GitHub
+repository. The issue shall describe the underlying problem and affected
+version and shall include or link to the workaround so the upstream owner can
+review, reproduce, and replace it with a maintained resolution.
+
+The consuming project shall reference the upstream issue from its local change
+or retained engineering record and shall review the workaround when the
+dependency publishes a resolution.
+
+**Verification:** Upstream issue, workaround, and consuming-project reference
+inspection.
+
 ## Relationship to Other WSP Requirements
 
 Project-process requirements coordinate rather than replace detailed
@@ -137,6 +166,10 @@ obligations:
 - `WSP-REQM-####` controls requirements and change impact;
 - `WSP-TEST-####` controls verification and release-test evidence;
 - `WSP-DOC-####` controls release documentation;
+- `WSP-INFO-####` controls manuals, help, reference information, and other
+  information for users;
+- `WSP-UX-####` controls human-centred design, accessibility, and UX/UI
+  evaluation;
 - `WSP-SEC-####` controls security design and vulnerability response;
 - `WSP-PSP-####` controls selected personal-process practices; and
 - technology profiles control applicable implementation conventions.

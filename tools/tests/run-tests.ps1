@@ -1,5 +1,7 @@
 [CmdletBinding()]
-param()
+param(
+    [string]$Python
+)
 
 $ErrorActionPreference = 'Stop'
 $toolsRoot = Split-Path -Parent $PSScriptRoot
@@ -57,6 +59,11 @@ try {
         throw ($parseFailures -join "`n")
     }
     Write-Output '[PASS] PowerShell syntax'
+
+    $cmakeBuildTest = Join-Path $toolsRoot `
+        'cmake\tests\Test-BuildBaseline.ps1'
+    Invoke-ToolTest $cmakeBuildTest @() 0 `
+        'CMake build-baseline tests succeed'
 
     $loggingTest = Join-Path $toolsRoot 'logging\tests\Test-Logging.ps1'
     Invoke-ToolTest $loggingTest @() 0 `
@@ -173,6 +180,32 @@ Build completed.
     }
     Write-Output '[PASS] Warning summary contains warning count'
 
+    $peRoot = Join-Path $workRoot 'pe-hardening'
+    $peImage = Join-Path $peRoot 'fixture.exe'
+    New-Item -ItemType Directory -Path $peRoot | Out-Null
+    [byte[]]$peBytes = New-Object byte[] 512
+    $peBytes[0] = [byte][char]'M'
+    $peBytes[1] = [byte][char]'Z'
+    [BitConverter]::GetBytes([uint32]0x80).CopyTo($peBytes, 0x3c)
+    $peBytes[0x80] = [byte][char]'P'
+    $peBytes[0x81] = [byte][char]'E'
+    [BitConverter]::GetBytes([uint16]0x8664).CopyTo($peBytes, 0x84)
+    [BitConverter]::GetBytes([uint16]0x00f0).CopyTo($peBytes, 0x94)
+    [BitConverter]::GetBytes([uint16]0x020b).CopyTo($peBytes, 0x98)
+    [BitConverter]::GetBytes([uint16]0x4160).CopyTo($peBytes, 0xde)
+    [IO.File]::WriteAllBytes($peImage, $peBytes)
+    $peTool = Join-Path $toolsRoot 'Test-PeHardening.ps1'
+    $peArguments = @(
+        '-Path', $peImage,
+        '-RequireControlFlowGuard'
+    )
+    Invoke-ToolTest $peTool $peArguments 0 `
+        'PE hardening accepts required image flags'
+    [BitConverter]::GetBytes([uint16]0x4060).CopyTo($peBytes, 0xde)
+    [IO.File]::WriteAllBytes($peImage, $peBytes)
+    Invoke-ToolTest $peTool $peArguments 1 `
+        'PE hardening rejects a missing NX flag'
+
     $checksumRoot = Join-Path $workRoot 'checksums'
     $checksumInput = Join-Path $checksumRoot 'artifact.bin'
     $checksumOutput = Join-Path $checksumRoot 'SHA256SUMS'
@@ -192,8 +225,41 @@ Build completed.
     }
     Write-Output '[PASS] Checksum identifies exact artifact'
 
+    $pdfTestTool = Join-Path $toolsRoot 'pdf\tests\run-tests.ps1'
+    if ($Python) {
+        Invoke-ToolTest $pdfTestTool @('-Python', $Python) 0 `
+            'Documentation PDF verifier self-tests succeed'
+    }
+    else {
+        Invoke-ToolTest $pdfTestTool @() 0 `
+            'Documentation PDF verifier self-tests succeed'
+    }
+
     $documentationRoot = Join-Path $workRoot 'documentation'
     $manifest = Join-Path $documentationRoot 'manifest.json'
+    $documentationInput = Join-Path $documentationRoot 'input.md'
+    $fakePandoc = Join-Path $documentationRoot 'fake-pandoc.ps1'
+    $fakePandocDriver = Join-Path $documentationRoot `
+        'fake-pandoc-driver.ps1'
+    $fakeLatex = Join-Path $documentationRoot 'fake-latex.ps1'
+    $documentationTool = Join-Path $toolsRoot `
+        'Build-Documentation.ps1'
+    $documentationArguments = @(
+        '-RepositoryRoot', $documentationRoot,
+        '-ManifestPath', 'manifest.json',
+        '-Pandoc', $fakePandoc,
+        '-PdfLatex', $fakeLatex,
+        '-Version', '9.8.7'
+    )
+    Write-Fixture $documentationInput "# Documentation fixture`n"
+    Write-Fixture $fakeLatex @'
+if ($args[0] -eq '--version') {
+    'pdfTeX fixture'
+    exit 0
+}
+exit 0
+'@
+
     Write-Fixture $manifest @'
 {
   "title": "Invalid fixture",
@@ -202,18 +268,130 @@ Build completed.
   "keywords": ["test"],
   "language": "en-US",
   "repositoryUrl": "https://github.com/example/wsp-tests",
-  "outputName": "invalid.pdf",
+  "outputName": "fixture.pdf",
   "files": ["missing.md"]
 }
 '@
-    $documentationTool = Join-Path $toolsRoot `
-        'Build-Documentation.ps1'
-    $documentationArguments = @(
-        '-RepositoryRoot', $documentationRoot,
-        '-ManifestPath', 'manifest.json'
-    )
     Invoke-ToolTest $documentationTool $documentationArguments 1 `
         'Documentation build rejects a missing manifest input'
+
+    Write-Fixture $manifest '{ invalid JSON'
+    Invoke-ToolTest $documentationTool $documentationArguments 1 `
+        'Documentation build rejects an invalid manifest'
+
+    Write-Fixture $manifest @'
+{
+  "title": "Duplicate fixture",
+  "author": "WSP tests",
+  "subject": "Negative documentation-build fixture",
+  "keywords": ["test"],
+  "language": "en-US",
+  "repositoryUrl": "https://github.com/example/wsp-tests",
+  "outputName": "fixture.pdf",
+  "files": ["input.md", "input.md"]
+}
+'@
+    Invoke-ToolTest $documentationTool $documentationArguments 1 `
+        'Documentation build rejects a duplicate manifest input'
+
+    Write-Fixture $manifest @'
+{
+  "title": "Documentation fixture",
+  "author": "WSP tests",
+  "subject": "Documentation-build fixture",
+  "keywords": ["test"],
+  "language": "en-US",
+  "repositoryUrl": "https://github.com/example/wsp-tests",
+  "outputName": "fixture.pdf",
+  "files": ["input.md"]
+}
+'@
+    Write-Fixture $fakePandoc @'
+if ($args[0] -eq '--version') {
+    'pandoc 3.8 fixture'
+    exit 0
+}
+exit 23
+'@
+    Invoke-ToolTest $documentationTool $documentationArguments 1 `
+        'Documentation build propagates a Pandoc error'
+
+    Write-Fixture $fakeLatex @'
+if ($args[0] -eq '--version') {
+    'pdfTeX fixture'
+    exit 0
+}
+exit 17
+'@
+    Write-Fixture $fakePandocDriver @'
+if ($args[0] -eq '--version') {
+    'pandoc 3.8 fixture'
+    exit 0
+}
+$engineArgument = @($args | Where-Object {
+        $_ -like '--pdf-engine=*'
+    })[0]
+if (-not $engineArgument) {
+    exit 19
+}
+$engine = $engineArgument.Substring('--pdf-engine='.Length)
+& $engine '--wsp-test-build'
+exit $LASTEXITCODE
+'@
+    $latexFailureArguments = @(
+        '-RepositoryRoot', $documentationRoot,
+        '-ManifestPath', 'manifest.json',
+        '-Pandoc', $fakePandocDriver,
+        '-PdfLatex', $fakeLatex,
+        '-Version', '9.8.7'
+    )
+    Invoke-ToolTest $documentationTool $latexFailureArguments 1 `
+        'Documentation build propagates a LaTeX error'
+
+    Write-Fixture $fakeLatex @'
+if ($args[0] -eq '--version') {
+    'pdfTeX fixture'
+}
+exit 0
+'@
+    Write-Fixture $fakePandoc @'
+if ($args[0] -eq '--version') {
+    'pandoc 3.8 fixture'
+}
+exit 0
+'@
+    Invoke-ToolTest $documentationTool $documentationArguments 1 `
+        'Documentation build rejects a missing expected PDF'
+
+    Write-Fixture $fakePandoc @'
+if ($args[0] -eq '--version') {
+    'pandoc 3.8 fixture'
+    exit 0
+}
+$outputArgument = @($args | Where-Object {
+        $_ -like '--output=*'
+    })[0]
+$outputPath = $outputArgument.Substring('--output='.Length)
+[IO.File]::WriteAllBytes($outputPath, [byte[]]@())
+exit 0
+'@
+    Invoke-ToolTest $documentationTool $documentationArguments 1 `
+        'Documentation build rejects an empty PDF'
+
+    Write-Fixture $fakePandoc @'
+if ($args[0] -eq '--version') {
+    'pandoc 3.8 fixture'
+    exit 0
+}
+$outputArgument = @($args | Where-Object {
+        $_ -like '--output=*'
+    })[0]
+$outputPath = $outputArgument.Substring('--output='.Length)
+[IO.File]::WriteAllText($outputPath, '%PDF-1.7 fixture')
+exit 0
+'@
+    Invoke-ToolTest $documentationTool $documentationArguments 0 `
+        'Documentation build accepts a complete ordered manifest'
 }
 finally {
     $resolvedWorkRoot = (Resolve-Path -LiteralPath $workRoot `

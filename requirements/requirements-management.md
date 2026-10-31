@@ -100,8 +100,14 @@ A project shall not silently omit or weaken an applicable WSP requirement.
 
 Every tailored, deferred, or not-applicable disposition shall record the
 rationale, approving authority, impact, and any compensating control. A
-deferred disposition shall additionally identify an owner and completion
-condition.
+deferred disposition shall additionally identify an owner and a target release
+or other objective completion condition.
+
+An approved deferred disposition shall not by itself prevent release. It shall
+not be reported as satisfied, verified, or conformant for the current release,
+and it shall not also be designated as a required gate for that release. Each
+release approval shall close, revise, or explicitly carry forward every
+outstanding deferral.
 
 **Rationale:** Explicit tailoring permits proportional application without
 making the actual project baseline ambiguous.
@@ -143,6 +149,10 @@ after the current requirement set changes.
 
 Each release shall identify the exact baseline of requirements it claims to
 satisfy and the disposition of every requirement in that baseline.
+
+The release record shall identify every deferred disposition carried by the
+release and its approval. Deferred requirements remain outside the release's
+satisfaction and verification claims until completed successfully.
 
 No requirement shall be reported as verified unless its required verification
 completed successfully against the released or configuration-equivalent

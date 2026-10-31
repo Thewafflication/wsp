@@ -24,6 +24,7 @@ themselves establish conformity to any referenced standard.
 | `WSP-SEC-0009`--`0011` | IEC 62443-4-1 implementation and updates |
 | `WSP-SEC-0012` | IEC 62443-4-1; ISO/IEC/IEEE 29119-2 and 29119-4 |
 | `WSP-SEC-0013/0014` | IEC 62443-4-1 issues, updates, and end of life |
+| `WSP-SEC-0015/0016` | IEC 62443-4-1 secure implementation and verification |
 
 ## Requirements
 
@@ -179,3 +180,54 @@ affected-version analysis, and conditions for coordinated response, rollback,
 or security release.
 
 **Verification:** Response-process and completed-response inspection.
+
+### WSP-SEC-0015 — Native Build Hardening
+
+Every released executable and shared library containing project-owned
+memory-unsafe native code shall enable the compiler and linker mitigations
+applicable to its platform and threat model. The baseline includes:
+
+- compiler-inserted stack corruption protection;
+- address-space randomization or position-independent executable support;
+- non-executable stack and data enforcement;
+- fortified C library operations in compatible optimized configurations;
+- read-only relocation data and immediate symbol binding for ELF targets; and
+- platform control-flow protection when the selected toolchain provides a
+  deployable implementation.
+
+Controls supplied by a platform or linker default shall still be declared and
+verified. A compiler flag that is accepted but ignored shall not be reported as
+an implemented control.
+
+TinyCC is the default WSP C compiler and shall receive the supported PE or ELF
+linker controls. Because TinyCC does not emit stack canaries, an applicable
+project shall also produce the release artifact with a hardened GCC, Clang, or
+MSVC configuration, or approve a tailoring decision that records the exposure,
+compensating controls, and acceptance authority. TinyCC `-b` bounds checking
+may supplement Debug security testing but is not a stack-canary equivalent.
+
+**Verification:** Build-configuration review and binary-hardening inspection.
+
+### WSP-SEC-0016 — Build-Hardening Verification
+
+CI shall fail when a required build-hardening control cannot be applied or when
+the selected compiler or linker silently ignores its controlling option.
+
+Release verification shall inspect compiler and linker commands and the
+resulting binaries. Evidence shall identify the source revision, compiler and
+linker versions, target architecture, build configuration, enabled controls,
+inspection tool and version, result, and every approved exception.
+
+Verification shall inspect final executables and shared libraries rather than
+infer final-image properties from options applied only to an object or static
+library. A change to the compiler, linker, target format, or hardening baseline
+shall trigger renewed inspection.
+
+Windows PE outputs may use the reusable
+[`Test-PeHardening.ps1`](../tools/Test-PeHardening.ps1) verifier for ASLR, NX,
+64-bit high-entropy address space, and required Control Flow Guard image flags.
+Stack-canary evidence remains a compiler-command and code-generation check; it
+shall not be inferred from PE header flags alone.
+
+**Verification:** Controlled missing-control test, build log, binary inspection,
+and release-evidence review.

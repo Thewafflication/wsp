@@ -1,0 +1,29 @@
+# Copy to the owning project's .editorconfig and review language overrides.
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+# Editor hint; the shared physical validator provides strict enforcement.
+max_line_length = 80
+
+[*.{yaml,yml,json,js,jsx,ts,tsx,sh,bash,zsh,html,css,cmake}]
+indent_size = 2
+
+[CMakeLists.txt]
+indent_size = 2
+
+[{Makefile,GNUmakefile,*.mk,*.make}]
+indent_style = tab
+indent_size = tab
+
+[*.go]
+indent_style = tab
+indent_size = tab
+
+[*.{bat,cmd}]
+end_of_line = crlf

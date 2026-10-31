@@ -23,12 +23,14 @@ following requirement sets are currently defined outside this directory:
 | --- | --- | --- |
 | `WSP-CSTYLE-####` | [C style](../style/c-style.md) | C projects |
 | `WSP-DOC-####` | [Docs](../documentation/requirements.md) | All projects |
+| `WSP-INFO-####` | [Information for users](../user-information/requirements.md) | Profile |
 | `WSP-PROC-####` | [Process](../processes/project-process.md) | All projects |
 | `WSP-PSP-####` | [PSP](../processes/personal-process.md) | Profile |
 | `WSP-SEC-####` | [Security](../security/security-requirements.md) | Profile |
 | `WSP-SIGN-####` | [Signing] | Profile |
 | `WSP-TEST-####` | [Testing](../testing/test-strategy.md) | All projects |
 | `WSP-TOOL-####` | [Common tools](../tools/requirements.md) | Tool consumers |
+| `WSP-UX-####` | [UX/UI](../ux/requirements.md) | Profile |
 | `WSP-WINRES-####` | [Win](../style/windows-version-resources.md) | Profile |
 
 This index shall be updated whenever a normative requirement set is added,

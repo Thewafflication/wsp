@@ -5,7 +5,91 @@
 This file records material changes to WSP releases. Requirement identifiers are
 not reused when requirements are removed or superseded.
 
-## Unreleased
+## 1.4.0 — 2026-09-30
+
+### Added
+
+- WSP-STYLE-0001 through WSP-STYLE-0007 for strict 80-character source and
+  configuration lines, UTF-8, whitespace, scope, and documentation contracts;
+- WSP-LANG-0001 through WSP-LANG-0011 for C, C++, Python, YAML, JSON, Make,
+  PowerShell, C#, Visual Basic, CMake, and additional language profiles;
+- a shared physical source-style validator with boundary and failure tests,
+  Doxygen/native documentation examples, and explicit WPM/WFC/WSH scan steps.
+
+- pre-commit lint, documentation-build, and full-suite checks for WSP, with
+  positive, negative, expected-failure, and infrastructure-error coverage;
+- WSP-CHECK-0001 through WSP-CHECK-0008 for adopting-project commit gates,
+  reproducible setup, rule coverage, expected failures, and independent CI;
+- workflow-derived WPM, WFC, and WSH command examples with inspected dependency,
+  caching, and coverage gaps;
+- a C/PowerShell/CMake adoption example, copyable YAML configuration, linter
+  recommendations, and WSP-specific check inventory, addressing
+  [issue 4](https://github.com/Thewafflication/wsp/issues/4).
+
+## 1.3.0 — 2026-09-01
+
+### Added
+
+- an ABI-safe C logging byte-sink contract for consumers that cannot share CRT
+  `FILE *` objects with WSP, including synchronous complete-record delivery,
+  consumer-owned context and close callbacks, configurable threshold reuse,
+  and observable consumer-defined write status; and
+- automated coverage for byte-sink formatting, error propagation, and exact
+  close ownership, resolving [issue 3](https://github.com/Thewafflication/wsp/issues/3).
+
+## 1.2.0 — 2026-08-27
+
+### Added
+
+- a selectable information-for-users profile linked to ISO/IEC/IEEE
+  26514:2022, with atomic requirements for planning, audience and task
+  analysis, manuals and help content, command and API reference, information
+  quality, accessibility, validation, synchronized release, maintenance, and a
+  project-owned information plan and acceptance record;
+- a selectable UX/UI profile covering human-centred development, interaction
+  and interface design, accessible information presentation, EN 301 549
+  applicability, assistive-technology interoperability, evaluation, and
+  release evidence, with atomic behavioral controls and a project-owned
+  acceptance-specification template for exact thresholds and coverage;
+- a standardized clang-tidy profile for project-owned C and C++ source, with
+  controlled configuration, fail-closed CI, finding disposition, and retained
+  release evidence requirements;
+- target-scoped CMake helpers that apply the common warning baseline, run
+  clang-tidy during compilation, and enable compiler and linker hardening;
+- a PE image verifier for ASLR, NX, 64-bit high-entropy address space, and
+  optional Control Flow Guard characteristics;
+- TinyCC-first hardening that rejects silently ignored compatibility options,
+  enables supported Windows PE protections, documents its built-in ELF
+  protections, and preserves TinyCC as the default compiler; and
+- native build-hardening and final-binary verification requirements covering
+  stack protection, ASLR/PIE, non-executable memory, fortified library calls,
+  ELF RELRO/immediate binding, and available control-flow protection; and
+- an upstream-issue requirement for changes or workarounds affecting
+  Thewafflication-owned dependencies or dependencies distributed as WPM
+  packages, including attachment or linkage of the workaround.
+
+### Fixed
+
+- release-document tables that could extend beyond the printable page area;
+- documentation CI now verifies manifest and bookmark order, metadata,
+  extractable text, table-of-contents placement, internal and external links,
+  and page boundaries, with positive and controlled negative tests; and
+- the release-readiness record now captures every-page visual review evidence
+  and an explicit PAdES applicability decision and rationale.
+
+### Changed
+
+- integrated former Annex A into the common GitHub Action requirements and
+  migration guidance, former Annex B into three native standard-input testing
+  requirements and its test-design guidance, and former Annex C into the main
+  logging and visual-style chapters;
+- added the logging and visual-style chapters to the controlled documentation
+  manifest and retired the three superseded interim annex chapters;
+- the TinyCC warning baseline now includes `-Wunsupported`, ensuring options
+  accepted only for GCC compatibility cannot be mistaken for implemented
+  security controls.
+
+## 1.1.0 — 2026-08-22
 
 ### Added
 
@@ -24,15 +108,21 @@ not reused when requirements are removed or superseded.
   mechanism, review questions, and a regression matrix for WCRT and other
   native runtimes; and
 - Annex C documenting the shared logging tools and visual-style guidance as
-  interim additions planned for incorporation into the main chapters in WSP
-  1.1.
+  interim additions planned for incorporation into the main chapters in a
+  later release; and
+- a reusable milestone-document pack, generalized from WSH practice, covering
+  work planning, design, review, closeout, and optional chronological work
+  logging.
 
 ### Changed
 
 - updated the WSP documentation workflow to Node.js 24-based releases of the
   checkout and artifact actions; and
 - linked the common test strategy to Annex B for interactive native-input
-  verification.
+  verification; and
+- clarified that approved deferred objectives do not by themselves block a
+  release, remain outside completion and verification claims, and must be
+  closed, revised, or explicitly carried forward during release approval.
 
 ## 1.0.0 — 2026-07-26
 

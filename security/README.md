@@ -9,10 +9,11 @@ This directory defines the WSP security profile and the Design for Security
 artifacts may retain a legacy title when their adoption record maps it to the
 WSP DFS.
 
-The profile separates two concerns:
+The profile includes:
 
 - [Security requirements](security-requirements.md) define common, tailorable
-  obligations identified as `WSP-SEC-####`.
+  obligations identified as `WSP-SEC-####`, including native build hardening
+  and verification.
 - [Windows code signing and Defender](windows-code-signing-and-defender.md)
   defines selectable release-trust obligations identified as `WSP-SIGN-####`.
 - [DFS guidance](dfs-guidance.md) defines the project-owned security design

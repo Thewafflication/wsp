@@ -28,6 +28,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            tools/requirements-dev.txt
+            tools/pdf/requirements.txt
+
+      - name: Install development and PDF verification dependencies
+        shell: pwsh
+        run: python -m pip install --requirement tools/requirements-dev.txt
+
       - name: Install Pandoc and MiKTeX
         shell: pwsh
         run: |
@@ -65,30 +78,45 @@ jobs:
             throw "initexmf configuration failed with exit code $LASTEXITCODE."
           }
 
-      - name: Run common-tool tests
+      - name: Run repository lint
         shell: pwsh
-        run: ./tools/tests/run-tests.ps1
+        run: |
+          pre-commit validate-config .pre-commit-config.yaml templates/pre-commit-config.yaml
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Invalid pre-commit configuration.'
+          }
+          ./tools/Test-RepositorySyntax.ps1
 
       - name: Build PDF
+        id: build_pdf
         shell: pwsh
         env:
           RELEASE_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
         run: |
           $version = if ($env:RELEASE_VERSION) {
             $env:RELEASE_VERSION
-          } else { $null }
+          } else {
+            $description = & git describe --tags --always --dirty
+            if ($LASTEXITCODE -ne 0 -or -not $description) {
+              throw 'Unable to determine the documentation version.'
+            }
+            "$description".Trim()
+          }
           ./tools/Build-Documentation.ps1 -Version $version
+          "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT `
+            -Encoding utf8 -Append
+
+      - name: Run full test suite
+        shell: pwsh
+        run: ./tools/tests/run-all-tests.ps1
 
       - name: Verify PDF
         shell: pwsh
         run: |
-          $pdf = 'output/pdf/wsp-documentation.pdf'
-          if (-not (Test-Path -LiteralPath $pdf -PathType Leaf)) {
-            throw "Documentation PDF was not created: $pdf"
-          }
-          if ((Get-Item -LiteralPath $pdf).Length -eq 0) {
-            throw "Documentation PDF is empty: $pdf"
-          }
+          ./tools/Test-DocumentationPdf.ps1 `
+            -ExpectedVersion '${{ steps.build_pdf.outputs.version }}' `
+            -ExpectedSourceRevision '${{ github.sha }}' `
+            -OutputPath output/pdf/documentation-verification.json
 
       - name: Generate SHA-256 checksum
         shell: pwsh
@@ -117,6 +145,7 @@ jobs:
           path: |
             output/pdf/wsp-documentation.pdf
             output/pdf/SHA256SUMS
+            output/pdf/documentation-verification.json
           if-no-files-found: error
           retention-days: 14
 

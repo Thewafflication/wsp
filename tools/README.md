@@ -11,12 +11,17 @@ WCRT while removing repository-specific paths and assumptions.
 | Tool | Purpose |
 | --- | --- |
 | `Build-Documentation.ps1` | Build a linked release documentation PDF |
+| `Test-DocumentationPdf.ps1` | Verify PDF identity, structure, links, and page boundaries |
 | `New-ArtifactChecksum.ps1` | Write SHA-256 release checksums |
 | `Test-CSourceQuality.ps1` | Enforce Doxygen and 80-column C rules |
+| `Test-SourceStyle.ps1` | Check physical source style across languages |
+| `Test-PeHardening.ps1` | Verify ASLR, NX, 64-bit high-entropy VA, and optional CFG image flags |
 | `Test-Traceability.ps1` | Validate requirement, test, and runner links |
 | `Test-TestEvidence.ps1` | Validate complete passing LaTeX evidence |
 | `New-TestReport.ps1` | Combine a test case and evidence into a report |
 | `Write-BuildWarningSummary.ps1` | Add build warnings to a CI summary |
+| [`cmake/`](cmake/README.md) | Apply target-scoped compiler warnings, native hardening, and clang-tidy |
+| [`static-analysis/`](static-analysis/wsp-clang-tidy.yml) | Supply the controlled WSP clang-tidy check configuration |
 | [`logging/`](logging/README.md) | Consistent colored console and plain file logging for C, PowerShell, and CMake |
 
 The [tool requirements](requirements.md) define behavior common to every WSP
@@ -27,6 +32,14 @@ Run the common-tool self-tests with:
 ```powershell
 pwsh -File wsp/tools/tests/run-tests.ps1
 ```
+
+WSP contributors run the complete repository suite with
+`pwsh -File tools/tests/run-all-tests.ps1` from the WSP root. This adds the
+C logging tests and commit-hook integration tests to the common-tool tests.
+See [contributor setup](../README.md#contributing) for dependencies and hooks.
+Adopting projects use their own canonical commands and the
+[commit-check example](../templates/commit-checks-template.md), invoking shared
+validators through their pinned WSP submodule.
 
 ## Invocation from an Adopting Project
 
@@ -54,7 +67,11 @@ never beneath the WSP submodule.
 Tools target PowerShell 7 and Windows CI. Scripts should remain portable to
 other PowerShell 7 platforms unless their purpose is explicitly Windows-only.
 External programs such as Git, Doxygen, and PDFLaTeX are dependencies only of
-the tools that invoke them.
+the tools that invoke them. `WspBuild.cmake` requires CMake 3.20 or newer;
+its analysis mode also requires clang-tidy and a Ninja or Makefile generator.
+The documentation-PDF verifier requires Python and the packages pinned in
+`pdf/requirements.txt`. The PE hardening verifier has no external executable
+dependency.
 
 ## Candidate Future Tools
 

@@ -16,7 +16,7 @@ else {
     $pythonPath = $pythonCommand.Source
 }
 
-$testScript = Join-Path $PSScriptRoot 'test_documentation_pdf.py'
+$testScript = Join-Path $PSScriptRoot 'test_documentation_pdf_checks.py'
 $previousBytecodeSetting = $env:PYTHONDONTWRITEBYTECODE
 try {
     $env:PYTHONDONTWRITEBYTECODE = '1'

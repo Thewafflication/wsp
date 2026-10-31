@@ -5,6 +5,12 @@
 This profile applies to project-owned PowerShell automation, build utilities,
 and test runners.
 
+The [common source style](source-style.md) adds mandatory 80-character physical
+lines, whitespace/encoding checks, and structured documentation contracts.
+Use [comment-based help](source-documentation.md#powershell-example) for
+reusable scripts and exported functions and a controlled adapter when producing
+Doxygen references.
+
 ## Script Structure
 
 - Begin reusable scripts with `[CmdletBinding()]` and a `param` block.

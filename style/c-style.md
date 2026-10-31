@@ -5,6 +5,11 @@
 This profile applies to project-owned C sources and headers. Generated and
 third-party sources are excluded unless explicitly brought into scope.
 
+The [common source style](source-style.md) supplements this profile. Its new
+cross-language rule preserves the C requirements below and extends physical
+line checks to other owned languages. See the
+[documentation examples](source-documentation.md) for Doxygen contracts.
+
 The requirements in this profile apply to every WSP-adopting project that owns
 C source or header files. A project may deviate only through the WSP tailoring
 process with a documented rationale.

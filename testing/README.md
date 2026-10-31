@@ -33,6 +33,9 @@ Generated test report
 
 ## Artifact Ownership
 
+[Commit checks](../processes/commit-checks.md) define local full-suite gates
+and expected-failure handling while preserving release evidence rules.
+
 WSP owns the common rules and templates. An adopting project owns its test-case
 specifications, runners, results, reports, and retained evidence.
 

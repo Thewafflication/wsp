@@ -54,6 +54,28 @@ The C implementation is C99, process-local, and not thread-safe. The caller
 must create the parent directory before opening a file sink. Append mode is
 recommended for an existing build log; truncate mode begins a new log.
 
+Consumers that cannot safely share a CRT `FILE *` with WSP may install a byte
+sink instead:
+
+```c
+int write_record(void *context, const char *bytes, size_t length);
+void close_sink(void *context);
+
+wsp_log_set_sink(&logger, write_record, close_sink, context);
+wsp_log_write(&logger, WSP_LOG_INFO, "Native sink active");
+if (wsp_log_sink_status(&logger) != 0) {
+    /* Surface the consumer-defined write failure. */
+}
+```
+
+The write callback receives one complete timestamped, uncolored record and
+shall synchronously consume or copy all bytes before returning. Message encoding
+is the encoding supplied by the caller; WSP adds only ASCII record framing. Zero
+reports success; a nonzero consumer-defined status is retained by the logger.
+Replacing or closing the sink invokes its optional close callback exactly once.
+The consumer owns the context and all native handles or runtime objects behind
+it; WSP never casts, closes, frees, or otherwise interprets them.
+
 Targets without `<unistd.h>` or Microsoft `_isatty` support may configure with
 `-DWSP_LOG_NO_TTY=ON`, or define `WSP_LOG_NO_TTY` when compiling `wsp_log.c`
 directly. Automatic color detection then conservatively disables color;
@@ -129,6 +151,8 @@ the common-tool tests and verify on every supported platform:
 - independent console and file thresholds;
 - visible handling of a requested file sink that cannot be initialized;
 - append, truncate, close, and repeated-write behavior; and
+- ABI-safe byte-sink record boundaries, status propagation, replacement, and
+  close-callback behavior; and
 - caller-controlled return, exception, and exit status after an error record.
 
 The adopting project records log rotation, retention, and sensitive-data rules

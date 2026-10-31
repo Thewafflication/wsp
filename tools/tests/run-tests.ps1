@@ -47,10 +47,10 @@ try {
                 $_.FullName,
                 [ref]$tokens,
                 [ref]$errors) | Out-Null
-            foreach ($error in $errors) {
+            foreach ($err in $errors) {
                 $parseFailures.Add(
-                    "$($_.Name):$($error.Extent.StartLineNumber): " +
-                    $error.Message)
+                    "$($_.Name):$($err.Extent.StartLineNumber): " +
+                    $err.Message)
             }
         }
     if ($parseFailures.Count -gt 0) {

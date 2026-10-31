@@ -15,6 +15,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$AllowManualTests = $true
 $RepositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 
 function Resolve-ProjectPath {
@@ -38,7 +39,7 @@ $failures = [Collections.Generic.List[string]]::new()
 $requirementFiles = @(Get-ChildItem -LiteralPath $requirementsRoot `
     -Recurse -File -Filter 'req-*.md')
 $specificationFiles = @(Get-ChildItem -LiteralPath $specificationsRoot `
-    -Recurse -File -Filter 'tc-*.tex')
+    -Recurse -File -Filter 'tc-*.c')
 $implementationFiles = @(Get-ChildItem -LiteralPath $implementationsRoot `
     -Recurse -File | Where-Object {
         $_.Name -match '^(?:run-)?tc-(\d{4})(?:-.*)?\.ps1$'

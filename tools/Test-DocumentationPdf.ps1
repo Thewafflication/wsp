@@ -41,7 +41,7 @@ else {
     $pythonPath = $pythonCommand.Source
 }
 
-$verifier = Join-Path $wspRoot 'tools/pdf/test_documentation_pdf.py'
+$verifier = Join-Path $wspRoot 'tools/pdf/_documentation_pdf_script.py'
 $arguments = @(
     $verifier,
     '--repository-root', $RepositoryRoot,

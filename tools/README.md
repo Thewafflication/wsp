@@ -10,7 +10,7 @@ WCRT while removing repository-specific paths and assumptions.
 
 | Tool | Purpose |
 | --- | --- |
-| `Initialize-ProjectWork.ps1` | Create project-owned backlog and agent-prompt entry points while preserving existing files |
+| `Initialize-ProjectWork.ps1` | Create missing project work entry points |
 | `Build-Documentation.ps1` | Build a linked release documentation PDF |
 | `Test-DocumentationPdf.ps1` | Verify PDF identity, structure, links, and page boundaries |
 | `New-ArtifactChecksum.ps1` | Write SHA-256 release checksums |

@@ -158,6 +158,28 @@ dependency publishes a resolution.
 **Verification:** Upstream issue, workaround, and consuming-project reference
 inspection.
 
+### WSP-PROC-0012 — Discoverable Project Work
+
+Each adopting project shall maintain a root-level PROJECT-WORK.md entry point
+linked from its AGENTS.md or README.md. It shall identify authoritative current
+requirements, roadmap, build/test instructions, scope exclusions, authorized
+worktree and the latest unfinished-work handoff.
+
+The entry point shall link or contain a prioritized queue of bounded tasks.
+Each ready task shall identify a stable ID, requirement or confirmed defect,
+product outcome, scope, prerequisites, acceptance commands with expected
+results, retained tests and publication requirements. Blocked tasks shall retain
+the observed failure and the condition or next experiment needed to continue.
+Completed tasks shall retain actual validation and revision/publication evidence.
+
+Reusable agent prompts shall refer to this project-owned queue. Templates shall
+be tailored before a task becomes ready. Historical unchecked roadmap items,
+an empty ready queue and successful reconciliation of already completed work
+shall not require an invented deliverable or a filler commit.
+
+**Verification:** Inspect the root entry point, its links and a sample ready,
+blocked or completed task against the project's actual code and evidence.
+
 ## Relationship to Other WSP Requirements
 
 Project-process requirements coordinate rather than replace detailed

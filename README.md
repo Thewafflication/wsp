@@ -89,6 +89,20 @@ An adopting project should select only the profiles that match its product,
 toolchain, and delivery model. Profile-specific requirements supplement rather
 than replace the common engineering requirements.
 
+## Finding project work
+
+Adopting projects maintain a root PROJECT-WORK.md linking their current
+requirements, roadmap, task queue and handoff. AGENT-TASKS.md supplies reusable
+selection, execution, continuation and closure prompts. Start from the
+[project work template](processes/project-work-template.md) and
+[agent prompts](processes/agent-tasks-template.md).
+
+Run `pwsh -File wsp/tools/Initialize-ProjectWork.ps1 -ProjectRoot .` to create
+the two entry points. The helper preserves existing files and supports -WhatIf.
+Fill in project-specific tasks and link the work index from AGENTS.md or README.md.
+Updating the WSP submodule makes the helper/templates available. Each project
+must adopt and tailor its own work index.
+
 ## Repository Organization
 
 The initial organization is expected to evolve as content is added:

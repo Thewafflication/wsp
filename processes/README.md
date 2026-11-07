@@ -5,6 +5,12 @@
 This directory defines how WSP work is planned, performed, measured, reviewed,
 and improved.
 
+## Discoverable work
+
+WSP-PROC-0012 defines a root PROJECT-WORK.md entry point.
+Use the [work template](project-work-template.md) and
+[reusable agent prompts](agent-tasks-template.md) to record actual project work.
+
 ## Contents
 
 - [Commit checks](commit-checks.md) define adopting-project gates, recommended

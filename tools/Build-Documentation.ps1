@@ -151,7 +151,7 @@ $pandocVersion = (& $pandocPath --version |
 $latexVersion = (& $pdfLatexPath --version |
     Select-Object -First 1).Trim()
 $buildDate = (Get-Date).ToString('yyyy-MM-dd')
-$titleDate = "$buildDate — Version $Version — Commit " +
+$titleDate = "$buildDate - Version $Version - Commit " +
     $shortSourceRevision
 $sharedHeader = Join-Path $wspRoot 'documentation/preamble.tex'
 $linkFilter = Join-Path $wspRoot 'documentation/internal-links.lua'

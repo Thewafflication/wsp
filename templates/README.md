@@ -11,6 +11,12 @@ assign project ownership and status, and control the resulting artifact under
 the project's process. Do not edit the pinned WSP submodule to complete a
 template.
 
+## Agent work planning
+
+The [project work index](../processes/project-work-template.md) and
+[agent task prompts](../processes/agent-tasks-template.md) provide conventional
+root entry points for an adopting project's backlog and continuation evidence.
+
 ## Included Templates
 
 - [Source style configurations](source-style-configurations.md) and a
